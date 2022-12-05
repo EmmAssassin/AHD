@@ -118,7 +118,6 @@ body {
 .fixed-header {
   position: fixed;
   margin-top: -22px;
-  transition: all .2s;
 }
 
 .states {
