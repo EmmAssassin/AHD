@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--Title - You will see this in the browser tab-->
+        <title>
+            Australian Human Database
+        </title>
+        <!--Favicon - Little img that you see in the browser tab-->
+        <link rel="icon" type="image/x-icon" href="../img/logo.png">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!--Style Sheets (CSS) and other external file links-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../AHD.css">
+        <!--JQuery Reference - JQuery is just a JavaScript Library-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="../scripts/navigationScript.js"></script>
+    </head>
+
+    <!--Body - Contains our content-->
+    <body>
+        <!--Header - Will contain our navigation bar-->
+        <div class="nav">
+          <div class="centerAlign">
+          <a href="../../index.html"><img src="../img/logo.png" id="nav-logo"></a>
+        <div class="navigation" id="topNavigation">
+          <a href="../../index.html">Home</a>
+          <div class="states">
+            <button class="statesDropDown" onclick="activeDropdown()">
+              States <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="statesDropDown-content">
+              <a href="./canberra.html">Australian Capital Territory</a>
+              <a href="./newSouthWales.html">New South Wales</a>
+              <a href="./northernTerritory.html">Northern Territory</a>
+              <a href="./queensland.html">Queensland</a>
+              <a href="./southAus.html">South Australia</a>
+              <a href="./tasmania.html">Tasmania</a>
+              <a href="./victoria.html">Victoria</a>
+              <a href="./westernAus.html">Western Australia</a>
+            </div>
+          </div>
+          <a href="./methodology.htnl">Methodology</a>
+          <a href="./dataExplain.html">Data Explanation</a>
+          <a href="javascript:void(0);" style="font-size: 15px;" class="icon" onclick="myFunction()">&#9776;</a>
+        </div>
+      </div>
+      </div>
+      
+        <div id="content">
+          <h1 id="pageHeading">Queensland</h1>
+
+          <table class="dataTable" cellspacing="0">
+            <!--Top Row-->
+            <thead>
+            <tr>
+                <th id="hideMe" rowspan="2"></th>
+                <th rowspan="2" id="bold">Available dates</th>
+                <th colspan="6" id="bold">Age Interval x Year Interval</th>
+            </tr>
+            <tr>
+                <th id="boldTwo">1x1</th>
+                <th id="boldTwo">1x5</th>
+                <th id="boldTwo">1x10</th>
+                <th id="boldTwo">5x1</th>
+                <th id="boldTwo">5x5</th>
+                <th id="boldTwo">5x10</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Births</td>
+                    <td>dates</td>
+                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Births.txt'">1x1</td>
+                    <td id="clickables" href="../txtFiles/humanMortality/ACT/Deaths_5x1.txt"> </td>
+                    <td id="clickables"></td>
+                    <td id="clickables"></td>
+                    <td id="clickables"></td>
+                    <td id="clickables"></td>
+                </tr>
+                <tr>
+                    <td>Deaths</td>
+                    <td>dates</td>
+                    <td id="clickables" data-href="../txtFiles/humanMortality/ACT/Deaths_1x1.txt" target="_blank"> 1x1 </td>
+                    <td id="clickables" onclick="window.location.href = '../txtFiles/humanMortality/ACT/Deaths_1x5.txt'"> 1x5 </td>
+                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Deaths_1x10.txt'"> 1x10 </td>
+                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Deaths_5x1.txt'"> 5x1 </td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                </tr>
+                <tr>
+                    <td>Population Size</td>
+                    <td>dates</td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                </tr>
+                <tr>
+                    <td>Exposure-to-Risk</td>
+                    <td>dates</td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                </tr>
+                <tr>
+                    <td>Death Rates</td>
+                    <td>dates</td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                </tr>
+                <tr>
+                    <td>Life Tables - Female</td>
+                    <td>dates</td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                </tr>
+                <tr>
+                    <td>Life Tables - Male</td>
+                    <td>dates</td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                </tr>
+                <tr>
+                    <td>Life Tables - Total</td>
+                    <td>dates</td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                </tr>
+                <tr>
+                    <td>Life Expectancy at Birth</td>
+                    <td>dates</td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                    <td id="clickables" onclick="location.href = ''"></td>
+                </tr>
+            </tbody>
+        </table>
+<!--
+          <div class="scrollToTop">
+                <span><a href="#pageHeading">click me</a></span>
+          </div>-->
+        </div>
+        
+        <footer>
+          <p id="footerText"><b>2022 Footer content</b></p>
+        </footer>
+        <!--JavaScript External Files - If it isn't "Onload" functions, it goes last within our body tags-->
+        <script src="assets/scripts/navigationScript.js"></script>
+    </body>
+</html>

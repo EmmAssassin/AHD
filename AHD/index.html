@@ -6,7 +6,7 @@
             Australian Human Database
         </title>
         <!--Favicon - Little img that you see in the browser tab-->
-        <!--<link rel="icon" type="image/x-icon" href="assets/img/fav.svg">-->
+        <link rel="icon" type="image/x-icon" href="./assets/img/logo.png">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
@@ -20,28 +20,46 @@
     <!--Body - Contains our content-->
     <body>
         <!--Header - Will contain our navigation bar-->
-        <header>
-            <div class="navigation" id="topNav">
-                <a href="#homeExample">Home Example</a>
-                <a href="#example2">Example2</a>
-                <a href="#example3">Example3</a>
-                <div class="dropdown">
-                  <button class="dropbtn">Dropdown example
-                    <i class="fa fa-caret-down"></i>
-                  </button>
-                  <div class="states">
-                    <a href="#">Dropdown 1</a>
-                    <a href="#">dropdown 2</a>
-                    <a href="#">dropdown 3</a>
-                  </div>
-                </div> 
-                <a href="#example4">Example 4</a>
-                <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
-              </div>
-        </header>
+        <!--Header - Will contain our navigation bar-->
+        <div class="nav">
+          <div class="centerAlign">
+          <a href="./index.html"><img src="./assets/img/logo.png" id="nav-logo"></a>
+        <div class="navigation" id="topNavigation">
+          <a href="./index.html">Home</a>
+          <div class="states">
+            <button class="statesDropDown" onclick="activeDropdown()">
+              States <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="statesDropDown-content">
+              <a href="./assets/pages/canberra.html">Australian Capital Territory</a>
+              <a href="./assets/pages/newSouthWales.html">New South Wales</a>
+              <a href="./assets/pages/northernTerritory.html">Northern Territory</a>
+              <a href="./assets/pages/queensland.html">Queensland</a>
+              <a href="./assets/pages/southAus.html">South Australia</a>
+              <a href="./assets/pages/tasmania.html">Tasmania</a>
+              <a href="./assets/pages/victoria.html">Victoria</a>
+              <a href="./assets/pages/westernAus.html">Western Australia</a>
+            </div>
+          </div>
+          <a href="./assets/pages/methodology.htnl">Methodology</a>
+          <a href="./assets/pages/dataExplain.html">Data Explanation</a>
+          <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa-solid fa-bars fa-2xl"></i></a>
+        </div>
+      </div>
+      </div>
 
-        <p>hi</p>
 
+        <div id="content">
+          <h1 id="pageHeading">Australian Human Database</h1>
+<!--
+          <div class="scrollToTop">
+                <span><a href="#pageHeading">click me</a></span>
+          </div>-->
+        </div>
+        
+        <footer>
+          <p id="footerText"><b>2022 Footer content</b></p>
+        </footer>
         <!--JavaScript External Files - If it isn't "Onload" functions, it goes last within our body tags-->
         <script src="assets/scripts/navigationScript.js"></script>
     </body>
