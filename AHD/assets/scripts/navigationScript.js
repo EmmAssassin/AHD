@@ -1,3 +1,8 @@
+$(function () {
+    fixedHeader();
+    initCollapseItems();
+    initScrollAnchors();
+});
 
 function myFunction() {
     var x = document.getElementById("topNavigation");
@@ -8,18 +13,10 @@ function myFunction() {
     } else {
       x.className = "navigation";
     }
-
   }
 
-
-  $(function () {
-    fixedHeader();
-    initCollapseItems();
-    initScrollAnchors();
-
-});
-
 function fixedHeader() {
+    alert("We are still in the making of the site! Thank you for your patience")
     $(window).scroll(function () {
         const scroll = $(window).scrollTop();
         /*if(scroll >= 90){

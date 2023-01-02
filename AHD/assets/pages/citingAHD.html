@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--Title - You will see this in the browser tab-->
+        <title>
+            Australian Human Database
+        </title>
+        <!--Favicon - Little img that you see in the browser tab-->
+        <link rel="icon" type="image/x-icon" href="../img/logo.png">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!--Style Sheets (CSS) and other external file links-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../AHD.css">
+        <!--JQuery Reference - JQuery is just a JavaScript Library-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="../scripts/navigationScript.js"></script>
+    </head>
+
+    <!--Body - Contains our content-->
+    <body>
+        <!--Header - Will contain our navigation bar-->
+        <div class="nav">
+          <div class="centerAlign">
+          <a href="../../index.html"><img src="../img/logo.png" id="nav-logo"></a>
+        <div class="navigation" id="topNavigation">
+          <a href="../../index.html">Home</a>
+          <div class="states">
+            <button class="statesDropDown" onclick="activeDropdown()">
+              States <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="statesDropDown-content">
+              <a href="./canberra.html">Australian Capital Territory</a>
+              <a href="./newSouthWales.html">New South Wales</a>
+              <a href="./northernTerritory.html">Northern Territory</a>
+              <a href="./queensland.html">Queensland</a>
+              <a href="./southAus.html">South Australia</a>
+              <a href="./tasmania.html">Tasmania</a>
+              <a href="./victoria.html">Victoria</a>
+              <a href="./westernAus.html">Western Australia</a>
+            </div>
+          </div>
+          <a href="./methodology.htnl">Methodology</a>
+          <a href="./dataExplain.html">Data Explanation</a>
+          <a href="javascript:void(0);" style="font-size: 15px;" class="icon" onclick="myFunction()">&#9776;</a>
+        </div>
+      </div>
+      </div>
+      
+        <div id="content">
+          <h1 id="pageHeading">Citing AHD</h1>
+
+          <section>
+            <h2>Citation Guidelines</h2>
+            <p>The following comments are intended to assist users by providing information about AHD data sources and by offering suggestions for appropriate citation procedures. </p>
+          </section>
+          
+          <section>
+            <h3>Complete Data Series</h3>
+            <p>
+                All the input data comes from an external source, namely the Australian Bureau of Statistics (ABS). The Human Mortality Database (HMD) methods protocol are then applied to the input data to obtain the Life Tables presented here. The user should identify and cite the original specific ABS data source, by consulting the complete list of sources given population by means of the link to "Data sources". 
+            </p>
+            <p>
+                <b>Births:</b> All birth counts come from the ABS. The user should identify and cite the original source, merely acknowledging the AHMD as the intermediary.
+            </p>
+            <p>
+                <b>Deaths:Deaths: The death counts presented in the "Complete Data Series" section of each state page may or may not have been manipulated in various ways.  The death counts presented in the "Complete Data Series" section of each state page may or may not have been manipulated in various ways. 
+                    <br>
+                Most death counts undergo various alterations, which may be slight or substantial in nature. Briefly, there are two kinds of manipulations applied to raw death counts in the AHMD: i) assigning deaths of unknown age to specific ages, and ii) splitting aggregate death counts (in various formats) into data organized by Lexis triangle. In these situations, the numbers are original creations of the AHMD, which should thus be acknowledged as the source of the data.
+            </p>
+            <p>
+                Population size: For ages 80 and above, most of the population estimates reported in the "Complete Data Series" section are original creations of the AHMD and should be cited accordingly. One exception pertains to cohorts who would be aged 80-89 at the end of observation (see Figure 6 of the AHMD Methods Protocol, available here: <a href="https://www.mortality.org/File/GetDocument/Public/Docs/MethodsProtocolV6.pdf">link</a>).
+            </p>
+            <p>
+                <b>Exposure-to-risk</b>, <b>death rates</b>, <b>life tables</b>, or <b>life expectancy at birth:</b> All such data are original creations of the AHMD, which should thus be cited as the unique source of the information.
+            </p>
+          </section>
+
+          <section>
+            <h2>Choosing a Bibliographic Citation</h2>
+            <h3>AHD Estimates</h3>
+            <p>
+                If the user concludes that the data in question should be attributed to the AHMD itself, we suggest the following format for a bibliographic citation:
+                <br>
+                AHMD. Australian Human Mortality Database. School of Demography, Australian National University. Available at www.aushd.org (data downloaded on [date]).
+            </p>
+          </section>
+          
+<!--
+          <div class="scrollToTop">
+                <span><a href="#pageHeading">click me</a></span>
+          </div>-->
+        </div>
+        
+        <footer>
+            <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://aushd.org">Australian Human Database</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://researchers.anu.edu.au/researchers/canudas-romo-v">Vladimir Canudas-Romo</a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a></p>
+          <ul id="footerText">
+            <li></li>
+          </ul>
+        </footer>
+        <!--JavaScript External Files - If it isn't "Onload" functions, it goes last within our body tags-->
+        <script src="assets/scripts/navigationScript.js"></script>
+    </body>
+</html>
