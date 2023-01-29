@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--Title - You will see this in the browser tab-->
+        <title>
+            Australian Human Database
+        </title>
+        <!--Favicon - Little img that you see in the browser tab-->
+        <link rel="icon" type="image/x-icon" href="../img/logo.png">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!--Style Sheets (CSS) and other external file links-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../AHD.css">
+        <!--JQuery Reference - JQuery is just a JavaScript Library-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="../scripts/navigationScript.js"></script>
+    </head>
+
+    <!--Body - Contains our content-->
+    <body>
+        <!--Header - Will contain our navigation bar-->
+        <div class="nav">
+          <div class="centerAlign">
+          <a href="../../index.html"><img src="../img/logo.png" id="nav-logo"></a>
+        <div class="navigation" id="topNavigation">
+          <a href="../../index.html">Home</a>
+          <div class="states">
+            <button class="statesDropDown" onclick="activeDropdown()">
+              States <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="statesDropDown-content">
+              <a href="./canberra.html">Australian Capital Territory</a>
+              <a href="./newSouthWales.html">New South Wales</a>
+              <a href="./northernTerritory.html">Northern Territory</a>
+              <a href="./queensland.html">Queensland</a>
+              <a href="./southAus.html">South Australia</a>
+              <a href="./tasmania.html">Tasmania</a>
+              <a href="./victoria.html">Victoria</a>
+              <a href="./westernAus.html">Western Australia</a>
+            </div>
+          </div>
+          <a href="./methodology.html">Methodology</a>
+          <a href="./dataExplaination.html">Data Explanation</a>
+          <!--<a href="./bgDocumentation.html">Background and Documentation</a>-->
+          <a href="javascript:void(0);" style="font-size: 15px;" class="icon" onclick="navigationFunction()">&#9776;</a>
+        </div>
+      </div>
+      </div>
+      
+        <div id="content">
+          <h1 id="pageHeading">Data Explanation</h1>
+
+          <section>
+            <h2>The Australian Human Mortality Database (AHMD) includes the following types of data:</h2>
+            <p>
+                Live birth counts, 
+            </p>
+            <p>
+                Death counts,
+            </p>
+            <p>
+                Population size on January 1st,
+            </p>
+            <p>
+                Population exposed to risk of death, 
+            </p>
+            <p>
+                Death rates,
+            </p>
+            <p>
+                Life tables, and
+            </p>
+            <p>
+                Life expectancy at birth.
+            </p>
+          </section>
+          
+          <section>
+            <h2>Format of Data Files</h2>
+            <p>
+                Data files are tab-delimited text (ASCII) files. 
+            </p>
+            <p>
+                Files are organized by sex, age, and time.
+            </p>
+            <p>
+                Population size is given for one-year and five-year age groups.
+            </p>
+            <p>
+                Deaths, exposure-to-risk, death rates, and life tables are given in similar formats of age and time:
+            </p>
+            <p>
+                1x1 (by age1 and year).
+            </p>
+            <p>
+                1x5 (by age1 and 5-year time interval).
+            </p>
+            <p>
+                1x10 (by age1 and 10-year time interval).
+            </p>
+            <p>
+                5x1 (by 5-year2 age group and year).
+            </p>
+            <p>
+                5x5 (by 5-year2 age group and 5-year time interval).
+            </p>
+            <p>
+                5x10 (by 5-year2 age group and 10-year time interval).
+            </p>
+            <p>
+                Deaths are also given by Lexis triangles (i.e., by age1, birth cohort, and calendar year).
+            </p>
+          </section>
+
+          <section>
+            <h2>Notes:</h2>
+            <p>
+                1: One-year age groups (or "by age") means 0, 1, 2,..., 109, 110+.
+            </p>
+            <p>
+                2: Five-year age groups means 0, 1-4, 5-9, 10-14,..., 105-109, 110+. Age groups are defined in terms of completed age, so "5-9" extends from exact age 5 to just before the 10th birthday (sometimes written elsewhere as "5-10").
+            </p>
+            <p>
+                Some of these numbers are estimates (of population size or numbers of deaths), not actual counts, and therefore may be expressed as non-integers.
+            </p>
+          </section>
+
+          <section>
+            <h2>Life Tables include the following columns:</h2>
+            <p>
+                Year: Year or range of years (for both period & cohort data). 
+            </p>
+            <p>
+                Age: Age group for n-year interval from exact age x to just before exact age x+n, where n=1, 4, 5, or ∞ (open age interval).
+            </p>
+            <p>
+                m(x): Central death rate between ages x and x+n
+            </p>
+            <p>
+                q(x): Probability of death between ages x and x+n
+            </p>
+            <p>
+                a(x): Average length of survival between ages x and x+n for persons dying in the interval
+            </p>
+            <p>
+                l(x): Number of survivors at exact age x, assuming l(0) = 100,000
+            </p>
+            <p>
+                d(x): Number of deaths between ages x and x+n
+            </p>
+            <p>
+                L(x): Number of person-years lived between ages x and x+n
+            </p>
+            <p>
+                T(x): Number of person-years remaining after exact age x
+            </p>
+            <p>
+                e(x): Life expectancy at exact age x (in years)
+            </p>
+            <p>
+                See the Methods Protocol (pp. 34-44) on the Human Mortality Database’s web site for more details about life table calculations.
+            </p>
+          </section>
+
+          <section>
+            <h2>Important Notes on Complete Series Data</h2>
+            <p>
+                Deaths, population estimates, death rates, and life tables are provided by single years of age up to 109, with an open age interval for 110+. However, these data are sometimes the product of aggregate raw data (e.g., 5-year age groups, open age intervals), which have been split into single years of age using the methods described in the HMD Methods Protocol. The original raw data that were extracted from published or unpublished sources are available from the AHMD Input Database.
+            </p>
+            <p>
+                For period life tables, the central death rate m(x) is used to compute probabilities of death q(x). The values of m(x) below age 80 are by definition equal to the observed population death rate M(x) shown on each page. At older ages, however, the number of deaths and the exposure-to-risk eventually become quite small, and thus observed death rates display considerable random variation. Therefore, the M(x) values are smoothed for ages 80 and older and use these smoothed values to compute q(x) above a certain age (based on the number of observed deaths). For details, see the HMD Methods Protocol (pp. 35-37). This procedure helps to avoid certain difficulties in period life table calculations at older ages that may be caused by: 1) extremely high death rates resulting from exposure being smaller than the number of deaths, 2) death rates of zero resulting from no deaths at an age where exposure is non-zero, and 3) undefined death rates at all ages where exposure is zero. 
+            </p>
+            <p>
+                <b>NOTE:</b> The text above has been adapted from the Human Mortality Database web site (www.mortality.org).
+            </p>
+          </section>
+          
+<!--
+          <div class="scrollToTop">
+                <span><a href="#pageHeading">click me</a></span>
+          </div>-->
+        </div>
+        
+        <footer>
+          <ul class="footerText">
+            <li>AHMD 2023</li>
+            <li><a id="footerLinks" href="./copyRight.html">CopyRight</a></li>
+            <li><a id="footerLinks" href="./privacyPolicy.html">Privacy Policy</a></li>
+            <li><a id="footerLinks" href="./citingAHD.html">Citing AHD</a></li>
+            <li><a id="footerLinks" href="./legalNotice.html">Legal Notice</a></li>
+          </ul>
+      </footer>
+        <!--JavaScript External Files - If it isn't "Onload" functions, it goes last within our body tags-->
+        <script src="assets/scripts/navigationScript.js"></script>
+    </body>
+</html>

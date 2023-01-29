@@ -4,10 +4,10 @@ $(function () {
     initScrollAnchors();
 });
 
-function myFunction() {
+
+//navigation functions
+function navigationFunction() {
     var x = document.getElementById("topNavigation");
-    var open = document.getElementById("open");
-    var closed = document.getElementById("unopen");
     if (x.className === "navigation") {
       x.className += " responsive";
     } else {
@@ -17,21 +17,7 @@ function myFunction() {
 
 function fixedHeader() {
     alert("We are still in the making of the site! Thank you for your patience")
-    $(window).scroll(function () {
-        const scroll = $(window).scrollTop();
-        /*if(scroll >= 90){
-            var headerHeight = $('#navigation').innerHeight();
-            $('.content').css('padding-top', headerHeight);
-            $('#navigation').addClass('fixed-header');
-        }
-        else{
-            $('#navigation').removeClass('fixed-header');
-            
-            $('.content').css('padding-top', 0);
-        }*/
-        $('.nav').toggleClass('fixed-header', scroll >= 60);
-        $('#content').toggleClass('withStickyHeader', scroll >= 60);
-    });
+    
     //Toggle menu dropdown
 
     $('.navLink').on('click',

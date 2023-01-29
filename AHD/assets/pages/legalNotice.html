@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--Title - You will see this in the browser tab-->
+        <title>
+            Australian Human Database
+        </title>
+        <!--Favicon - Little img that you see in the browser tab-->
+        <link rel="icon" type="image/x-icon" href="../img/logo.png">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!--Style Sheets (CSS) and other external file links-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../AHD.css">
+        <!--JQuery Reference - JQuery is just a JavaScript Library-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="../scripts/navigationScript.js"></script>
+    </head>
+
+    <!--Body - Contains our content-->
+    <body>
+        <!--Header - Will contain our navigation bar-->
+        <div class="nav">
+          <div class="centerAlign">
+          <a href="../../index.html"><img src="../img/logo.png" id="nav-logo"></a>
+        <div class="navigation" id="topNavigation">
+          <a href="../../index.html">Home</a>
+          <div class="states">
+            <button class="statesDropDown" onclick="activeDropdown()">
+              States <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="statesDropDown-content">
+              <a href="./canberra.html">Australian Capital Territory</a>
+              <a href="./newSouthWales.html">New South Wales</a>
+              <a href="./northernTerritory.html">Northern Territory</a>
+              <a href="./queensland.html">Queensland</a>
+              <a href="./southAus.html">South Australia</a>
+              <a href="./tasmania.html">Tasmania</a>
+              <a href="./victoria.html">Victoria</a>
+              <a href="./westernAus.html">Western Australia</a>
+            </div>
+          </div>
+          <a href="./methodology.html">Methodology</a>
+          <a href="./dataExplaination.html">Data Explanation</a>
+          <!--<a href="./bgDocumentation.html">Background and Documentation</a>-->
+          <a href="javascript:void(0);" style="font-size: 15px;" class="icon" onclick="navigationFunction()">&#9776;</a>
+        </div>
+      </div>
+      </div>
+      
+        <div id="content">
+          <h1 id="pageHeading">Legal Notice</h1>
+
+          <p>School of Demography, <br>
+            Research School of Social Science, <br>
+            Building #146, <br>
+            Acton 2601, <br>
+            Canberra, <br>
+            Australia <br>
+            Telephone: +61 2 6125 2136 <br>
+            Internet: https://demography.cass.anu.edu.au  <br>
+            Email: Vladimir.Canudas-Romo@anu.edu.au <br>
+            </p>
+<!--
+          <div class="scrollToTop">
+                <span><a href="#pageHeading">click me</a></span>
+          </div>-->
+        </div>
+        
+        <footer>
+          <ul class="footerText">
+            <li>AHMD 2023</li>
+            <li><a id="footerLinks" href="./copyRight.html">CopyRight</a></li>
+            <li><a id="footerLinks" href="./privacyPolicy.html">Privacy Policy</a></li>
+            <li><a id="footerLinks" href="./citingAHD.html">Citing AHD</a></li>
+            <li><a id="footerLinks" href="./legalNotice.html">Legal Notice</a></li>
+          </ul>
+      </footer>
+        <!--JavaScript External Files - If it isn't "Onload" functions, it goes last within our body tags-->
+        <script src="assets/scripts/navigationScript.js"></script>
+    </body>
+</html>
