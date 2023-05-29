@@ -1,67 +1,93 @@
 $(function () {
-    fixedHeader();
-    initCollapseItems();
-    initScrollAnchors();
-});
-
-
-//navigation functions
-function navigationFunction() {
-    var x = document.getElementById("topNavigation");
-    if (x.className === "navigation") {
-      x.className += " responsive";
-    } else {
-      x.className = "navigation";
-    }
-  }
-
-function fixedHeader() {
-    alert("We are still in the making of the site! Thank you for your patience")
     
-    //Toggle menu dropdown
+    startUp();
 
-    $('.navLink').on('click',
-        function () {
-            if (window.innerWidth < 992) {
-                return;
+})
+
+function startUp() {
+           
+    $(window).resize(function(){            
+        if($(window).width() > 1024){   
+            if($('.collapsable').hasClass('open')) {
+                $('.collapsable').removeClass('open');
+            }            
+                   
+            $('.topLine').removeClass('rightCross');            
+            $('.midLine').removeClass('hidden');             
+            $('.bottomLine').removeClass('leftCross');   
+            
+            if($('#states')){
+                $('.collapsable > #states').remove();
             }
-            $(this).siblings('.dropdown-content')
-                .slideToggle();
-        });
+        } 
 
-    $('button.navbar-menu').on('click',
-        function () {
-            const navbarMenuOpened = !$('.navContent').hasClass('show');
-            $('body').toggleClass('disabled', navbarMenuOpened);
-        });
-}
+        if($(window).width() < 1024){ 
 
-function initCollapseItems() {
-    $('.country-with-file').click(function () {
-        $(this).next('.subdata')
-            .slideToggle();
+            if(!$('.collapsableStates').hasClass('hide')){
+                $('.collapsableStates').addClass('hide');
+                $('.collapsableStates > #states').remove();
+            }
+        }
     });
 
-    $('.collapse-button').click(function () {
-        $(this).toggleClass('showed');
-        $(this).next('.collapse-body').slideToggle();
-    });
+    
 }
 
-/*
-function initScrollAnchors() {
-    const headerSize = 120;
+function navFunction(){
+ 
+        $('.collapsable').toggleClass('open');    
+        $('.topLine').toggleClass('rightCross');      
+        $('.midLine').toggleClass('hidden');     
+        $('.bottomLine').toggleClass('leftCross'); 
 
-    $('a[href*="#"]')
-        // Remove links that don't actually link to anything
-        .not('[href="#"]')
-        .not('[href="#0"]')
-        .click(function (event) {
-            // On-page links
-            if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') &&
-                location.hostname === this.hostname) {
-                scrollToPosition(this.hash, event);
-                setHash(this.hash);
-            }
-        });
-*/
+        if(!$('.collapsableStates').hasClass('hide')){
+            $('.collapsableStates').addClass('hide');
+        }
+
+        if($('#states')){
+            $('.collapsable > #states').remove();
+        }
+}
+
+function openStates(value) {
+    var html = "";
+
+    if(value == 1){
+        html += '<li id="states"><a href="./assets/pages/canberra.html">Australian Capital Territory</a></li>' + 
+        '<li id="states"><a href="./assets/pages/newSouthWales.html">New South Wales</a></li>' +
+        '<li id="states"><a href="./assets/pages/northernTerritory.html">Northern Territory</a></li>' +
+        '<li id="states"><a href="./assets/pages/queensland.html">Queensland</a></li>' + 
+        '<li id="states"><a href="./assets/pages/southAus.html">South Australia</a></li>' +
+        '<li id="states"><a href="./assets/pages/tasmania.html">Tasmania</a></li>' +
+        '<li id="states"><a href="./assets/pages/victoria.html">Victoria</a></li>' +
+        '<li id="states"><a href="./assets/pages/westernAus.html">Western Australia</a></li>';    
+    }
+    else {
+        html += '<li id="states"><a href="./canberra.html">Australian Capital Territory</a></li>' + 
+    '<li id="states"><a href="./newSouthWales.html">New South Wales</a></li>' +
+    '<li id="states"><a href="./northernTerritory.html">Northern Territory</a></li>' +
+    '<li id="states"><a href="./queensland.html">Queensland</a></li>' + 
+    '<li id="states"><a href="./southAus.html">South Australia</a></li>' +
+    '<li id="states"><a href="./tasmania.html">Tasmania</a></li>' +
+    '<li id="states"><a href="./victoria.html">Victoria</a></li>' +
+    '<li id="states"><a href="./westernAus.html">Western Australia</a></li>';
+    }
+    
+    $('.collapsableStates').toggleClass('hide');
+
+    if(!$('.collapsableStates').hasClass('hide') && $(window).width() > 1024){
+        $('.collapsableStates').append(html);
+    }
+    
+    if($('.collapsableStates').hasClass('hide') && $(window).width() > 1024){
+        $('.collapsableStates').empty();
+    }
+
+    if(!$('.collapsableStates').hasClass('hide') && $(window).width() < 1024){
+        $('.collapsable').append(html);
+    }
+
+    if($('.collapsableStates').hasClass('hide') && $(window).width() < 1024){
+        $('.collapsable > #states').remove();
+    }
+}

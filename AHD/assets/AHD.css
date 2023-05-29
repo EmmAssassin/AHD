@@ -1,265 +1,383 @@
-/*Mobile Devices*/
-@media screen and (max-width: 767px) {
-  
-  #content{
-    width: 75%;
-  }
+/*Links*/
 
+/*Mobile sizing*/
+@media screen and (max-width: 768px) {
 
-}
+  /*Navigation*/
 
-/*Tablet Devices*/
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-  
-  #content{
-    width: 70%;
-  }
-
-}
-
-/*Laptop Devices/ Smaller screens*/
-@media screen and (min-width: 1025px) and (max-width: 1400px) {
-  
-  #content{
-    width: 60%;
-  }
-
-  .centerAlign {
-    width: 90%;
-  }
-
-  .navigation a {
-    font-size: 18.7px;
-    transition: all 2s;
-    font-weight: bold;
-  }
-
-  .states .statesDropDown {
-    font-size: 18.7px;
-    transition: all 2s;
-    font-weight: bold;
-  }
-
-}
-
-/*Computer Devices/ Large screens*/
-@media screen and (min-width: 1401px) {
-  
-  #content{
-    width: 50%;
-  }
-
-  .centerAlign {
-    width: 80%;
-  }
-
-  .navigation a {
-    font-size: 22px;
-    transition: all 2s;
-    font-weight: bolder;
-  }
-
-  .states .statesDropDown {
-    font-size: 22px;
-    transition: all 2s;
-    font-weight: bolder;
-  }
-}
-
-/*For Hamburger Menu*/
-@media screen and (max-width: 1024px) {
-  .navigation.responsive {
-    position: relative;
-  }
-
-  .navigation.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-
-  .navigation a:not(:last-child), .states .statesDropDown {
-    display: none;
-  }
-
-  .navigation a.icon {
-    float: right;
-  }
-
-  .icon {
-    font-size: 30px !important;
-    font-weight: 900;
-  }
-
-  .navigation.responsive a {
-    float: none;
+  .nav-toggle {
     display: block;
-    text-align: left;
+    padding: 12px 20px;
   }
 
-  .navigation.responsive .states {
-    float: none;
+  .nav-links {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      position: absolute;
   }
 
-  .navigation.responsive .statesDropDown-content {
-    position: relative;
+  .nav-links li {
+      display: block;
   }
 
-  .navigation.responsive .states .statesDropDown {
-    display: block;
+  .collapsable {
+      display: none;
+  }
+
+  .open {
+      display: block !important;
+      position: absolute;
+      margin-top: 90px;
+      background-color: #f5f5f5;
+      color: #ac142b;
+      box-shadow: 0px 16px 14px 1px #4e4e4ea8;
+      width: 100%;
+      overflow: scroll;
+  }
+
+  .open li {
+      float: none;
+      color: #252525;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+  }
+
+  .open li a {
+      display: block;
+      padding: 12px 16px;
+      width: inherit;
+      height: inherit;
+  }
+}
+
+/*Tablet sizing*/
+@media screen and (min-width: 768px) and (max-width: 1025px) {
+
+  .nav-toggle {
+      display: block;
+      padding: 12px 20px;
+  }
+
+  .nav-links {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      position: absolute;
+  }
+
+  .nav-links li {
+      display: block;
+  }
+
+  .collapsable {
+      display: none;
+  }
+
+  .open {
+      display: block !important;
+      position: absolute;
+      margin-top: 90px;
+      background-color: #f5f5f5;
+      box-shadow: 0px 16px 14px 1px #4e4e4ea8;
+      width: 100%;
+  }
+
+  .open li {
+      float: none;
+      color: #252525;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+  }
+
+  .open li a {
+      display: block;
+      padding: 12px 16px;
+      width: inherit;
+      height: inherit;
+  }
+
+}
+
+/*Laptop sizing*/
+@media screen and (min-width: 1025px) and (max-width: 1401px) {
+
+  .nav-toggle {
+      display: none;
+  }
+
+  .nav-links {
+      margin: 10px 50px 10px 0;
+      position: relative;
+  }
+
+  .nav-links li {
+      padding: 20px;
+      display: inline-block;
+  }
+
+  .collapsable {
+      display: inline;
+      width: 100%;
+  }
+  
+  .collapsableStates{
+    padding: 0;
     width: 100%;
-    text-align: left;
-  }
-
-  #nav-logo {
-    display: none;
-  }
-
-  .centerAlign{
-    width: 75%;
-  }
-
-  .statesDropDown-content {
-    background-color: #ecdfb4;
-  }
-
-}
-
-/*For non hamburger menus*/
-@media screen and (min-width: 1025px) {
-
-  .centerAlign {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .statesDropDown-content {
+    position: absolute;
+    min-width: 160px;
+    z-index: 1;
+    margin-top: 18px;
     background-color: #f5f5f5;
-    box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.6);
-    /*margin-top: 16px;*/
+    box-shadow: 0px 10px 10px 5px #4e4e4ead;
+  }
+  
+  .collapsableStates li {
+    width: 100%;
+    padding: 0 !important;
+    z-index: 1;
+  }
+  
+  .collapsableStates a {
+    float: none;
+    color: #252525;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    z-index: 1;
   }
 
-  .navigation .icon {
-    display: none;
-  }
 }
 
-/*For all sizes*/
-html{    
-  width: 100%;
+/*Desktop sizing*/
+@media screen and (min-width: 1401px) {
+
+  .nav-toggle {
+      display: none;
+  }
+
+  .nav-links li {
+      padding: 20px;
+      display: inline-block;
+  }
+
+  .nav-links {
+      margin: 10px 50px 10px 0;
+      position: relative;
+  }
+
+  .collapsable {
+      display: inline;
+  }
+  
+  .collapsableStates{
+    padding: 0;
+    width: 100%;
+    position: absolute;
+    min-width: 160px;
+    margin-top: 18px;
+    box-shadow: 0px 10px 10px 5px #4e4e4ead;
+    z-index: 1;
+  }
+  
+  .collapsableStates li {
+    width: 100%;
+    padding: 0 !important;
+    z-index: 1;
+    background-color: #f5f5f5;
+  }
+  
+  .collapsableStates a {
+    float: none;
+    color: #252525;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    z-index: 1;
+  }
+
 }
+
+/*All sizes*/
+
+/*Whole*/
+html {}
 
 body {
-  width: 100%;
-  height: 100%;
-  padding: 0;
   margin: 0;
+  width: 100%;
   background-color: #f5f5f5;
 }
 
-/*navigation*/
-.nav{
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/*Navigation*/
+
+.navigation {
   background-color: #ecdfb4;
-  box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.2);
+  min-width: 100%;
+  margin-top: 0;
   position: fixed;
-}
-  
-#nav-logo {
-  left: 0;
-  float: left;
-  margin: 15px 20px;
-  height: 60px;
-  position: relative;
+  z-index: 1;
+  height: 90px;
+  box-shadow: 0 0 20px 10px #4e4e4ead;
 }
 
-.navigation a {
-  float: left;
-  display: block;
-  color: #252525;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-.fixed-header {
-  position: fixed;
-  margin-top: -22px;
-}
-
-.states {
-  float: left;
-  overflow: hidden;
-}
-
-.statesDropDown:hover .fa-caret-down {
-  content: "\f023";
-}
-
-.states .statesDropDown {
-  border: none;
-  outline: none;
-  color: #252525;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-}
-
-.statesDropDown-content {
-  display: none;
+#navigationLogo {
+  height: 50px;
+  padding: 20px 0 20px 5%;
   position: absolute;
-  min-width: 160px;
   z-index: 1;
 }
 
-.statesDropDown-content a {
-  float: none;
-  color: #252525;
-  padding: 12px 16px;
+.nav-collapsable {
+  width: 100%;
+  position: absolute;
+  float: right;
+  z-index: 0;
+}
+
+.nav-links {
+  float: right;
+  font-size: 16px;
+}
+
+.nav-links li {
+  list-style: none;
+}
+
+.nav-links li a {
   text-decoration: none;
-  display: block;
-  text-align: left;
+  color: #252525;
+  cursor: pointer;
+  padding: 20px;
 }
 
-.navigation a:hover, .states:hover .statesDropDown {
+.nav-links li a:hover {
   color: #BE830E;
 }
 
-.statesDropDown-content a:hover {
-  background-color: #F5EDDE;
+.bookingButton {
+  padding: 0px !important;
+}
+
+.bookingButton button{
+  padding: 20px;
+}
+
+.bookingButton button:hover {
   color: #BE830E;
+  cursor: pointer;
 }
 
-.states:hover .statesDropDown-content {
-  display: block;
+.nav-toggle {
+  background-color: #ecdfb4;
+  float: right;
+  z-index: 1;
+  position: relative;
+  border: none;
+  height: 90px;
+  margin: 0px;
+  cursor: pointer;
+  transition: all 1s;
+  padding: 12px 16px;
 }
 
-#content{
-  z-index: -1;
-  margin-right: auto;
-  margin-left: auto;
-  transition: all .2s;
-  padding-top: 90px;
-  text-align: justify;
+.topLine,
+.midLine,
+.bottomLine {
+  width: 35px;
+  height: 5px;
+  background-color: #252525;
+  margin: 6px 0;
+  transition: 0.4s;
+  z-index: 0;
+  position: relative;
+  border-radius: 30px;
 }
 
-#pageHeading {
+.rightCross {
+  transform: translate(0, 11px) rotate(-45deg) !important;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.leftCross {
+  transform: translate(0, -11px) rotate(45deg);
+}
+
+main {
+  padding: 90px 5% 0 5%;
+  min-height: 62vh;
+  z-index: 0;
+}
+
+main h1 {
   text-align: center;
 }
+
+#mobileLine {
+  width: 100%;
+}
+
+.hide {
+  display: none;
+}
+
+/*Footer*/
 
 footer {
-  height: 50px;
   background-color: #ecdfb4;
+  bottom: 0;
+  padding: 30px 5% 30px 5%;
 }
 
-#footerText {
+.footer-links {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-links li {
+  list-style: none;
+  display: inline-block;
+  padding: 16px;
   font-size: 16px;
-  padding: 15px;
+}
+
+.footer-links li a {
+  color: #252525;
+  text-decoration: none;
+}
+
+footer hr {
+  color: #252525;
+  height: 0.5px;
+  background: #BE830E;
+  color: #BE830E;
+  width: 85%;
+}
+
+footer p{
   text-align: center;
+  color: #252525;
+}
+
+#footerLogo {
+  height: 50px;
+}
+
+.bookingButton button {
+  background-color: transparent;
+  border: none;
+  font-size: 17px;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .hideMe {

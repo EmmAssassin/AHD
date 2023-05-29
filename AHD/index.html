@@ -19,56 +19,77 @@
 
     <!--Body - Contains our content-->
     <body>
-        <!--Header - Will contain our navigation bar-->
-        <!--Header - Will contain our navigation bar-->
-        <div class="nav">
-          <div class="centerAlign">
-          <a href="./index.html"><img src="./assets/img/logo.png" id="nav-logo"></a>
-        <div class="navigation" id="topNavigation">
-          <a href="./index.html">Home</a>
-          <div class="states">
-            <button class="statesDropDown" onclick="activeDropdown()">
-              States <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="statesDropDown-content">
-              <a href="./assets/pages/canberra.html">Australian Capital Territory</a>
-              <a href="./assets/pages/newSouthWales.html">New South Wales</a>
-              <a href="./assets/pages/northernTerritory.html">Northern Territory</a>
-              <a href="./assets/pages/queensland.html">Queensland</a>
-              <a href="./assets/pages/southAus.html">South Australia</a>
-              <a href="./assets/pages/tasmania.html">Tasmania</a>
-              <a href="./assets/pages/victoria.html">Victoria</a>
-              <a href="./assets/pages/westernAus.html">Western Australia</a>
-            </div>
-          </div>
-          <a href="./assets/pages/methodology.html">Methodology</a>
-          <a href="./assets/pages/dataExplaination.html">Data Explanation</a>
-          <!--<a href="./assets/pages/bgDocumentation.html">Background and Documentation</a>-->
-          <a href="javascript:void(0);" style="font-size: 15px;" class="icon" onclick="navigationFunction()">&#9776;</a>
-        </div>
-      </div>
+      <!--Top navigation - add hover effects later-->
+      <div class="navigation">
+          <!--Logo-->
+          <a href="index.html"><img src="./assets/img/logo.png" alt="logo" id="navigationLogo"></a>
+          <!--Hamburger Menu-->
+          <button class="nav-toggle" aria-hidden="true" aria-label="menu" onclick="navFunction(); return false">
+              <!--Hamburger menu lines-->
+              <div class="topLine"></div><div class="midLine"></div><div class="bottomLine"></div>
+          </button>
+          <nav class="nav" aria-hidden="true" style="transition: max-height 284ms ease 0s;">
+              <!--Navigational Links-->
+              <ul class="nav-links">
+                  <!--Collaspable links when mobile sized-->
+                  <div class="collapsable">
+                  <li>
+                      <a href="./assets/pages/methodology.html">Methodology</a>
+                  </li>
+                  <li>
+                      <a href="./assets/pages/dataExplaination.html">Data Explanation</a>
+                  </li>
+                  <li>
+                      <a href="./assets/pages/bgDocumentation.html">Background Documentation</a>
+                  </li>
+                  <li>
+                      <a href="./assets/pages/team.html">Team</a>
+                  </li>
+              <!--Optional Book now button - Outside of collapsable menu-->
+                  <li class="bookingButton">
+                      <button value="1" onclick="openStates(this.value)">States</button>
+                  </li>
+                  <div class="collapsableStates hide">          
+                    
+                  </div>    
+                </div>      
+              </ul>
+          </nav>
       </div>
 
+      <!--Page content - needs to be under the sticky nav-->
+      <main>
+        <h1 id="pageHeading">Australian Human Mortality Database</h1>
+        <p>The Australian Human Mortality Database (AHMD) was created to provide detailed mortality and population data for Australian states and territories: Australian Capital Territory, New South Wales, Northern Territory, Queensland, South Australia, Tasmania, Victoria, and Western Australia. The AHMD’s underlying methodology corresponds to the one used for the Human Mortality Database (HMD).</p>
 
-        <div id="content">
-          <h1 id="pageHeading">Australian Human Mortality Database</h1>
-          <p>The Australian Human Mortality Database (AHMD) was created to provide detailed mortality and population data for Australian states and territories: Australian Capital Territory, New South Wales, Northern Territory, Queensland, South Australia, Tasmania, Victoria, and Western Australia. The AHMD’s underlying methodology corresponds to the one used for the Human Mortality Database (HMD).</p>
-<!--
-          <div class="scrollToTop">
-                <span><a href="#pageHeading">click me</a></span>
-          </div>-->
-        </div>
-        
-        <footer>
-          <ul class="footerText">
-            <li>AHMD 2023</li>
-            <li><a id="footerLinks" href="./assets/pages/copyRight.html">CopyRight</a></li>
-            <li><a id="footerLinks" href="./assets/pages/privacyPolicy.html">Privacy Policy</a></li>
-            <li><a id="footerLinks" href="./assets/pages/citingAHD.html">Citing AHD</a></li>
-            <li><a id="footerLinks" href="./assets/pages/legalNotice.html">Legal Notice</a></li>
+      </main>
+
+      <footer>
+          <!--Logo-->
+          <img src="./assets/img/logo.png" alt="Logo" id="footerLogo">
+          <!--Footer Links-->
+          <ul class="footer-links">
+              <!---->
+              <li>
+                  <a href="./assets/pages/methodology.html">Methodology</a>
+              </li>
+              <li>
+                  <a href="./assets/pages/dataExplaination.html">Data Explanation</a>
+              </li>
+              <li>
+                  <a href="./assets/pages/privacyPolicy.html">Privacy Policy</a>
+              </li>
+              <li>
+                  <a href="./assets/pages/citingAHD.html">Citing AHD</a>
+              </li>
+              <li>
+                <a href="./assets/pages/legalNotice.html">Legal Notice</a>
+              </li>
           </ul>
+          <!--line--><hr>
+          <!--Copyright and Facebook link and Icon-->
+          <p>2022 &#169; <a href="./assets/pages/copyRight.html">Australian Human Mortality Database CopyRight</a></p>
       </footer>
-        <!--JavaScript External Files - If it isn't "Onload" functions, it goes last within our body tags-->
-        <script src="assets/scripts/navigationScript.js"></script>
-    </body>
+      <script src="assets/scripts/navigationScript.js"></script>
+  </body>
 </html>
