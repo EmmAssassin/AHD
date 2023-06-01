@@ -1,4 +1,4 @@
-ACT,  Births (1-year)	Last modified: 02 Jul 2018;  Methods Protocol: v6 (2017)
+ACT,  Births (1-year)	Last modified: 23 May 2023;  Methods Protocol: v6 (2017)
 
 Year          Female      Male     Total
 1911              13        17        30
@@ -107,3 +107,8 @@ Year          Female      Male     Total
 2014            2669      2883      5552
 2015            2632      2910      5542
 2016            2505      2647      5152
+2017            2999      3208      6207
+2018            2642      2732      5374
+2019            2654      2866      5520
+2020            2616      2752      5368
+2021            2649      2894      5543
