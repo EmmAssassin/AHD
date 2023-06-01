@@ -21,36 +21,41 @@
     <body>
       <!--Top navigation - add hover effects later-->
       <div class="navigation">
-          <!--Logo-->
-          <a href="../../index.html"><img src="../img/logo.png" alt="logo" id="navigationLogo"></a>
-          <!--Hamburger Menu-->
-          <button class="nav-toggle" aria-hidden="true" aria-label="menu" onclick="navFunction(); return false">
-              <!--Hamburger menu lines-->
-              <div class="topLine"></div><div class="midLine"></div><div class="bottomLine"></div>
-          </button>
-          <nav class="nav" aria-hidden="true" style="transition: max-height 284ms ease 0s;">
-              <!--Navigational Links-->
-              <ul class="nav-links">
-                  <!--Collaspable links when mobile sized-->
-                  <div class="collapsable">
+        <!--Logo-->
+        <a href="index.html"><img src="../img/logo.png" alt="logo" id="navigationLogo"></a>
+        <!--Hamburger Menu-->
+        <button class="nav-toggle" aria-hidden="true" aria-label="menu" onclick="navFunction(); return false">
+            <!--Hamburger menu lines-->
+            <div class="topLine"></div><div class="midLine"></div><div class="bottomLine"></div>
+        </button>
+        <nav class="nav" aria-hidden="true" style="transition: max-height 284ms ease 0s;">
+            <!--Navigational Links-->
+            <ul class="nav-links">
+                <!--Collaspable links when mobile sized-->
+                <div class="collapsable">
                   <li>
-                      <a href="./methodology.html">Methodology</a>
+                      <a href="methodology.html">Methodology</a>
                   </li>
                   <li>
-                      <a href="./dataExplaination.html">Data Explanation</a>
+                      <a href="dataExplaination.html">Data Explanation</a>
                   </li>
-              
-              <!--Optional Book now button - Outside of collapsable menu-->
-                  <li class="bookingButton">
-                      <button onclick="openStates()">States</button>
+                  <li>
+                      <a href="bgDocumentation.html">Background Documentation</a>
                   </li>
-                  <div class="collapsableStates hide">          
-                    
-                  </div>    
-                </div>      
-              </ul>
-          </nav>
-      </div>
+                  <li>
+                      <a href="team.html">Team</a>
+                  </li>
+            <!--Optional Book now button - Outside of collapsable menu-->
+                <li class="bookingButton">
+                    <button onclick="openStates()">States</button>
+                </li>
+                <div class="collapsableStates hide">          
+                  
+                </div>    
+              </div>      
+            </ul>
+        </nav>
+    </div>
 
       <!--Page content - needs to be under the sticky nav-->
       <main>
