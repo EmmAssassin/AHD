@@ -243,7 +243,7 @@ body {
 
 .nav-links {
   float: right;
-  font-size: 26px;
+  font-size: 20px;
 }
 
 .nav-links li {
@@ -263,10 +263,6 @@ body {
 
 .bookingButton {
   padding: 0px !important;
-}
-
-.bookingButton button{
-  padding: 20px;
 }
 
 .bookingButton button:hover {
@@ -359,7 +355,7 @@ footer {
   list-style: none;
   display: inline-block;
   padding: 16px;
-  font-size: 16px;
+  font-size: 20px;
 }
 
 .footer-links li a {
@@ -378,6 +374,7 @@ footer hr {
 footer p{
   text-align: center;
   color: #252525;
+  font-size: 16px;
 }
 
 #footerLogo {
@@ -387,8 +384,9 @@ footer p{
 .bookingButton button {
   background-color: transparent;
   border: none;
-  font-size: 26px;
+  font-size: 20px;
   font-family: 'Times New Roman', Times, serif;
+  padding: 20px;
 }
 
 .hideMe {

@@ -1,0 +1,15 @@
+# Lexis Map of Lexis database (LDB) by calendar year, age, and sex {#generallexis}
+```{r pb03, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="General Lexis",value = 3/18)
+}
+```
+## Females
+```{r generallexisDBF, cache=TRUE, fig.cap='Lexis Map of Lexis database', fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150}
+general_lexisDB(parms, sex = "f")
+```
+
+## Males
+```{r generallexisDBM, cache=TRUE, fig.cap='Lexis Map of Lexis database', fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150}
+general_lexisDB(parms, sex = "m")
+```

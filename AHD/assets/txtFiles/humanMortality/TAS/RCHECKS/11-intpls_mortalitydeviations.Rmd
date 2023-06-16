@@ -1,0 +1,20 @@
+# Mortality deviation compared with adjacent ages, years {#mortdevageyear}
+```{r pb11, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Mortality deviation",value = 11/18)
+}
+```
+
+Chart of mortality deviations compared with adjacent ages. Note that the number of neighboring ages and/or years as well as the p-values for $X$ and the size of $R$ can be modified in the call to the script.
+
+Expect to see large negative deviations at age 1 versus age 0. Patterns of large deviations, e.g., at ages ending in "0" or "5", may indicate problematic places in the mortality surface.
+
+## Females
+```{r intplsmortalitydeviationsF, cache=TRUE, fig.cap='Mortality deviation compared with adjacent ages, years',  fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150, warning=FALSE,  message=FALSE}
+intpls_mortalitydeviations(parms, sex = "f", lagx=1, lagt=0, pvalX=0.001, crit1R=0.1, crit2R=0.05)
+```
+
+## Males
+```{r intplsmortalitydeviationsM, cache=TRUE, fig.cap='Mortality deviation compared with adjacent ages, years',  fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150, warning=FALSE,  message=FALSE}
+intpls_mortalitydeviations(parms, sex = "m", lagx=1, lagt=0, pvalX=0.001, crit1R=0.1, crit2R=0.05);
+```

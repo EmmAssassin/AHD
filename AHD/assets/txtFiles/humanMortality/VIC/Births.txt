@@ -1,4 +1,4 @@
-VIC,  Births (1-year)	Last modified: 02 Jul 2018;  Methods Protocol: v6 (2017)
+VIC,  Births (1-year)	Last modified: 23 May 2023;  Methods Protocol: v6 (2017)
 
 Year          Female      Male     Total
 1911           16092     16934     33026
@@ -107,3 +107,8 @@ Year          Female      Male     Total
 2014           36167     38057     74224
 2015           35736     37832     73568
 2016           40454     42438     82892
+2017           39786     42308     82094
+2018           38134     40354     78488
+2019           37519     39701     77220
+2020           35845     37698     73543
+2021           36912     38451     75363

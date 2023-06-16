@@ -1,0 +1,14 @@
+bookdown::gitbook:
+  css: style.css
+  config:
+    toc:
+      collapse: section
+      before: |
+        <li style="display: block; padding-left: 5px; padding-right: 5px; padding-top: 5px;">
+          <a href="./">
+            <img src="HMD_logo.png" height="20" style="border: 0; float: left; margin-right: 15px">
+            HMD Diagnostic Checks
+          </a>
+        </li>
+    sharing: null
+    search: no

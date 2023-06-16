@@ -1,0 +1,16 @@
+# Raw Population Counts {#generalrawpop}
+
+Raw Population Counts: population and births by type of source
+```{r pb01, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Raw Population Counts",value = 1/18)
+}
+```
+## Females
+```{r generalrawpopF, cache=TRUE, fig.cap='Raw Population Counts: population and births by type of source', fig.align='center', fig.width=8.25, fig.height=6}
+general_rawpop(parms, sex = "f")
+```
+## Males
+```{r generalrawpopM, cache=TRUE, fig.cap='Raw Population Counts: population and births by type of source', fig.align='center', fig.width=8.25, fig.height=6}
+general_rawpop(parms, sex = "m")
+```

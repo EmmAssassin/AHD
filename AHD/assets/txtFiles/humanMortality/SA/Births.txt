@@ -1,4 +1,4 @@
-SA,  Births (1-year)	Last modified: 02 Jul 2018;  Methods Protocol: v6 (2017)
+SA,  Births (1-year)	Last modified: 23 May 2023;  Methods Protocol: v6 (2017)
 
 Year          Female      Male     Total
 1911            5442      5615     11057
@@ -107,3 +107,8 @@ Year          Female      Male     Total
 2014           10014     10370     20384
 2015            9569     10018     19587
 2016            9532     10240     19772
+2017            9205      9867     19072
+2018            9285      9828     19113
+2019            9498      9992     19490
+2020            9031      9495     18526
+2021            9643     10114     19757

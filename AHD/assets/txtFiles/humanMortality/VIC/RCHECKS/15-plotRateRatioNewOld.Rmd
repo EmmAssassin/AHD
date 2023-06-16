@@ -1,0 +1,29 @@
+# Internal consistency: ratio of new to old mortality rates  {#newoldmortrate}
+```{r pb15, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Ratio of new to old mortality rates",value = 15/18)
+}
+```
+Chart of ratio of new vs. old raw and adjusted mortality rates in life table data.
+
+Might be used to locate large discrepancies between old and new data. CS should look at graphs in 16 and 17 to understand whether differences are due to changes in numerators, denominators, or both.
+
+## Females
+### Unadjusted rates
+```{r plotRateRatioNewOldF, cache=TRUE, fig.cap='Internal consistency: ratio of new to old mortality rates -- unadjusted',  fig.align='center', fig.height=10, out.width="95%",fig.asp=1, dpi=150, warning=FALSE, message=FALSE}
+plotRateRatioNewOld(parms,sex='f',plot.adjusted.rates=FALSE)
+```
+### Adjusted rates
+```{r plotRateRatioNewOldFa, cache=TRUE, fig.cap='Internal consistency: ratio of new to old mortality rates -- unadjusted',  fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150, warning=FALSE, message=FALSE}
+plotRateRatioNewOld(parms,sex='f',plot.adjusted.rates=TRUE)
+```
+
+## Males
+### Unadjusted rates
+```{r plotRateRatioNewOldM, cache=TRUE, fig.cap='Internal consistency: ratio of new to old mortality rates -- adjusted',  fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150, warning=FALSE, message=FALSE}
+plotRateRatioNewOld(parms,sex='m',plot.adjusted.rates=FALSE)
+```
+### Adjusted rates
+```{r plotRateRatioNewOldMa, cache=TRUE, fig.cap='Internal consistency: ratio of new to old mortality rates -- adjusted',  fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150, warning=FALSE, message=FALSE}
+plotRateRatioNewOld(parms,sex='m',plot.adjusted.rates=TRUE)
+```

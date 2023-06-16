@@ -1,0 +1,64 @@
+
+R version 4.2.3 (2023-03-15) -- "Shortstop Beagle"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+
+
+ Heads up : experience has shown that saving your workspace on quitting R 
+is a bad idea when your environment holds many GB of stuff. Consequently
+this R is configured to NOT save your workspace on quitting.
+
+Rstudio, however does not understand this -- to save headaches YOU MUST configure
+Rstudio to never save .RData and to not read existing .RData files
+ Tools -> Global Options
+
+> ## R Start file
+> 
+> cat("HMD R Diagnostics Processing....\n")
+HMD R Diagnostics Processing....
+> 
+> 
+> cat("Loading devtools and HMDDiag package \n")
+Loading devtools and HMDDiag package 
+> 
+> library(ggplot2)
+> library(data.table)
+> #library(roxygen2)
+> library(devtools)
+Loading required package: usethis
+> library(compiler)
+> #library(plyr)
+> #library(shiny)
+> 
+> load_all(path='../HMDDiag.git')
+ℹ Loading HMDDiag
+Loading required package: bookdown
+
+ If you have library(shiny) attached, type HMDqc() to start the GUI to run the HMD diagnostic checks.
+       
+ Otherwise, use a wrapper function for the SetParams and RunHMDCountry functions.
+> 
+> cat("setting parameters and paths...check that these are correct\n")
+setting parameters and paths...check that these are correct
+> 
+> 
+> parms <- HMDDiag::SetParams()
+Error in HMDDiag::SetParams() : object 'OIDBPATH' not found
+Execution halted

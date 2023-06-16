@@ -1,0 +1,21 @@
+# Deviations from smoothed deaths  {#mortalitydeviations}
+```{r pb04, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Death Outliers",value = 4/18)
+}
+```
+```{r outl, echo=FALSE}
+if( dir.exists(file.path(parms$LDBPATH,"outl"))){ 
+
+  current_folder <- file.path(parms$LDBPATH,"outl")
+  new_folder <- file.path(parms$Report.dir,"_book")
+  list_of_files <- list.files(current_folder)
+
+  file.copy(file.path(current_folder,list_of_files), new_folder)
+
+  htmltools::includeHTML(file.path(parms$Report.dir,"_book","!index.htm"))
+} else {
+  cat("No outlier data found to process....")
+}
+
+```

@@ -15,6 +15,7 @@
         <!--JQuery Reference - JQuery is just a JavaScript Library-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="../scripts/navigationScript.js"></script>
+        <script src="../scripts/tableScript.js"></script>
     </head>
 
     <!--Body - Contains our content-->
@@ -22,7 +23,7 @@
       <!--Top navigation - add hover effects later-->
       <div class="navigation">
         <!--Logo-->
-        <a href="index.html"><img src="../img/logo.png" alt="logo" id="navigationLogo"></a>
+        <a href="../../index.html"><img src="../img/logo.png" alt="logo" id="navigationLogo"></a>
         <!--Hamburger Menu-->
         <button class="nav-toggle" aria-hidden="true" aria-label="menu" onclick="navFunction(); return false">
             <!--Hamburger menu lines-->
@@ -47,7 +48,7 @@
                   </li>
             <!--Optional Book now button - Outside of collapsable menu-->
                 <li class="bookingButton">
-                    <button onclick="openStates()">States</button>
+                    <button value="2" onclick="openStates(this.value)">States</button>
                 </li>
                 <div class="collapsableStates hide">          
                   
@@ -59,118 +60,7 @@
 
       <!--Page content - needs to be under the sticky nav-->
       <main>
-        <h1 id="pageHeading">Victoria</h1>
-
-          <table class="dataTable" cellspacing="0">
-            <!--Top Row-->
-            <thead>
-            <tr>
-                <th id="hideMe" rowspan="2"></th>
-                <th rowspan="2" id="bold">Available dates</th>
-                <th colspan="6" id="bold">Age Interval x Year Interval</th>
-            </tr>
-            <tr>
-                <th id="boldTwo">1x1</th>
-                <th id="boldTwo">1x5</th>
-                <th id="boldTwo">1x10</th>
-                <th id="boldTwo">5x1</th>
-                <th id="boldTwo">5x5</th>
-                <th id="boldTwo">5x10</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Births</td>
-                    <td>dates</td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Births.txt'">1x1</td>
-                    <td id="clickables" href="../txtFiles/humanMortality/ACT/Deaths_5x1.txt"> </td>
-                    <td id="clickables"></td>
-                    <td id="clickables"></td>
-                    <td id="clickables"></td>
-                    <td id="clickables"></td>
-                </tr>
-                <tr>
-                    <td>Deaths</td>
-                    <td>dates</td>
-                    <td id="clickables" data-href="../txtFiles/humanMortality/ACT/Deaths_1x1.txt" target="_blank"> 1x1 </td>
-                    <td id="clickables" onclick="window.location.href = '../txtFiles/humanMortality/ACT/Deaths_1x5.txt'"> 1x5 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Deaths_1x10.txt'"> 1x10 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Deaths_5x1.txt'"> 5x1 </td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                </tr>
-                <tr>
-                    <td>Population Size</td>
-                    <td>dates</td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                </tr>
-                <tr>
-                    <td>Exposure-to-Risk</td>
-                    <td>dates</td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                </tr>
-                <tr>
-                    <td>Death Rates</td>
-                    <td>dates</td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                </tr>
-                <tr>
-                    <td>Life Tables - Female</td>
-                    <td>dates</td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                </tr>
-                <tr>
-                    <td>Life Tables - Male</td>
-                    <td>dates</td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                </tr>
-                <tr>
-                    <td>Life Tables - Total</td>
-                    <td>dates</td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                </tr>
-                <tr>
-                    <td>Life Expectancy at Birth</td>
-                    <td>dates</td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                </tr>
-            </tbody>
-        </table>
+        
       </main>
 
       <footer>

@@ -1,4 +1,4 @@
-NT,  Births (1-year)	Last modified: 02 Jul 2018;  Methods Protocol: v6 (2017)
+NT,  Births (1-year)	Last modified: 23 May 2023;  Methods Protocol: v6 (2017)
 
 Year          Female      Male     Total
 1911              15        16        31
@@ -107,3 +107,8 @@ Year          Female      Male     Total
 2014            1954      2072      4026
 2015            1895      2109      4004
 2016            1894      2033      3927
+2017            1901      1981      3882
+2018            1965      2085      4050
+2019            1774      1884      3658
+2020            1793      1959      3752
+2021            1861      1923      3784

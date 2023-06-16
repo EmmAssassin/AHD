@@ -1,4 +1,4 @@
-QLD,  Births (1-year)	Last modified: 02 Jul 2018;  Methods Protocol: v6 (2017)
+QLD,  Births (1-year)	Last modified: 23 May 2023;  Methods Protocol: v6 (2017)
 
 Year          Female      Male     Total
 1911            8281      8703     16984
@@ -107,3 +107,8 @@ Year          Female      Male     Total
 2014           30774     32292     63066
 2015           29895     31850     61745
 2016           30346     31495     61841
+2017           29438     31720     61158
+2018           30046     31885     61931
+2019           29942     31793     61735
+2020           28970     30520     59490
+2021           31276     32835     64111

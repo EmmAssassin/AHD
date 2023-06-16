@@ -1,0 +1,28 @@
+# Internal consistency: ratio of new to old deaths {#newolddeath}
+Chart of ratio of new vs. old death counts in Lexis database.  Might be used to locate large discrepancies between old and new data.
+```{r pb16, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Ratio of new to old Deaths",value = 16/18)
+}
+```
+## Females
+```{r plotNumberRatioFd, cache=TRUE,   fig.cap='Internal consistency: ratio of new to old deaths',  fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150}
+mydata=plotNumberRatio(parms, sex='f', type="deaths")
+if (is.na(mydata[1,1])) {print("No extreme observations for females.")} else {
+  knitr::kable(
+    mydata, booktabs = TRUE,
+    caption = "List of Extreme Observations, Female"
+  )
+}
+```
+
+## Males
+```{r plotNumberRatioMd, cache=TRUE,   fig.cap='Internal consistency: ratio of new to old deaths',  fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150}
+mydata=plotNumberRatio(parms, sex='m', type="deaths")
+if (is.na(mydata[1,1])) {print("No extreme observations for males.")} else {
+  knitr::kable(
+    mydata, booktabs = TRUE,
+    caption = "List of Extreme Observations, Male"
+  )
+}
+```

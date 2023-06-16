@@ -1,4 +1,4 @@
-NSW,  Births (1-year)	Last modified: 02 Jul 2018;  Methods Protocol: v6 (2017)
+NSW,  Births (1-year)	Last modified: 23 May 2023;  Methods Protocol: v6 (2017)
 
 Year          Female      Male     Total
 1911           23154     24383     47537
@@ -107,3 +107,8 @@ Year          Female      Male     Total
 2014           44385     46689     91074
 2015           48737     51342    100079
 2016           46863     49220     96083
+2017           47055     49536     96591
+2018           52127     55216    107343
+2019           47966     50940     98906
+2020           46526     48933     95459
+2021           49230     52102    101332

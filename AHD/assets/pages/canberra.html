@@ -23,7 +23,7 @@
       <!--Top navigation - add hover effects later-->
       <div class="navigation">
         <!--Logo-->
-        <a href="index.html"><img src="../img/logo.png" alt="logo" id="navigationLogo"></a>
+        <a href="../../index.html"><img src="../img/logo.png" alt="logo" id="navigationLogo"></a>
         <!--Hamburger Menu-->
         <button class="nav-toggle" aria-hidden="true" aria-label="menu" onclick="navFunction(); return false">
             <!--Hamburger menu lines-->
@@ -48,7 +48,7 @@
                   </li>
             <!--Optional Book now button - Outside of collapsable menu-->
                 <li class="bookingButton">
-                    <button onclick="openStates()">States</button>
+                    <button value="2" onclick="openStates(this.value)">States</button>
                 </li>
                 <div class="collapsableStates hide">          
                   
@@ -60,126 +60,8 @@
 
       <!--Page content - needs to be under the sticky nav-->
       <main>
-        <h1 id="pageHeading">Australian Capital Territory</h1>
-
-          <p></p>
           
-          <table class="dataTable" cellspacing="0">
-            <!--Top Row-->
-            <thead>
-            <tr>
-                <th id="hideMe" rowspan="2"></th>
-                <th rowspan="2" id="bold">Available dates</th>
-                <th colspan="6" id="bold">Age Interval x Year Interval</th>
-            </tr>
-            <tr>
-                <th id="boldTwo">1x1</th>
-                <th id="boldTwo">1x5</th>
-                <th id="boldTwo">1x10</th>
-                <th id="boldTwo">5x1</th>
-                <th id="boldTwo">5x5</th>
-                <th id="boldTwo">5x10</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Births</td>
-                    <td>dates</td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Births.txt'">1x1</td>
-                    <td id="clickables" href=""></td>
-                    <td id="clickables"></td>
-                    <td id="clickables"></td>
-                    <td id="clickables"></td>
-                    <td id="clickables"></td>
-                </tr>
-                <tr>
-                    <td>Deaths</td>
-                    <td>dates</td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Deaths_1x1.txt'"> 1x1 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Deaths_1x5.txt'"> 1x5 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Deaths_1x10.txt'"> 1x10 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Deaths_5x1.txt'"> 5x1 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Deaths_5x5.txt'"> 5x5 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Deaths_5x10.txt'"> 5x10 </td>
-                </tr>
-                <tr>
-                    <td>Population Size</td>
-                    <td>dates</td>
-                    <!--1x1 says abridged-->
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Population.txt'"> 1x1 </td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Population5.txt'"> 5x1 </td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                </tr>
-                <tr>
-                    <td>Exposure-to-Risk</td>
-                    <td>dates</td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Exposures_1x1.txt'"> 1x1 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Exposures_1x5.txt'"> 1x5 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Exposures_1x10.txt'"> 1x10 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Exposures_5x1.txt'"> 5x1 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Exposures_5x5.txt'"> 5x5 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Exposures_5x10.txt'"> 5x10 </td>
-                </tr>
-                <tr>
-                  <!--Mx files-->
-                    <td>Death Rates</td>
-                    <td>dates</td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Mx_1x1.txt'"> 1x1 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Mx_1x5.txt'"> 1x5 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Mx_1x10.txt'"> 1x10</td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Mx_5x1.txt'"> 5x1 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Mx_5x5.txt'"> 5x5 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/Mx_5x10.txt'"> 5x10 </td>
-                </tr>
-                <tr>
-                  <!--fl files-->
-                    <td>Life Tables - Female</td>
-                    <td>dates</td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/fltper_1x1.txt'"> 1x1 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/fltper_1x5.txt'"> 1x5</td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/fltper_1x10.txt'"> 1x10 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/fltper_5x1.txt'"> 5x1 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/fltper_5x5.txt'"> 5x5 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/fltper_5x10.txt'"> 5x10 </td>
-                </tr>
-                <tr>
-                  <!--Ml files-->
-                    <td>Life Tables - Male</td>
-                    <td>dates</td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/mltper_1x1.txt'"> 1x1 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/mltper_1x5.txt'"> 1x5 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/mltper_1x10.txt'"> 1x10 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/mltper_5x1.txt'"> 5x1 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/mltper_5x5.txt'"> 5x5 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/mltper_5x10.txt'"> 5x10 </td>
-                </tr>
-                <tr>
-                  <!--bl files-->
-                    <td>Life Tables - Total</td>
-                    <td>dates</td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/bltper_1x1.txt'"> 1x1 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/bltper_1x5.txt'"> 1x5 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/bltper_1x10.txt'"> 1x10 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/bltper_5x1.txt'"> 5x1 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/bltper_5x5.txt'"> 5x5 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/bltper_5x10.txt'"> 5x10 </td>
-                </tr>
-                <tr>
-                  <!--E0per files-->
-                    <td>Life Expectancy at Birth</td>
-                    <td>dates</td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/E0per.txt'"> 1x1 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/E0per_1x5.txt'"> 1x5 </td>
-                    <td id="clickables" onclick="location.href = '../txtFiles/humanMortality/ACT/E0per_1x10.txt'"> 1x10 </td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                    <td id="clickables" onclick="location.href = ''"></td>
-                </tr>
-            </tbody>
-        </table>
+          
       </main>
 
       <footer>

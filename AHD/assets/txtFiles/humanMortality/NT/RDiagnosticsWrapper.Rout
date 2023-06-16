@@ -1,0 +1,152 @@
+
+R version 4.2.3 (2023-03-15) -- "Shortstop Beagle"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+
+
+ Heads up : experience has shown that saving your workspace on quitting R 
+is a bad idea when your environment holds many GB of stuff. Consequently
+this R is configured to NOT save your workspace on quitting.
+
+Rstudio, however does not understand this -- to save headaches YOU MUST configure
+Rstudio to never save .RData and to not read existing .RData files
+ Tools -> Global Options
+
+> ## R Start file
+> 
+> cat("HMD R Diagnostics Processing....\n")
+HMD R Diagnostics Processing....
+> 
+> 
+> cat("Loading devtools and HMDDiag package \n")
+Loading devtools and HMDDiag package 
+> 
+> library(ggplot2)
+> library(data.table)
+> #library(roxygen2)
+> library(devtools)
+Loading required package: usethis
+> library(compiler)
+> #library(plyr)
+> #library(shiny)
+> 
+> load_all(path='../HMDDiag.git')
+ℹ Loading HMDDiag
+Loading required package: bookdown
+
+ If you have library(shiny) attached, type HMDqc() to start the GUI to run the HMD diagnostic checks.
+       
+ Otherwise, use a wrapper function for the SetParams and RunHMDCountry functions.
+> 
+> cat("setting parameters and paths...check that these are correct\n")
+setting parameters and paths...check that these are correct
+> 
+> 
+> parms <- HMDDiag::SetParams()
+> 
+> parms
+$COUNTRY
+[1] "NT"
+
+$CountryName
+[1] "NT"
+
+$IDBPATH
+[1] "/nobackup/90days/hmd/RunResultsTMP/NT/InputDB"
+
+$LDBPATH
+[1] "/nobackup/90days/hmd/RunResultsTMP/NT/LexisDB"
+
+$STATSPATH
+[1] "/nobackup/90days/hmd/RunResultsTMP/NT/STATS"
+
+$OCOUNTRY
+[1] "NT_Old"
+
+$OCountryName
+[1] "NT"
+
+$OIDBPATH
+[1] "/nobackup/90days/hmd/RunResultsTMP/NT_Old/InputDB"
+
+$OLDBPATH
+[1] "/nobackup/90days/hmd/RunResultsTMP/NT_Old/LexisDB"
+
+$OSTATSPATH
+[1] "/nobackup/90days/hmd/RunResultsTMP/NT_Old/STATS"
+
+$Report.dir
+[1] "/nobackup/90days/hmd/RunResultsTMP/NT/RCHECKS"
+
+> 
+> #RunHMDCountry(WORKING=parms$WORKING, OPENAGE=parms$OPENAGE, RADIX=parms$RADIX, CAGEEXTRP=parms$CAGEEXTRP,
+> #              MPVERSION=parms$MPVERSION, STATSFOLDER=parms$STATSFOLDER, XXX=parms$XXX,
+> #              LDBPATH=parms$LDBPATH,
+> #              IDBPATH=parms$IDBPATH, SAVEBIN=parms$SAVEBIN)
+> 
+> #load_all(path='/data/commons/boe/HMDLexis.git/HMDLexis/HMDLexis')
+> #res<- try(
+> #  testidb <- HMDLexis::readInputDB(WORKING=getwd(), XXX=parms$XXX)
+> #)
+> 
+> # NB:  regardless of what is passed to RunHMDCountry(), the invoked bookdown::render() happens in an empty environment with 
+> # calling parent environment the equivalent of the global environment.  
+> 
+> c2 <-  "SWE";  # aka othercountry
+> usingShiny <- FALSE
+> 
+> HMDDiag::RunHMDCountry(WORKING = getwd(), c2 = c2, usingShiny=FALSE)
+ [1] "_output.yml"                       "00-Introduction.Rmd"              
+ [3] "01-RawPopulationCounts.Rmd"        "02-RawDeathsLexis.Rmd"            
+ [5] "03-general_lexisDB.Rmd"            "04-deathoutliers.Rmd"             
+ [7] "05-plotIntconDeaths.Rmd"           "06-general_plotIntConPop.Rmd"     
+ [9] "07-plotIntConDeaths.Rmd"           "08-intcon_popbyage.Rmd"           
+[11] "09-intpls_deathratesbyyear.Rmd"    "10-intpls_deathratesbyage.Rmd"    
+[13] "11-intpls_mortalitydeviations.Rmd" "12-plotIntplsNetmigration.Rmd"    
+[15] "13-plotNetMigration.Rmd"           "14-plotLifeExpectancy.Rmd"        
+[17] "15-plotRateRatioNewOld.Rmd"        "16-plotNumberRatioDeaths.Rmd"     
+[19] "17-plotNumberRatioPop.Rmd"         "18-intpls_deathratesSexRatio.Rmd" 
+[21] "endprogress.Rmd"                   "style.css"                        
+[23] "toc.css"                          
+ [1] "_output.yml"                       "00-Introduction.Rmd"              
+ [3] "01-RawPopulationCounts.Rmd"        "02-RawDeathsLexis.Rmd"            
+ [5] "03-general_lexisDB.Rmd"            "04-deathoutliers.Rmd"             
+ [7] "05-plotIntconDeaths.Rmd"           "06-general_plotIntConPop.Rmd"     
+ [9] "07-plotIntConDeaths.Rmd"           "08-intcon_popbyage.Rmd"           
+[11] "09-intpls_deathratesbyyear.Rmd"    "10-intpls_deathratesbyage.Rmd"    
+[13] "11-intpls_mortalitydeviations.Rmd" "12-plotIntplsNetmigration.Rmd"    
+[15] "13-plotNetMigration.Rmd"           "14-plotLifeExpectancy.Rmd"        
+[17] "15-plotRateRatioNewOld.Rmd"        "16-plotNumberRatioDeaths.Rmd"     
+[19] "17-plotNumberRatioPop.Rmd"         "18-intpls_deathratesSexRatio.Rmd" 
+[21] "endprogress.Rmd"                   "style.css"                        
+[23] "toc.css"                          
+HMD Diagnostics have been started...
+
+processing file: _main.Rmd
+  |                                                 |                                         |   0%  |                                                 |                                         |   1%                               |                                                 |.                                        |   1% (setup)                       |                                                 |.                                        |   2%                               |                                                 |.                                        |   3% (versionprint)                                             |                                                 |..                                       |   4% (pb01)                        |                                                 |..                                       |   5%                               |                                                 |..                                       |   6% (generalrawpopF)              |                                                 |...                                      |   6%                               |                                                 |...                                      |   7% (generalrawpopM)              |                                                 |...                                      |   8%                              (pb02)                        |                                                 |....                                     |   9%                               |                                                 |....                                     |  10% (generalrawdeathsF)                                        |                                                 |.....                                    |  11% (generalrawdeathsM)           |                                                 |.....                                    |  12%                               |                                                 |.....                                    |  13% (pb03)                                                     |                                                 |......                                   |  14% (generallexisDBF)             |                                                 |......                                   |  15%                              (generallexisDBM)             |                                                 |.......                                  |  16%                               |                                                 |.......                                  |  17% (pb04)                       (outl)                        |                                                 |.......                                  |  18%                               |                                                 |........                                 |  19% (pb05)                        |                                                 |........                                 |  20%                              (plotIntConDeathsF)           |                                                 |.........                                |  21%                               |                                                 |.........                                |  22% (plotIntConDeathsM)                                        |                                                 |.........                                |  23% (pb06)                        |                                                 |..........                               |  24%                              (generalplotIntConPopF)       |                                                 |..........                               |  25%                               |                                                 |...........                              |  26% (generalplotIntConPopM)       |                                                 |...........                              |  27%                              (pb07)                        |                                                 |...........                              |  28%                               |                                                 |............                             |  29% (plotIntConDeathsF04)                                      |                                                 |............                             |  30% (plotIntConDeathsF564)        |                                                 |.............                            |  31%                              (plotIntConDeathsF65)         |                                                 |.............                            |  32%                               |                                                 |.............                            |  33% (plotIntConDeathsF85)         |                                                 |..............                           |  34%                              (plotIntConDeathsM04)         |                                                 |..............                           |  35%                               |                                                 |...............                          |  36% (plotIntConDeathsM564)                                     |                                                 |...............                          |  37% (plotIntConDeathsM65)         |                                                 |...............                          |  38%                               |                                                 |................                         |  38% (plotIntConDeathsM85)         |                                                 |................                         |  39%                               |                                                 |................                         |  40% (pb08)                        |                                                 |.................                        |  41%                              (intconpopbyage04F)           |                                                 |.................                        |  42%                               |                                                 |.................                        |  43% (intconpopbyage064F)          |                                                 |..................                       |  43%                               |                                                 |..................                       |  44% (plotIntConDeaths64pF)        |                                                 |..................                       |  45%                               |                                                 |...................                      |  45% (plotIntConDeaths86pF)        |                                                 |...................                      |  46%                               |                                                 |...................                      |  47% (intconpopbyage04M)           |                                                 |...................                      |  48%                               |                                                 |....................                     |  48% (intconpopbyage064M)          |                                                 |....................                     |  49%                               |                                                 |....................                     |  50% (plotIntConDeaths64pM)        |                                                 |.....................                    |  50%                               |                                                 |.....................                    |  51% (plotIntConDeaths86pM)        |                                                 |.....................                    |  52%                               |                                                 |......................                   |  52% (pb09)                        |                                                 |......................                   |  53%                               |                                                 |......................                   |  54% (generateSlides)              |                                                 |......................                   |  55%                               |                                                 |.......................                  |  55% (addSlidesJs)                 |                                                 |.......................                  |  56%                               |                                                 |.......................                  |  57% (projecth1env)                |                                                 |........................                 |  57%                               |                                                 |........................                 |  58% (goto_slidejs)                |                                                 |........................                 |  59%                              (pb10)                        |                                                 |.........................                |  60%                               |                                                 |.........................                |  61% (generateSlidesAge)           |                                                 |.........................                |  62%                               |                                                 |..........................               |  62% (addSlidesJsAge)              |                                                 |..........................               |  63%                               |                                                 |..........................               |  64% (projecth1envAge)                                          |                                                 |...........................              |  65% (goto_slidejsAge)             |                                                 |...........................              |  66%                              (pb11)                        |                                                 |............................             |  67%                               |                                                 |............................             |  68% (intplsmortalitydeviationsF)  |                                                 |............................             |  69%                              (intplsmortalitydeviationsM)  |                                                 |.............................            |  70%                               |                                                 |.............................            |  71% (pb12)                                                     |                                                 |..............................           |  72% (plotIntplsNetmigrationF)     |                                                 |..............................           |  73%                              (plotIntplsNetmigrationM)     |                                                 |..............................           |  74%                               |                                                 |...............................          |  75% (pb13)                        |                                                 |...............................          |  76%                              (plotNetMigration)          Quitting from lines 838-839 (_main.Rmd) 
+Error in Ops.data.frame(pop.t[i.year + 1, -1] - pop.t[i.year, -1], births.t[,  : 
+  '-' only defined for equally-sized data frames
+Calls: <Anonymous> ... eval_with_user_handlers -> eval -> eval -> plotNetMigration -> Ops.data.frame
+In addition: Warning messages:
+1: The closing backticks on line 860 ("```") in _main.Rmd do not match the opening backticks " ```" on line 856. You are recommended to fix either the opening or closing delimiter of the code chunk to use exactly the same numbers of backticks and same level of indentation (or blockquote). 
+2: The closing backticks on line 867 ("```") in _main.Rmd do not match the opening backticks " ```" on line 863. You are recommended to fix either the opening or closing delimiter of the code chunk to use exactly the same numbers of backticks and same level of indentation (or blockquote). 
+                                                                                                                       
+Please delete _main.Rmd after you finish debugging the error.
+Execution halted

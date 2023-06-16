@@ -1,4 +1,4 @@
-TAS, Life expectancy at birth (period, 1x5)	Last modified: 02 Jul 2018;  Methods Protocol: v6 (2017)
+TAS, Life expectancy at birth (period, 1x5)	Last modified: 23 May 2023;  Methods Protocol: v6 (2017)
 
   Year       Female    Male     Total
 1971-1974     74.93    68.23    71.45
@@ -6,8 +6,8 @@ TAS, Life expectancy at birth (period, 1x5)	Last modified: 02 Jul 2018;  Methods
 1980-1984     77.53    70.70    74.01
 1985-1989     78.07    72.20    75.09
 1990-1994     79.40    73.43    76.38
-1995-1999     80.35    75.15    77.77
-2000-2004     81.38    76.41    78.91
-2005-2009     82.00    77.81    79.92
-2010-2014     82.42    78.68    80.55
-2015-2016     82.65    78.94    80.79
+1995-1999     80.35    75.15    77.76
+2000-2004     81.37    76.40    78.90
+2005-2009     81.98    77.78    79.90
+2010-2014     82.41    78.65    80.54
+2015-2019     83.20    79.53    81.36

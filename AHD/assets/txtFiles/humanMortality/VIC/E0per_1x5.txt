@@ -1,4 +1,4 @@
-VIC, Life expectancy at birth (period, 1x5)	Last modified: 02 Jul 2018;  Methods Protocol: v6 (2017)
+VIC, Life expectancy at birth (period, 1x5)	Last modified: 23 May 2023;  Methods Protocol: v6 (2017)
 
   Year       Female    Male     Total
 1971-1974     75.68    69.09    72.31
@@ -7,7 +7,7 @@ VIC, Life expectancy at birth (period, 1x5)	Last modified: 02 Jul 2018;  Methods
 1985-1989     79.48    73.29    76.38
 1990-1994     80.78    74.95    77.88
 1995-1999     81.78    76.33    79.09
-2000-2004     83.01    78.15    80.63
-2005-2009     84.00    79.70    81.89
-2010-2014     84.92    81.06    83.03
-2015-2016     85.11    81.41    83.28
+2000-2004     83.01    78.14    80.62
+2005-2009     83.98    79.65    81.86
+2010-2014     84.88    81.00    82.98
+2015-2019     85.31    81.58    83.47
