@@ -1,13 +1,10 @@
 
 $(function () {
-    const stateArray = sessionStorage.getItem('stateArray');
-    const thisA = sessionStorage.getItem('thisArray');
     buildTable();
 })
 
 function buildTable(){
     var tablehtml = "";
-    var headinghtml = "";
     var pageHeading = document.getElementById('pageHeading');
     pageHeadingText = pageHeading.innerHTML;
     console.log(pageHeadingText);
@@ -39,7 +36,6 @@ function buildTable(){
     
      const table = document.createElement("table");
 
-     $('main').append(headinghtml);
      $('main').append(table);
      //$('table').addClass('dataTable');
      
