@@ -115,19 +115,19 @@ function buildTable(){
      '<td id="clickables"></td>' +
      '</tr></tbody></table>' +
      '<h2>Input Data</h2>' +
-     '<table class="dataTable"><thead><tr><th id="hideMe" rowspan="2"></th><th rowspan="2" id="bold">Available dates</th><th  id="bold">Data</th><th id="bold">Lexis map</th></tr></thead>' +
+     '<table class="dataTable"><thead><tr><th id="hideMe" rowspan="2"></th><th rowspan="2" id="bold">Available dates</th><th  id="bold">Data</th></tr></thead>' +
      '<tbody><tr>' +
      '<td>Births</td><td>1971-2016</td>' +
-     '<td id="clickables"><a href = "../txtFiles/humanMortality/' + state + '/InputDB/' + state + 'birth.txt"> txt </a></td> <td id="clickables"></td>' +
+     '<td id="clickables"><a href = "../txtFiles/humanMortality/' + state + '/InputDB/' + state + 'birth.txt"> txt </a></td>' +
      '</tr><tr>' +
      '<td>Deaths</td><td>1971-2016</td>' +
-     '<td id="clickables"><a href = "../txtFiles/humanMortality/' + state + '/InputDB/' + state + 'death.txt"> txt </a></td> <td id="clickables"><a></a></td>' +
+     '<td id="clickables"><a href = "../txtFiles/humanMortality/' + state + '/InputDB/' + state + 'death.txt"> txt </a></td>' +
      '</tr><tr>' +
      '<td>Population size</td><td>1971-2016</td>' +
-     '<td id="clickables"><a href = "../txtFiles/humanMortality/' + state + '/InputDB/' + state + 'pop.txt"> txt </a></td> <td id="clickables"><a></a></td>' +
+     '<td id="clickables"><a href = "../txtFiles/humanMortality/' + state + '/InputDB/' + state + 'pop.txt"> txt </a></td>' +
      '</tr><tr>' +
      '<td>Reference file</td><td>1971-2016</td>' +
-     '<td id="clickables"><a href = "../txtFiles/humanMortality/' + state + '/InputDB/' + state + 'ref.txt"> txt </a></td> <td id="clickables"><a></a></td>' +
+     '<td id="clickables"><a href = "../txtFiles/humanMortality/' + state + '/InputDB/' + state + 'ref.txt"> txt </a></td>' +
      '</tr></tbody></table>';
 
      $('main').append(tablehtml);
