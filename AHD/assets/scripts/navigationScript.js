@@ -94,8 +94,8 @@ function openStates(value) {
     }
 }
 
-function statesLoad(state) {
-    var states = state.split('-');
+function statesLoad(stater) {
+    var states = stater.split('-');
     console.log(states[0]);
     console.log(states[1]);
 
