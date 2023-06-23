@@ -404,6 +404,7 @@ td, th{
   border: 5px solid #252525;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 30px;
 }
 
 table, th, td {
@@ -424,4 +425,8 @@ table, th, td {
 #clickables:hover {
   background-color: #e9a112;
   cursor:pointer;
+}
+
+#inputData {
+  text-align: center;
 }
