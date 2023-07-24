@@ -12,6 +12,7 @@
         
         <!--Style Sheets (CSS) and other external file links-->
         <link rel="stylesheet" href="assets/AHD.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <!--JQuery Reference - JQuery is just a JavaScript Library-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="assets/scripts/navigationScript.js"></script>
@@ -22,7 +23,7 @@
       <!--Top navigation - add hover effects later-->
       <div class="navigation">
           <!--Logo-->
-          <a href=".index.html"><img src="./assets/img/logo.png" alt="logo" id="navigationLogo"></a>
+          <a href="index.html"><img src="./assets/img/logo.png" alt="logo" id="navigationLogo"></a>
           <!--Hamburger Menu-->
           <button class="nav-toggle" aria-hidden="true" aria-label="menu" onclick="navFunction(); return false">
               <!--Hamburger menu lines-->
@@ -33,25 +34,23 @@
               <ul class="nav-links">
                   <!--Collaspable links when mobile sized-->
                   <div class="collapsable">
+                    <li class="bookingButton">
+                        <button value="1" onclick="openStates(this.value)">States </button>
+                    </li>
+                    <div class="collapsableStates hide">          
+                      
+                    </div> 
                   <li>
-                      <a href="./assets/pages/methodology.html">Methodology</a>
+                      <a class="hideNavButtons" href="./assets/pages/dataExplaination.html">Data Explanation</a>
                   </li>
                   <li>
-                      <a href="./assets/pages/dataExplaination.html">Data Explanation</a>
+                      <a class="hideNavButtons" href="./assets/pages/bgDocumentation.html">Background Documentation</a>
                   </li>
                   <li>
-                      <a href="./assets/pages/bgDocumentation.html">Background Documentation</a>
-                  </li>
-                  <li>
-                      <a href="./assets/pages/team.html">Team</a>
+                      <a class="hideNavButtons" href="./assets/pages/team.html">Team</a>
                   </li>
               <!--Optional Book now button - Outside of collapsable menu-->
-                  <li class="bookingButton">
-                      <button value="1" onclick="openStates(this.value)">States</button>
-                  </li>
-                  <div class="collapsableStates hide">          
-                    
-                  </div>    
+                   
                 </div>      
               </ul>
           </nav>
@@ -70,9 +69,6 @@
           <!--Footer Links-->
           <ul class="footer-links">
               <!---->
-              <li>
-                  <a href="./assets/pages/methodology.html">Methodology</a>
-              </li>
               <li>
                   <a href="./assets/pages/dataExplaination.html">Data Explanation</a>
               </li>

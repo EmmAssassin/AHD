@@ -33,22 +33,23 @@
               <ul class="nav-links">
                   <!--Collaspable links when mobile sized-->
                   <div class="collapsable">
+                    <li class="bookingButton">
+                        <button value="2" onclick="openStates(this.value)">States</button>
+                    </li>
+                    <div class="collapsableStates hide">          
+                      
+                    </div> 
                     <li>
-                        <a href="dataExplaination.html">Data Explanation</a>
+                        <a class="hideNavButtons" href="dataExplaination.html">Data Explanation</a>
                     </li>
                     <li>
-                        <a href="bgDocumentation.html">Background Documentation</a>
+                        <a class="hideNavButtons" href="bgDocumentation.html">Background Documentation</a>
                     </li>
                     <li>
-                        <a href="team.html">Team</a>
+                        <a class="hideNavButtons" href="team.html">Team</a>
                     </li>
               <!--Optional Book now button - Outside of collapsable menu-->
-                  <li class="bookingButton">
-                      <button value="2" onclick="openStates(this.value)">States</button>
-                  </li>
-                  <div class="collapsableStates hide">          
-                    
-                  </div>    
+                     
                 </div>      
               </ul>
           </nav>

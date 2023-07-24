@@ -33,22 +33,23 @@
             <ul class="nav-links">
                 <!--Collaspable links when mobile sized-->
                 <div class="collapsable">
+                    <li class="bookingButton">
+                        <button value="2" onclick="openStates(this.value)">States</button>
+                    </li>
+                    <div class="collapsableStates hide">          
+                      
+                    </div> 
                   <li>
-                      <a href="dataExplaination.html">Data Explanation</a>
+                      <a class="hideNavButtons" href="dataExplaination.html">Data Explanation</a>
                   </li>
                   <li>
-                      <a href="bgDocumentation.html">Background Documentation</a>
+                      <a class="hideNavButtons" href="bgDocumentation.html">Background Documentation</a>
                   </li>
                   <li>
-                      <a href="team.html">Team</a>
+                      <a class="hideNavButtons" href="team.html">Team</a>
                   </li>
             <!--Optional Book now button - Outside of collapsable menu-->
-                <li class="bookingButton">
-                    <button value="2" onclick="openStates(this.value)">States</button>
-                </li>
-                <div class="collapsableStates hide">          
-                  
-                </div>    
+                   
               </div>      
             </ul>
         </nav>
@@ -61,20 +62,20 @@
           <section>
             <h2>Core Team</h2>
             <p>
-                Professor Vladimir Canudas-Romo, Head of School of Demography, Australian National University
+                <a href="mailto:vladimir.canudas-romo@anu.edu.au">Professor Vladimir Canudas-Romo</a>, Head of School of Demography, Australian National University
             </p>
             <p>
-                Wen Su, School of Demography, Australian National University
+                <a href='mailto:wen.su@anu.edu.au'>Wen Su</a>, School of Demography, Australian National University
             </p>
             <p>
-                Emily (Emm) Woolnough, Website developer
+                <a href="mailto:emmwoolnough@outlook.com">Emily (Emm) Woolnough</a>, Website developer
             </p>
           </section>
 
           <section>
             <h2>Contact at the Max Plank Institute for Demographic Research</h2>
             <p>
-                Dmitri Jdanov (MPIDR), Co-Director of the Human Mortality Database project 
+                <a href="mailto:jdanov@demogr.mpg.de">Dmitri Jdanov (MPIDR)</a>, Co-Director of the Human Mortality Database project 
             </p>
           </section>
       </main>

@@ -126,6 +126,7 @@
   
   .collapsableStates{
     padding: 0;
+    margin-left: -2vw;
     width: 100%;
     position: absolute;
     min-width: 160px;
@@ -176,6 +177,8 @@
   
   .collapsableStates{
     padding: 0;
+    margin-right: auto;
+    margin-left: auto;
     width: 100%;
     position: absolute;
     min-width: 160px;
@@ -331,7 +334,7 @@ main p {
 }
 
 .hide {
-  display: none;
+  display: none !important;
 }
 
 /*Footer*/

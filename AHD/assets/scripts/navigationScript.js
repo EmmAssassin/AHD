@@ -10,6 +10,9 @@ function startUp() {
             if($('.collapsable').hasClass('open')) {
                 $('.collapsable').removeClass('open');
                 $('main').removeClass('no-move');   
+                if ($('.hideNavButtons').addClass('hide')){
+                    $('.hideNavButtons').removeClass('hide');
+                }
             }            
                    
             $('.topLine').removeClass('rightCross');            
@@ -19,12 +22,14 @@ function startUp() {
             if($('#states')){
                 $('.collapsable > #states').remove();
             }
+            
         } 
 
         if($(window).width() < 1024){ 
             if(!$('.collapsableStates').hasClass('hide')){
                 $('.collapsableStates').addClass('hide');
                 $('.collapsableStates > #states').remove();
+                //$('.hideNavButtons').removeClass('hide');
             }
         }
     });
@@ -44,6 +49,10 @@ function navFunction(){
 
         if($('#states')){
             $('.collapsable > #states').remove();
+        }
+
+        if($('.collapsableStates').hasClass('hide')){ 
+            $('.hideNavButtons').removeClass('hide');
         }
 }
 
@@ -72,6 +81,12 @@ function openStates(value) {
         }
     
     $('.collapsableStates').toggleClass('hide');
+    
+    $('.fa').toggleClass('fa-angle-down');
+    
+    if($(window).width() < 1024 && $('.collapsable > #states')){ 
+        $('.collapsable > #states').remove();
+    }
 
     if(!$('.collapsableStates').hasClass('hide') && $(window).width() > 1024){
         $('.collapsableStates').append(html);
@@ -88,4 +103,11 @@ function openStates(value) {
     if($('.collapsableStates').hasClass('hide') && $(window).width() < 1024){
         $('.collapsable > #states').remove();
     }
+        
+        if($(window).width() < 1024 && $('.collapsableStates').hasClass('hide')){ 
+                $('.hideNavButtons').removeClass('hide');
+        }
+        else if($(window).width() < 1024 && !$('.collapsableStates').hasClass('hide')){ 
+            $('.hideNavButtons').addClass('hide');
+        }
 }
