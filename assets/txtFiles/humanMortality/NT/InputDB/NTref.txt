@@ -1,0 +1,43 @@
+RefCode
+1
+Source
+Australian Bureau of Statistics Data Explorer (ABS.StatData Explorer: https://explore.data.abs.gov.au/)
+Comments
+(Death counts) Australian states and territories, by age 0 to 100+ and sex, from 1971 to 2021. 
+Data extracted on 23 Apr 2023 05:52 UTC (GMT) from ABS.StatData Explorer, Commonwealth of Australia. 
+Date
+23 Apr 2023
+Reference Person
+Wen Su (wen.au@anu.edu.au)
+Vladimir Canudas-Romo (vladimir.canudas-romo@anu.edu.au)
+
+
+RefCode
+2
+Source
+Australian Bureau of Statistics 3105.0.65.001 Australian Historical Population Statistics, 2014.
+and (ABS.StatData Explorer: https://explore.data.abs.gov.au/)
+Comments
+(Birth counts) Australian states and territories, by sex, from 1911 to 2021. 
+Data extracted on 23 Apr 2023 05:52 UTC (GMT) from ABS.StatData Explorer, Commonwealth of Australia. 
+Date
+23 Apr 2023
+Reference Person
+Wen Su (wen.au@anu.edu.au)
+Vladimir Canudas-Romo (vladimir.canudas-romo@anu.edu.au)
+
+
+
+RefCode
+3
+Source
+Australian Bureau of Statistics Data Explorer (ABS.StatData Explorer: https://explore.data.abs.gov.au/)
+Comments
+(Official population estimates) Australian states and territories, by single age 0 to 100+, 
+by sex, from 30 June 1971 to 30 June 2021. 
+Data extracted on 23 Apr 2023 05:52 UTC (GMT) from ABS.StatData Explorer, Commonwealth of Australia. 
+Date
+23 Apr 2023
+Reference Person
+Wen Su (wen.au@anu.edu.au)
+Vladimir Canudas-Romo (vladimir.canudas-romo@anu.edu.au)

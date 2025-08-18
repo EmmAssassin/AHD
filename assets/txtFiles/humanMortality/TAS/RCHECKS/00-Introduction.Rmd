@@ -1,0 +1,67 @@
+---
+title: "HMD Diagnostics"
+author: "Team HMD"
+date: '`r Sys.Date()`'
+output: 
+  bookdown::gitbook:
+    css: style.css
+description: This is a bookdown::gitbook document containing the Diagnostic graphs for an HMD country
+  The output format for this example is bookdown::gitbook.
+documentclass: book
+github-repo: rstudio/bookdown-demo
+link-citations: yes
+site: bookdown::bookdown_site
+
+---
+```{r setup, include=FALSE}
+knitr::opts_knit$set(progress = FALSE)
+knitr::opts_chunk$set(message=FALSE, echo=FALSE, fig.cap="")
+
+if(usingShiny==1){
+  progress <- shiny::Progress$new()
+  progress$set(message = "Calculating", value = NULL)
+}
+
+```
+
+# Introduction {-}
+
+
+<h3> General data quality checks </h3>
+<ol class="toclist">
+<li> Chart of raw population data from input database (IDB) by calendar year, age, and sex <br> Confirm range of age intervals across time is correct. [link](#generalrawpop)  </li>
+<li> Chart of raw deaths counts from input database (IDB) by calendar year, age-interval, and sex<br> Confirm range of age intervals across time is correct. [link](#rawdeath) </li>
+<li> Lexis map of Lexis database (LDB) by calendar year, age, and sex. <br>	Confirm that data in LDB make sense. [link](#generallexis) </li>
+<li> Chart of outliers in distribution of deaths in age range prior to open age interval (OAI) <br> Check that procedure for smoothing deaths before fitting model to split OAI is reasonable. [link](#mortalitydeviations)</li>
+</ol>
+<h3> Internal consistency checks </h3>
+<ol start="5" class="toclist">
+<li> Chart of total number of deaths by year for IDB versus LDB by sex <br>	Total from IDB should match exactly to total in LDB. [link](#totaldeaths)</li>
+<li> Chart of total January 1st population by year for IDB versus LDB by sex	<br> Total from IDB should track close to total in LDB. [link](#totalpop)</li>
+<li> Chart of deaths within age groups (under 5, 5 to 64, 65 or higher, 85 or higher) by year for IDB versus LDB	<br> For each age group specific chart, IDB should track close to LDB. [link](#intcondeathagesex)</li>
+<li> Chart of population size within age groups (under 5, 5 to 64, 65 or higher, 85 or higher) by year for IDB versus LDB	<br> For each age group specific chart, IDB should track close to LDB. [link](#intconpopagesex)</li>
+</ol>
+<h3> Internal plausibility checks </h3>
+<ol start="9" class="toclist">
+<li> Chart of death rates by age and sex for each year (based on mltper_1x1.csv/fltper_1x1.csv located in output directory for country!!!) <br>	Identify strange patterns in death rates for males versus females. [link](#deathrateagesex)</li>
+<li> Chart of death rates by year and sex for each age (based on mltper_1x1.csv/fltper_1x1.csv located in output directory for country!!!) <br>	Identify strange patterns in death rates for males versus females. [link](#deathratetimesex)</li>
+<li> Chart of mortality deviations compared with adjacent ages. Note that the number of neighboring ages and/or years as well as the p-values for X and the size of R can be modified prior to running the batch program. <br>	Expect to see large negative deviations at age 1 versus age 0. Patterns of large deviations, e.g., at ages ending in "0" or "5", may indicate problematic places in the mortality surface. [link](#mortdevageyear)</li>
+<li> Lexis map of total net migration.	<br> Migration patterns should make sense. Should not show net migration above age 80 (unless there are territorial changes). [link](#netmig)</li>
+</ol>
+<h3> External plausibility checks </h3>
+<ol start="13" class="toclist">
+<li> Chart of total net migration by calendar year and sex <br>	Might be used to check that pattern of implied migration is consistent with any available migration data. [link](#impliedmig)</li>
+<li> Chart of life expectancy at ages 0, 65, and 80 by sex compared to Sweden <br>	Might be used to check pattern of life expectancy with Sweden as the benchmark. [link](#lifeswe)</li>
+</ol>
+<h3> Internal consistency of old vs. new data </h3>
+<ol start="15" class="toclist">
+<li> Chart of ratio of new vs. old raw and adjusted mortality rates in life table data <br>	Might be used to locate large discrepancies between old and new data. CS should look at graphs in 16 and 17 to understand whether differences are due to changes in numerators, denominators, or both. [link](#newoldmortrate)</li>
+<li> Chart of ratio of new vs. old death counts in Lexis database <br>	Might be used to locate large discrepancies between old and new data. [link](#newolddeath)</li>
+<li> Chart of ratio of new vs. old population counts in Lexis database <br>	Might be used to locate large discrepancies between old and new data. [link](#newoldpop)</li>
+<li> Chart of mortality sex ratio surface [link](#mortsexratio)</li>
+</ol>
+
+
+```{r versionprint, include=TRUE}
+sprintf(as.character(packageVersion("HMDDiag")))
+```

@@ -1,0 +1,494 @@
+
+R version 4.2.3 (2023-03-15) -- "Shortstop Beagle"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+
+
+ Heads up : experience has shown that saving your workspace on quitting R 
+is a bad idea when your environment holds many GB of stuff. Consequently
+this R is configured to NOT save your workspace on quitting.
+
+Rstudio, however does not understand this -- to save headaches YOU MUST configure
+Rstudio to never save .RData and to not read existing .RData files
+ Tools -> Global Options
+
+> ## R Start file
+> #sessionInfo()
+> #.libPaths()
+> 
+> options(showErrorCalls=TRUE)
+> options(showWarnCalls=TRUE)
+> options(show.error.locations="top")
+> options(warn=1)  # immediately print warnings
+> 
+> 
+> 
+> cat("HMD R Lifetable Processing....\n")
+HMD R Lifetable Processing....
+> 
+> 
+> cat("Loading devtools and RLifeTables package \n")
+Loading devtools and RLifeTables package 
+> 
+> library(roxygen2)
+> library(devtools)
+Loading required package: usethis
+> 
+> 
+> load_all(path='../HMDLifeTables/HMDLifeTables/HMDLifeTables')
+ℹ Loading HMDLifeTables
+> 
+> #cat(paste("Loading...",file.path(Sys.getenv("PROJ"),"RunHMDCountry.R"),"\n"))
+> 
+> #source(file.path(Sys.getenv("PROJ"),"RunHMDCountry.R"), echo=FALSE)
+>        
+> cat("Pulling environment variables that may override defaults...\n")
+Pulling environment variables that may override defaults...
+> 
+> ## construct parameter list.  NB  parms$field = NULL will not stick, while list(field=NULL) will
+> ## so use list()
+> parms <- list(
++     WORKING = getwd(),
++     OPENAGE = ifelse( nzchar(Sys.getenv("OPENAGE")), as.integer(Sys.getenv("OPENAGE")), 110),
++     RADIX =  ifelse( nzchar(Sys.getenv("RADIX")), as.integer(Sys.getenv("RADIX")), 100000),
++     CAGEEXTRP = ifelse( nzchar(Sys.getenv("CAGEEXTRP")), as.integer(Sys.getenv("CAGEEXTRP")), 90),
++     MPVERSION =  ifelse( nzchar(Sys.getenv("MPVER")), as.integer(Sys.getenv("MPVER")), 6),
++     STATSFOLDER = "STATS",
++     XXX = ifelse( nzchar(Sys.getenv("XXX")), Sys.getenv("XXX"), 
++                   ifelse(exists("XXX"), XXX, NULL) ),
++     CountryName = ifelse( nzchar(Sys.getenv("CountryName")), Sys.getenv("CountryName"),
++                   ifelse(exists("CountryName"), CountryName, NULL) ),
++     IDBPATH = NULL,
++     LDBPATH = NULL,
++     SAVEBIN = TRUE
++     );
+>     
+> if(  nzchar(Sys.getenv("LDBPATH")) )
++     parms["LDBPATH"] <- Sys.getenv("LDBPATH")
+> ##
+> 
+> if(  nzchar(Sys.getenv("INDBPATH")) )
++     parms["IDBPATH"] <- Sys.getenv("INDBPATH")
+> ##
+> ## check inputs for obvious errors, using R LexisDB code
+> 
+> load_all(path='/data/commons/boe/HMDLexis.git/HMDLexis/HMDLexis')
+ℹ Loading HMDLexis
+! Adding files missing in collate:
+  '/data/commons/boe/HMDLexis.git/HMDLexis/HMDLexis/R/computeLDB.R',
+  '/data/commons/boe/HMDLexis.git/HMDLexis/HMDLexis/R/d_rr2tltu.R',
+  '/data/commons/boe/HMDLexis.git/HMDLexis/HMDLexis/R/d_s1x1_CDW.R',
+  '/data/commons/boe/HMDLexis.git/HMDLexis/HMDLexis/R/d_sNx1vv.R',
+  '/data/commons/boe/HMDLexis.git/HMDLexis/HMDLexis/R/d_unk5.R', and
+  '/data/commons/boe/HMDLexis.git/HMDLexis/HMDLexis/R/writeLDB.R'
+> 
+> res<- try(
++   testidb <- HMDLexis::readInputDB(WORKING=getwd(), XXX=parms$XXX)
++ )
+
+Reading in InputDB items for NT ...
+ run at:  2023-05-23 09:07:33 
+
+Error in HMDLexis::readInputDB(WORKING = getwd(), XXX = parms$XXX) : 
+Either the spelling or the order of the column names is off in NTdeath.txt
+Correct this before continuing. The correct columns should be:
+
+PopName, Area, Year, YearReg, YearInterval, Sex, Age, AgeInterval, Lexis, RefCode, Access, Deaths, NoteCode1, NoteCode2, NoteCode3, LDB
+
+> 
+> if( class(res) == "try-error" ){
++    warning("FAST FAIL: there appear to be problems in the InputDB files")
++ }
+Warning: FAST FAIL: there appear to be problems in the InputDB files
+> 
+> 
+> cat("Running the lifetables...\n")
+Running the lifetables...
+> 
+> print(parms)
+$WORKING
+[1] "/nobackup/90days/hmd/RunResultsTMP/NT"
+
+$OPENAGE
+[1] 110
+
+$RADIX
+[1] 1e+05
+
+$CAGEEXTRP
+[1] 90
+
+$MPVERSION
+[1] 6
+
+$STATSFOLDER
+[1] "STATS"
+
+$XXX
+[1] "NT"
+
+$CountryName
+[1] "NT"
+
+$IDBPATH
+NULL
+
+$LDBPATH
+NULL
+
+$SAVEBIN
+[1] TRUE
+
+> ## run the top-level script from the RLifeTables package, which suitable parameter settings
+> RunHMDCountry(WORKING=parms$WORKING, OPENAGE=parms$OPENAGE, RADIX=parms$RADIX, CAGEEXTRP=parms$CAGEEXTRP,
++               MPVERSION=parms$MPVERSION, STATSFOLDER=parms$STATSFOLDER, XXX=parms$XXX, CountryName=parms$CountryName,
++               LDBPATH=parms$LDBPATH,
++               IDBPATH=parms$IDBPATH, SAVEBIN=parms$SAVEBIN)
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+1 0.100981950550016 0.100993432208776 
+2 0.100995908471744 0.00102997878187952 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+3 0.0200477337618718 0.344346753377973 
+4 0.100986992272481 0.100992004009068 
+5 0.200979292452155 0.000983558198864986 
+6 0.0578356271444181 0.122243464256623 
+7 0.101005860418 0.100987320922571 
+8 0.100997682706472 0.000996212455828298 
+9 0.100987309991049 0.100973436186377 
+10 0.167587657879935 0 
+11 0.128997766900659 0.0973845069497731 
+12 0.10097896572592 0.100989527328373 
+13 0.101001641410263 0.00103252078847058 
+14 0.072870349430405 0.109521596918549 
+15 0.0972926969826604 0.0575370697972199 
+16 0.0565943171990989 0.153518996103686 
+17 0.0636971365162256 0.108158758895006 
+18 0.101015393944598 0.000998284024299648 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+19 0.0499757349192238 0.0999944014043708 
+20 0.122032219349093 0.053650982354262 
+21 0.111971346684833 0.0377484232401893 
+22 0.102777463156008 0.0663757200070361 
+23 0.100982892050022 0.100959593812876 
+24 0.0731295275267165 0.110329438972836 
+25 0.0600498713633865 0.0854715368678294 
+26 0.0528779441421298 0.133416847616995 
+27 0.100974723608143 0.101002155683579 
+28 0.101037164902509 0.00101136968347805 
+29 0.049331749586171 0.14468200798116 
+30 0.134064771158514 0.0204621914019451 
+31 0.138182159987555 0 
+32 0.100957356675999 0.100995126027619 
+33 0.101003890278464 0.100956724321637 
+34 0.0708041178129712 0.130256600137058 
+35 0.0713009696810053 0.106679938432227 
+36 0.0602616560290831 0.129206266215243 
+37 0.0938667611359318 0.079330783257673 
+38 0.0832399322686079 0.0999051486931123 
+39 0.049010539175624 0.166889903200505 
+40 0.065923445760376 0.151130328711199 
+41 0.0611919793495235 0.108839042874275 
+42 0.106496205818179 0.0135328697376601 
+43 0.0674255480468965 0.127640475747593 
+44 0.0664875718394961 0.098953943463791 
+45 0.0839634785190439 0.0844477701018367 
+46 0.0800608651104831 0.08105042213689 
+47 0.049739909265197 0.115633489675139 
+48 0.0798180071219945 0.0772421944014431 
+49 0.0537139576510283 0.144546032503136 
+50 0.0479119736607912 0.141134254433767 
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+1 0.100991666145408 0.100990568673434 
+2 0.100967825847241 0.000979619094916375 
+3 0.10097331720296 0.000989004890866976 
+4 0.100971538214296 0.101004002855714 
+5 0.100251277757192 0.148937341044078 
+6 0.100999859565203 0.00100405956714517 
+7 0.10098565232952 0.100993126778025 
+8 0.0680986116697262 0.0152967995221339 
+9 0.200963894909694 0.000971940722128453 
+10 0.100987506116619 0.000983660377158354 
+11 0.06050121186965 0.0410822346304933 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+12 0.0166674845753043 0.193715211021531 
+13 0.0575346616375975 0.129052974007405 
+14 0.0504165034827498 0.173203547888335 
+15 0.100981239580593 0.00100604823323051 
+16 0.100986255523108 0.00101001380106008 
+17 0.0355027161708428 0.187043605755968 
+18 0.0526737738464333 0.12232452642376 
+19 0.0886191098119668 0.0568342356614798 
+20 0.054182977523292 0.0950004515249249 
+21 0.0565117666240321 0.052908005637578 
+22 0.0729386058282137 0.0818326843586152 
+23 0.0737776354474208 0.0565297919637634 
+24 0.0511433665503549 0.0950413298153095 
+25 0.101006129078907 0.00104192401291666 
+26 0.025980177419243 0.186229215989625 
+27 0.0555040960359166 0.114524302522692 
+28 0.0448263780945689 0.161594356422101 
+29 0.0561723411029241 0.125604955453298 
+30 0.0576519704414485 0.0896501234895765 
+31 0.0717722459479595 0.0920508595769136 
+32 0.0599192806523118 0.0584430152729525 
+33 0.0519424185030469 0.145967272787275 
+34 0.0450377706936907 0.0956989417678731 
+35 0.0521343321061577 0.118565487004372 
+36 0.0729095615354242 0.0854280804138504 
+37 0.0533249935925442 0.119392520379896 
+38 0.0609897449788825 0.132970811051506 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+39 0.0499829287377295 0.100009793494045 
+40 0.039549026001391 0.161013270200853 
+41 0.0420871771787345 0.157394093280639 
+42 0.0407792362065105 0.0953154400553053 
+43 0.0417917333408795 0.13836157325755 
+44 0.0569142065572032 0.104446733400999 
+45 0.0340609004382335 0.164051422487962 
+46 0.0457808581645161 0.120919535215544 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+47 0.0499737105885958 0.10001539850724 
+48 0.054918165398594 0.109526315552766 
+49 0.0445188958112847 0.122416168905992 
+50 0.031687379315304 0.125816767743295 
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+1 0.0555294382467954 0.171563953246252 
+2 0.113362900524666 0.0442247548954766 
+3 0.104630721044698 0.0725229682632733 
+4 0.0732134817793425 0.0812308673982727 
+5 0.105177631039273 0.0665301626098736 
+6 0.067946328386256 0.103154260469103 
+7 0.105889593933288 0.0707279062432574 
+8 0.070279738646888 0.116205291327105 
+9 0.0712911224654722 0.103797418047749 
+10 0.06757155320846 0.102340647734564 
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+1 0.0773744301818818 0.0774400960451598 
+2 0.0915576952535274 0.0797314403256911 
+3 0.0516378407087514 0.114872763344348 
+4 0.0605295454605235 0.100489743734124 
+5 0.0609284316039914 0.0779092176979197 
+6 0.0496086218397961 0.128337155863 
+7 0.0556918830982271 0.101709430492285 
+8 0.0562475531169358 0.11461148137624 
+9 0.0440586632931027 0.132342659919577 
+10 0.0449248355947169 0.124676452774829 
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+1 0.0844092205127297 0.0983228402270203 
+2 0.0867477616949801 0.0771368226972091 
+3 0.0848564644856235 0.0845939916271013 
+4 0.0840752823428365 0.0956695713970844 
+5 0.0693277509066164 0.10249570764268 
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+1 0.0859059722846086 0.0786434671581725 
+2 0.0562559194675913 0.107167874958406 
+3 0.0536842257595775 0.108549937930115 
+4 0.0560122286677463 0.108892674217658 
+5 0.0445607659551316 0.127988208478103 
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/NT/InputDB/NTbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+Warning in Write_Births(WORKING = WORKING, STATSFOLDER = STATSFOLDER, LDBPATH = LDBPATH,  :
+  ***  NT : Different Birth Years between IDB, LDB: 1911  1912  1913  1914  1915  1916  1917  1918  1919  1920  1921  1922  1923  1924  1925  1926  1927  1928  1929  1930  1931  1932  1933  1934  1935  1936  1937  1938  1939  1940  1941  1942  1943  1944  1945  1946  1947  1948  1949  1950  1951  1952  1953  1954  1955  1956  1957  1958  1959  1960  1961  1962  1963  1964  1965  1966  1967  1968  1969  1970 
+Calls: RunHMDCountry -> Write_Births
+> 
+> 
+> cat("HMD R Lifetable ... finished")
+HMD R Lifetable ... finished> 
+> proc.time()
+   user  system elapsed 
+ 92.419 104.159  21.692 

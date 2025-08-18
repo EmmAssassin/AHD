@@ -1,0 +1,15 @@
+# Total deaths by sex {#totaldeaths}
+```{r pb05, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Total Deaths",value = 5/18)
+}
+```
+## Females
+```{r plotIntConDeathsF, cache=TRUE, fig.cap='Total deaths by sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConDeaths(parms, sex = "f", total.pop = TRUE)
+```
+
+## Males
+```{r plotIntConDeathsM, cache=TRUE, fig.cap='Total deaths by sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConDeaths(parms, sex = "m", total.pop = TRUE)
+```

@@ -1,0 +1,985 @@
+---
+title: "HMD Diagnostics"
+author: "Team HMD"
+date: '`r Sys.Date()`'
+output: 
+  bookdown::gitbook:
+    css: style.css
+description: This is a bookdown::gitbook document containing the Diagnostic graphs for an HMD country
+  The output format for this example is bookdown::gitbook.
+documentclass: book
+github-repo: rstudio/bookdown-demo
+link-citations: yes
+site: bookdown::bookdown_site
+
+---
+```{r setup, include=FALSE}
+knitr::opts_knit$set(progress = FALSE)
+knitr::opts_chunk$set(message=FALSE, echo=FALSE, fig.cap="")
+
+if(usingShiny==1){
+  progress <- shiny::Progress$new()
+  progress$set(message = "Calculating", value = NULL)
+}
+
+```
+
+# Introduction {-}
+
+
+<h3> General data quality checks </h3>
+<ol class="toclist">
+<li> Chart of raw population data from input database (IDB) by calendar year, age, and sex <br> Confirm range of age intervals across time is correct. [link](#generalrawpop)  </li>
+<li> Chart of raw deaths counts from input database (IDB) by calendar year, age-interval, and sex<br> Confirm range of age intervals across time is correct. [link](#rawdeath) </li>
+<li> Lexis map of Lexis database (LDB) by calendar year, age, and sex. <br>	Confirm that data in LDB make sense. [link](#generallexis) </li>
+<li> Chart of outliers in distribution of deaths in age range prior to open age interval (OAI) <br> Check that procedure for smoothing deaths before fitting model to split OAI is reasonable. [link](#mortalitydeviations)</li>
+</ol>
+<h3> Internal consistency checks </h3>
+<ol start="5" class="toclist">
+<li> Chart of total number of deaths by year for IDB versus LDB by sex <br>	Total from IDB should match exactly to total in LDB. [link](#totaldeaths)</li>
+<li> Chart of total January 1st population by year for IDB versus LDB by sex	<br> Total from IDB should track close to total in LDB. [link](#totalpop)</li>
+<li> Chart of deaths within age groups (under 5, 5 to 64, 65 or higher, 85 or higher) by year for IDB versus LDB	<br> For each age group specific chart, IDB should track close to LDB. [link](#intcondeathagesex)</li>
+<li> Chart of population size within age groups (under 5, 5 to 64, 65 or higher, 85 or higher) by year for IDB versus LDB	<br> For each age group specific chart, IDB should track close to LDB. [link](#intconpopagesex)</li>
+</ol>
+<h3> Internal plausibility checks </h3>
+<ol start="9" class="toclist">
+<li> Chart of death rates by age and sex for each year (based on mltper_1x1.csv/fltper_1x1.csv located in output directory for country!!!) <br>	Identify strange patterns in death rates for males versus females. [link](#deathrateagesex)</li>
+<li> Chart of death rates by year and sex for each age (based on mltper_1x1.csv/fltper_1x1.csv located in output directory for country!!!) <br>	Identify strange patterns in death rates for males versus females. [link](#deathratetimesex)</li>
+<li> Chart of mortality deviations compared with adjacent ages. Note that the number of neighboring ages and/or years as well as the p-values for X and the size of R can be modified prior to running the batch program. <br>	Expect to see large negative deviations at age 1 versus age 0. Patterns of large deviations, e.g., at ages ending in "0" or "5", may indicate problematic places in the mortality surface. [link](#mortdevageyear)</li>
+<li> Lexis map of total net migration.	<br> Migration patterns should make sense. Should not show net migration above age 80 (unless there are territorial changes). [link](#netmig)</li>
+</ol>
+<h3> External plausibility checks </h3>
+<ol start="13" class="toclist">
+<li> Chart of total net migration by calendar year and sex <br>	Might be used to check that pattern of implied migration is consistent with any available migration data. [link](#impliedmig)</li>
+<li> Chart of life expectancy at ages 0, 65, and 80 by sex compared to Sweden <br>	Might be used to check pattern of life expectancy with Sweden as the benchmark. [link](#lifeswe)</li>
+</ol>
+<h3> Internal consistency of old vs. new data </h3>
+<ol start="15" class="toclist">
+<li> Chart of ratio of new vs. old raw and adjusted mortality rates in life table data <br>	Might be used to locate large discrepancies between old and new data. CS should look at graphs in 16 and 17 to understand whether differences are due to changes in numerators, denominators, or both. [link](#newoldmortrate)</li>
+<li> Chart of ratio of new vs. old death counts in Lexis database <br>	Might be used to locate large discrepancies between old and new data. [link](#newolddeath)</li>
+<li> Chart of ratio of new vs. old population counts in Lexis database <br>	Might be used to locate large discrepancies between old and new data. [link](#newoldpop)</li>
+<li> Chart of mortality sex ratio surface [link](#mortsexratio)</li>
+</ol>
+
+
+```{r versionprint, include=TRUE}
+sprintf(as.character(packageVersion("HMDDiag")))
+```
+
+<!--chapter:end:00-Introduction.Rmd-->
+
+# Raw Population Counts {#generalrawpop}
+
+Raw Population Counts: population and births by type of source
+```{r pb01, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Raw Population Counts",value = 1/18)
+}
+```
+## Females
+```{r generalrawpopF, cache=TRUE, fig.cap='Raw Population Counts: population and births by type of source', fig.align='center', fig.width=8.25, fig.height=6}
+general_rawpop(parms, sex = "f")
+```
+## Males
+```{r generalrawpopM, cache=TRUE, fig.cap='Raw Population Counts: population and births by type of source', fig.align='center', fig.width=8.25, fig.height=6}
+general_rawpop(parms, sex = "m")
+```
+
+<!--chapter:end:01-RawPopulationCounts.Rmd-->
+
+#  Raw Deaths Lexis Diagram {#rawdeath}
+The background color of the lexis element reflects the nature of the age interval: A dark gray background indicates a closed, a light gray background indicates an open-ended age interval. The outline color of the lexis element is blue for ages of 130 or less, red otherwise.
+```{r pb02, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Raw Deaths",value = 2/18)
+}
+```
+## Females
+```{r generalrawdeathsF, cache=TRUE,   fig.cap='Raw Deaths Lexis Map', fig.align='center', fig.height=10, out.width="95%",fig.asp=1, dpi=150}
+general_rawdeaths(parms, sex = "f")
+```
+
+## Males
+```{r generalrawdeathsM,  cache=TRUE, fig.cap='Raw Deaths Lexis Map', fig.align='center', fig.height=10, out.width="95%",fig.asp=1, dpi=150}
+general_rawdeaths(parms, sex = "m")
+```
+
+<!--chapter:end:02-RawDeathsLexis.Rmd-->
+
+# Lexis Map of Lexis database (LDB) by calendar year, age, and sex {#generallexis}
+```{r pb03, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="General Lexis",value = 3/18)
+}
+```
+## Females
+```{r generallexisDBF, cache=TRUE, fig.cap='Lexis Map of Lexis database', fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150}
+general_lexisDB(parms, sex = "f")
+```
+
+## Males
+```{r generallexisDBM, cache=TRUE, fig.cap='Lexis Map of Lexis database', fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150}
+general_lexisDB(parms, sex = "m")
+```
+
+<!--chapter:end:03-general_lexisDB.Rmd-->
+
+# Deviations from smoothed deaths  {#mortalitydeviations}
+```{r pb04, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Death Outliers",value = 4/18)
+}
+```
+```{r outl, echo=FALSE}
+if( dir.exists(file.path(parms$LDBPATH,"outl"))){ 
+
+  current_folder <- file.path(parms$LDBPATH,"outl")
+  new_folder <- file.path(parms$Report.dir,"_book")
+  list_of_files <- list.files(current_folder)
+
+  file.copy(file.path(current_folder,list_of_files), new_folder)
+
+  htmltools::includeHTML(file.path(parms$Report.dir,"_book","!index.htm"))
+} else {
+  cat("No outlier data found to process....")
+}
+
+```
+
+<!--chapter:end:04-deathoutliers.Rmd-->
+
+# Total deaths by sex {#totaldeaths}
+```{r pb05, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Total Deaths",value = 5/18)
+}
+```
+## Females
+```{r plotIntConDeathsF, cache=TRUE, fig.cap='Total deaths by sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConDeaths(parms, sex = "f", total.pop = TRUE)
+```
+
+## Males
+```{r plotIntConDeathsM, cache=TRUE, fig.cap='Total deaths by sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConDeaths(parms, sex = "m", total.pop = TRUE)
+```
+
+<!--chapter:end:05-plotIntconDeaths.Rmd-->
+
+# Total population by sex {#totalpop}
+```{r pb06, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Total Population",value = 6/18)
+}
+```
+## Females
+```{r generalplotIntConPopF, cache=TRUE, fig.cap='Internal consistency: total population by sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConPop(parms, sex = "f",total.pop = TRUE)
+```
+
+## Males
+```{r generalplotIntConPopM, cache=TRUE, fig.cap='Internal consistency: total population by sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConPop(parms, sex = "m", total.pop = TRUE)
+```
+
+<!--chapter:end:06-general_plotIntConPop.Rmd-->
+
+# Internal Consistency: deaths by age and sex {#intcondeathagesex}
+```{r pb07, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Deaths by age and sex",value = 7/18)
+}
+```
+## Females
+
+### Age 0-4
+```{r plotIntConDeathsF04, cache=TRUE, fig.cap='Internal consistency: deaths by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConDeaths(parms, sex = "f",age.min = 0, age.max = 4)
+
+```
+### Age 5-64
+```{r plotIntConDeathsF564, cache=TRUE, fig.cap='Internal consistency: deaths by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConDeaths(parms, sex = "f",age.min = 5, age.max = 64)
+```
+### Age 65+
+```{r plotIntConDeathsF65, cache=TRUE, fig.cap='Internal consistency: deaths by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConDeaths(parms, sex = "f", age.min = 65)
+```
+### Age 85+
+```{r plotIntConDeathsF85, cache=TRUE, fig.cap='Internal consistency: deaths by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConDeaths(parms, sex = "f", age.min = 85)
+```
+
+## Males
+
+### Age 0-4
+```{r plotIntConDeathsM04, cache=TRUE, fig.cap='Internal consistency: deaths by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConDeaths(parms, sex = "m",age.min = 0, age.max = 4)
+
+```
+### Age 5-64
+```{r plotIntConDeathsM564, cache=TRUE, fig.cap='Internal consistency: deaths by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConDeaths(parms, sex = "m",age.min = 5, age.max = 64)
+```
+### Age 65+
+```{r plotIntConDeathsM65, cache=TRUE, fig.cap='Internal consistency: deaths by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConDeaths(parms, sex = "m", age.min = 65)
+```
+### Age 85+
+```{r plotIntConDeathsM85, cache=TRUE, fig.cap='Internal consistency: deaths by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConDeaths(parms, sex = "m", age.min = 85)
+```
+
+<!--chapter:end:07-plotIntConDeaths.Rmd-->
+
+# Internal consistency: population by age and sex {#intconpopagesex}
+```{r pb08, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Population by age and sex",value = 8/18)
+}
+```
+
+## Females
+### Age 0-4
+```{r intconpopbyage04F, cache=TRUE, fig.cap='Internal consistency: population by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConPop(parms, sex = "f", age.min = 0, age.max = 4)
+
+```
+### Age 5-64
+```{r intconpopbyage064F, cache=TRUE, fig.cap='Internal consistency: population by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConPop(parms, sex = "f",age.min = 5, age.max = 64)
+```
+### Age 65+
+```{r plotIntConDeaths64pF, cache=TRUE, fig.cap='Internal consistency: population by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConPop(parms, sex = "f", age.min = 65)
+```
+### Age 85+
+```{r plotIntConDeaths86pF, cache=TRUE, fig.cap='Internal consistency: population by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConPop(parms, sex = "f", age.min = 85)
+```
+
+## Males
+### Age 0-4
+```{r intconpopbyage04M, cache=TRUE, fig.cap='Internal consistency: population by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConPop(parms, sex = "m", age.min = 0, age.max = 4)
+
+```
+### Age 5-64
+```{r intconpopbyage064M, cache=TRUE, fig.cap='Internal consistency: population by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConPop(parms, sex = "m",age.min = 5, age.max = 64)
+```
+### Age 65+
+```{r plotIntConDeaths64pM, cache=TRUE, fig.cap='Internal consistency: population by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConPop(parms, sex = "m", age.min = 65)
+```
+### Age 85+
+```{r plotIntConDeaths86pM, cache=TRUE, fig.cap='Internal consistency: population by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConPop(parms, sex = "m", age.min = 85)
+```
+
+<!--chapter:end:08-intcon_popbyage.Rmd-->
+
+# Death rates by age and sex {#deathrateagesex}
+```{r pb09, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Death Rates by age and sex",value = 9/18)
+}
+```
+Chart of death rates by age and sex for each year (based on mltper_1x1.csv/fltper_1x1.csv located in output directory for country)
+
+<!-- <link rel="stylesheet" href="https://www.mortality.org/Public/sashmd.css" type="text/css"></link> -->
+<!-- <script type="text/javascript" src="https://www.mortality.org/Public/slideshow.js"></script> -->
+<script type="text/javascript" src="slideshow.js"></script>
+<script type="text/javascript">
+<!--
+SLIDES = new slideshow("SLIDES");
+// For a self-running slideshow you can set the delay between slides.
+// 3000 = 3 seconds
+SLIDES.timeout = 500;
+// By default, all of the slideshow images are prefetched.
+// You can set the prefetch variable if you have a large number
+// of slides.
+SLIDES.prefetch = 1;
+// By default the slideshow will repeat when you get to the end.
+// If this is set to false though, the controls do not work!!!
+// SLIDES.repeat = false;
+//-->
+
+```{r generateSlides, cache=TRUE, echo=FALSE,message=FALSE,include=FALSE, eval=TRUE}
+
+# load("parms.RData")
+# library(ggplot2)
+# library(data.table)
+
+# country.code <- parms$COUNTRY
+# country.name <- parms$CountryName
+
+# mltper.path="U:\\dataLab\\UCBshare\\HMDWORKV6\\HUN\\STATS\\mltper_1x1.csv"
+# mltper.path="U:/dataLab/UCBshare/HMDWORKV6/HUN/STATS/mltper_1x1.csv"
+# fltper.path="U:\\dataLab\\UCBshare\\HMDWORKV6\\HUN\\STATS\\fltper_1x1.csv"
+
+# mltper.path="/HUN/STATS/mltper_1x1.csv"
+
+mltper.path <- file.path(parms$STATSPATH, "mltper_1x1.csv")
+fltper.path <- file.path(parms$STATSPATH, "fltper_1x1.csv")
+
+#mltper.path <- file.path("../STATS/mltper_1x1.csv")
+#fltper.path <- file.path("../STATS/fltper_1x1.csv")
+
+
+# read.csv(mltper.path, stringsAsFactors=FALSE, colClasses="numeric")
+
+.line1 <- readLines(mltper.path, n=1)
+if( grepl("Year", .line1)) {
+      mltper <- read.csv(mltper.path, stringsAsFactors=FALSE, colClasses="numeric")
+} else {
+      mltper <- read.table(mltper.path, sep = ",", head=FALSE, stringsAsFactors=FALSE, colClasses="numeric")
+      colnames(mltper) <- c("YearFirst", "YearLast", "Agei","Exposures", "Deaths", "mx", "ax", "qx", "px",
+                               "lx", "dx", "Lx", "Tx", "ex" )
+}
+
+
+.line1 <- readLines(fltper.path, n=1)
+if( grepl("Year", .line1)){ # file has header
+    fltper <- read.csv(fltper.path, stringsAsFactors=FALSE, colClasses="numeric")
+} else {
+  fltper <- read.table(fltper.path, sep = ",", head=FALSE, stringsAsFactors=FALSE, colClasses="numeric")
+  colnames(fltper) <- c("YearFirst", "YearLast", "Agei","Exposures", "Deaths", "mx", "ax", "qx", "px",  "lx", "dx", "Lx",
+                           "Tx", "ex" )
+}
+
+
+mltper$Sex<- "Male"
+
+fltper$Sex<- "Female"
+
+ltper=rbind(fltper,mltper)
+
+# ltper<- rbindlist(list(fltper,mltper))
+
+availableYear<- unique(mltper$YearFirst)
+
+# print(head(mltper))
+for (i in availableYear){
+  # png(paste("intpls_deathratesY",i,".png",sep=""),height=500,width=700)
+  png(paste("_book/intpls_deathratesY",i,".png",sep=""), width = 8.09, height = 5, units = 'in', res = 300)
+
+  # this.year <- ltper[ltper$YearFirst == i, ]
+  this.year <- subset(ltper,subset=YearFirst==i)
+  print(ggplot()+
+          geom_point(data=this.year, aes(x=Agei,y=Deaths/Exposures,col=Sex))+
+          geom_line(data=this.year, aes(x=Agei,y=mx,col=Sex))+
+          labs(title=paste("Age specific mortality for ", parms$CountryName, " in ",i,sep=""), x="Age",y="log mortality")+
+          scale_y_log10(limits = c(min(ltper$mx[ltper$mx > 0],na.rm=T),max(ltper$mx,na.rm=T)),labels = function(x) format(x, scientific = FALSE))+
+          theme(legend.position=c(0.9,0.2))
+        )
+
+  dev.off()
+}
+```
+
+```{r addSlidesJs, echo=FALSE, results="asis"}
+template=
+"s = new slide();
+s.src  = \"intpls_deathratesY%1$d.png\";
+s.link = \"intpls_deathratesY%1$d.png\";
+s.text = \"Open link in same window\";
+SLIDES.add_slide(s);"
+
+for (i in availableYear) {
+  cat(sprintf(template, i))
+}
+
+```
+
+</script>
+
+<!-- <style type="text/css">  -->
+
+<!-- TD.nav { -->
+<!-- text-color: #000000; -->
+<!-- text-align : center; -->
+<!-- font-size : 1.8em; -->
+<!-- background-color : #FFFFFF; -->
+<!-- color : #000000; -->
+<!-- padding:0.5em; -->
+<!-- } -->
+<!-- TD.nav2 { -->
+<!-- text-align : center; -->
+<!-- font-size : 1.8em; -->
+<!-- background-color : #FFFFFF; -->
+<!-- border : solid; -->
+<!-- border-color: #FFFFFF; -->
+<!-- border-width: .1; -->
+<!-- padding:0.5em; -->
+<!-- } -->
+
+<!-- </style> -->
+
+<!-- <script> -->
+<!-- ```{r print1, echo=F, results="asis"} -->
+<!-- cat("function myFunction() {\ndocument.getElementById(\"demo\").innerHTML = \"Paragraph changed.\";\n}") -->
+<!-- ``` -->
+<!-- </script> -->
+
+<!-- <p id="demo">A Paragraph.</p> -->
+
+<!-- <button type="button" onclick="myFunction()">Try it</button> -->
+
+<!-- <img src="intpls_deathratesY2017.png"> -->
+
+
+
+<body class="center" onLoad="SLIDES.update()">
+
+```{r projecth1env, echo=FALSE, results="asis"}
+cat(sprintf("<h3>Diagnostic Charts for HMD Project - Country: %1$s (%2$s)</h3>",parms$CountryName,parms$COUNTRY))
+```
+<h3>Internal plausibility - Death rates by age for each year</h3>
+<hr />
+<table>
+<tr><td colspan="2">
+<img name="SLIDESIMG" src="intpls_deathratesY1950.png" alt="Slideshow image" />
+</td></tr>
+<tr><td class="nav">
+Slide Controls:<br />
+<table>
+<tr>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.next();SLIDES.play();return false;">START</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.pause();return false;">STOP</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.hotlink();return false;">VIEW</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.previous();return false;">PREVIOUS</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.next();return false;">NEXT</A>
+</td>
+</tr>
+</table></td>
+
+<td class="nav">Delay (Seconds): <br /><table>
+<tr>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.timeout=500;">0.25</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.timeout=500;">0.5</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.timeout=1000;">1</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.timeout=1500;">1.5</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.timeout=2000;">2</A>
+</td>
+</tr>
+</table></td></tr>
+<tr><td colspan="2" class="nav">
+Go to year:
+```{r goto_slidejs, echo=FALSE, results="asis"}
+buttonYear=c(availableYear[1], availableYear[availableYear %% 5 == 0], availableYear[length(availableYear)])
+if (buttonYear[1]==buttonYear[2]) {buttonYear=buttonYear[-1]}
+if (buttonYear[length(buttonYear)]==buttonYear[(length(buttonYear)-1)]) {buttonYear=buttonYear[-length(buttonYear)]}
+template=
+"<a href=\"javascript:void(0)\"
+onClick=\"SLIDES.goto_slide(%2$d);return false;\">%1$d </A>"
+
+for (i in buttonYear) {
+  cat(sprintf(template, i, match(i,availableYear)-1))
+}
+
+```
+
+</td></tr>
+</table>
+<script type="text/javascript">
+<!--
+if (document.images) {
+  SLIDES.image = document.images.SLIDESIMG;
+  SLIDES.update();
+  SLIDES.play();
+}
+//-->
+</script>
+<hr />
+<!-- <table> -->
+<!--   <tr> -->
+<!--     <td class="footerl" valign="top" width="360"><address><a href="mailto:hmd@demog.berkeley.edu">Beate Danielsen: hmd@demog.berkeley.edu</a> </address></td> -->
+<!--     <td class="footerr" valign="top" width="360"><em>Last Updated:<br />October 15, 2018 -->
+<!--         </em><br /><a href="http://validator.w3.org/check/referer"> -->
+<!--         <img height="31" alt=" [Valid XHTML 1.0!] " src="https://www.mortality.org/Public/valid-xhtml10.png"  width="88" /></a> </td> -->
+<!--   </tr> -->
+<!-- </table> -->
+</body>
+
+<!--chapter:end:09-intpls_deathratesbyyear.Rmd-->
+
+# Death rates over time by sex {#deathratetimesex}
+```{r pb10, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Death Rates over time by sex",value = 10/18)
+}
+```
+Chart of death rates over time by sex for a given age.
+
+<!-- <link rel="stylesheet" href="https://www.mortality.org/Public/sashmd.css" type="text/css"></link> -->
+<!-- <script type="text/javascript" src="https://www.mortality.org/Public/slideshow.js"></script> -->
+<script type="text/javascript" src="slideshow.js"></script>
+<script type="text/javascript">
+<!--
+SLIDES = new slideshow("SLIDES");
+// For a self-running slideshow you can set the delay between slides.
+// 3000 = 3 seconds
+SLIDES.timeout = 500;
+// By default, all of the slideshow images are prefetched.
+// You can set the prefetch variable if you have a large number
+// of slides.
+SLIDES.prefetch = 1;
+// By default the slideshow will repeat when you get to the end.
+// If this is set to false though, the controls do not work!!!
+// SLIDES.repeat = false;
+//-->
+
+```{r generateSlidesAge, cache=TRUE, echo=FALSE,message=FALSE,include=FALSE, eval=TRUE}
+
+# load("parms.RData")
+# library(ggplot2)
+# library(data.table)
+
+#country.code <- parms$COUNTRY
+#country.name <- parms$CountryName
+
+# mltper.path="U:\\dataLab\\UCBshare\\HMDWORKV6\\HUN\\STATS\\mltper_1x1.csv"
+# mltper.path="U:/dataLab/UCBshare/HMDWORKV6/HUN/STATS/mltper_1x1.csv"
+# fltper.path="U:\\dataLab\\UCBshare\\HMDWORKV6\\HUN\\STATS\\fltper_1x1.csv"
+
+# mltper.path="/HUN/STATS/mltper_1x1.csv"
+
+mltper.path <- file.path(parms$STATSPATH, "mltper_1x1.csv")
+fltper.path <- file.path(parms$STATSPATH, "fltper_1x1.csv")
+
+#mltper.path <- file.path("../STATS/mltper_1x1.csv")
+#fltper.path <- file.path("../STATS/fltper_1x1.csv")
+
+
+# read.csv(mltper.path, stringsAsFactors=FALSE, colClasses="numeric")
+
+.line1 <- readLines(mltper.path, n=1)
+if( grepl("Year", .line1)) {
+      mltper <- read.csv(mltper.path, stringsAsFactors=FALSE, colClasses="numeric")
+} else {
+      mltper <- read.table(mltper.path, sep = ",", head=FALSE, stringsAsFactors=FALSE, colClasses="numeric")
+      colnames(mltper) <- c("YearFirst", "YearLast", "Agei","Exposures", "Deaths", "mx", "ax", "qx", "px",
+                               "lx", "dx", "Lx", "Tx", "ex" )
+}
+
+.line1 <- readLines(fltper.path, n=1)
+if( grepl("Year", .line1)){ # file has header
+    fltper <- read.csv(fltper.path, stringsAsFactors=FALSE, colClasses="numeric")
+} else {
+  fltper <- read.table(fltper.path, sep = ",", head=FALSE, stringsAsFactors=FALSE, colClasses="numeric")
+  colnames(fltper) <- c("YearFirst", "YearLast", "Agei","Exposures", "Deaths", "mx", "ax", "qx", "px",  "lx", "dx", "Lx",
+                           "Tx", "ex" )
+}
+
+mltper$Sex<- "Male"
+
+fltper$Sex<- "Female"
+
+ltper=rbind(fltper, mltper)
+# ltper=rbindlist(list(fltper,mltper))
+
+for (i in 0:110){
+
+  this.age <- ltper[ltper$Agei == i, ]
+
+  png(paste("_book/intpls_deathratesA",i,".png",sep=""), width = 8.09, height = 5, units = 'in', res = 300)
+
+  print(
+    ggplot()+
+          geom_point(data=this.age, aes(x=YearFirst,y=Deaths/Exposures,col=Sex))+
+          geom_line(data=this.age, aes(x=YearFirst,y=mx,col=Sex))+
+          labs(title=paste("Death rates over time, ",parms$CountryName,", Age ",i,sep=""), x="Age",y="log mortality")+
+          # ylim(c(-10,1))+
+          scale_y_log10(limits = c(min(ltper$mx[ltper$mx > 0],na.rm=T),max(ltper$mx,na.rm=T)),labels = function(x) format(x, scientific = FALSE))+
+          theme(legend.position="bottom")
+        )
+
+  dev.off()
+}
+```
+
+```{r addSlidesJsAge, echo=FALSE, results="asis"}
+template=
+"s = new slide();
+s.src  = \"intpls_deathratesA%1$d.png\";
+s.link = \"intpls_deathratesA%1$d.png\";
+s.text = \"Open link in same window\";
+SLIDES.add_slide(s);"
+
+for (i in 0:110) {
+  cat(sprintf(template, i))
+}
+
+```
+
+</script>
+
+<!-- <style type="text/css">  -->
+
+<!-- TD.nav { -->
+<!-- text-color: #000000; -->
+<!-- text-align : center; -->
+<!-- font-size : 1.8em; -->
+<!-- background-color : #FFFFFF; -->
+<!-- color : #000000; -->
+<!-- padding:0.5em; -->
+<!-- } -->
+<!-- TD.nav2 { -->
+<!-- text-align : center; -->
+<!-- font-size : 1.8em; -->
+<!-- background-color : #FFFFFF; -->
+<!-- border : solid; -->
+<!-- border-color: #FFFFFF; -->
+<!-- border-width: .1; -->
+<!-- padding:0.5em; -->
+<!-- } -->
+
+<!-- </style> -->
+
+<!-- <script> -->
+<!-- ```{r print1, echo=F, results="asis"} -->
+<!-- cat("function myFunction() {\ndocument.getElementById(\"demo\").innerHTML = \"Paragraph changed.\";\n}") -->
+<!-- ``` -->
+<!-- </script> -->
+
+<!-- <p id="demo">A Paragraph.</p> -->
+
+<!-- <button type="button" onclick="myFunction()">Try it</button> -->
+
+<!-- <img src="intpls_deathratesY2017.png"> -->
+
+
+
+<body class="center" onLoad="SLIDES.update()">
+
+```{r projecth1envAge, echo=FALSE, results="asis"}
+cat(sprintf("<h3>Diagnostic Charts for HMD Project - Country: %1$s (%2$s)</h3>",parms$CountryName,parms$COUNTRY))
+```
+<!-- <h1>Diagnostic Charts for HMD Project - Country: SVK (SVK)</h1> -->
+
+<h3>Internal plausibility - Death rates by age for each year</h3>
+<hr />
+
+<table>
+<tr><td colspan="2">
+<img name="SLIDESIMG" src="intpls_deathratesA0.png" alt="Slideshow image" />
+</td></tr>
+<tr><td class="nav">
+Slide Controls:<br />
+<table>
+<tr>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.next();SLIDES.play();return false;">START</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.pause();return false;">STOP</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.hotlink();return false;">VIEW</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.previous();return false;">PREVIOUS</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.next();return false;">NEXT</A>
+</td>
+</tr>
+</table></td>
+
+<td class="nav">Delay (Seconds): <br /><table>
+<tr>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.timeout=500;">0.25</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.timeout=500;">0.5</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.timeout=1000;">1</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.timeout=1500;">1.5</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.timeout=2000;">2</A>
+</td>
+</tr>
+</table></td></tr>
+<tr><td colspan="2" class="nav">
+Go to age:
+```{r goto_slidejsAge, echo=FALSE, results="asis"}
+buttonYear=seq(from=0,to=110,by=5)
+template=
+"<a href=\"javascript:void(0)\"
+onClick=\"SLIDES.goto_slide(%1$d);return false;\">%1$d </A>"
+
+for (i in buttonYear) {
+  cat(sprintf(template, i))
+}
+
+```
+</td></tr>
+</table>
+<script type="text/javascript">
+<!--
+if (document.images) {
+  SLIDES.image = document.images.SLIDESIMG;
+  SLIDES.update();
+  SLIDES.play();
+}
+//-->
+</script>
+<hr />
+<!-- <table> -->
+<!--   <tr> -->
+<!--     <td class="footerl" valign="top" width="360"><address><a href="mailto:hmd@demog.berkeley.edu">Beate Danielsen: hmd@demog.berkeley.edu</a> </address></td> -->
+<!--     <td class="footerr" valign="top" width="360"><em>Last Updated:<br />October 15, 2018 -->
+<!--         </em><br /><a href="http://validator.w3.org/check/referer"> -->
+<!--         <img height="31" alt=" [Valid XHTML 1.0!] " src="https://www.mortality.org/Public/valid-xhtml10.png"  width="88" /></a> </td> -->
+<!--   </tr> -->
+<!-- </table> -->
+</body>
+
+<!--chapter:end:10-intpls_deathratesbyage.Rmd-->
+
+# Mortality deviation compared with adjacent ages, years {#mortdevageyear}
+```{r pb11, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Mortality deviation",value = 11/18)
+}
+```
+
+Chart of mortality deviations compared with adjacent ages. Note that the number of neighboring ages and/or years as well as the p-values for $X$ and the size of $R$ can be modified in the call to the script.
+
+Expect to see large negative deviations at age 1 versus age 0. Patterns of large deviations, e.g., at ages ending in "0" or "5", may indicate problematic places in the mortality surface.
+
+## Females
+```{r intplsmortalitydeviationsF, cache=TRUE, fig.cap='Mortality deviation compared with adjacent ages, years',  fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150, warning=FALSE,  message=FALSE}
+intpls_mortalitydeviations(parms, sex = "f", lagx=1, lagt=0, pvalX=0.001, crit1R=0.1, crit2R=0.05)
+```
+
+## Males
+```{r intplsmortalitydeviationsM, cache=TRUE, fig.cap='Mortality deviation compared with adjacent ages, years',  fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150, warning=FALSE,  message=FALSE}
+intpls_mortalitydeviations(parms, sex = "m", lagx=1, lagt=0, pvalX=0.001, crit1R=0.1, crit2R=0.05);
+```
+
+<!--chapter:end:11-intpls_mortalitydeviations.Rmd-->
+
+# Internal Plausibility: Lexis Map of Net Migration {#netmig}
+Migration patterns should make sense. Should not show net migration above age 80 (unless there are territorial changes).
+```{r pb12, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Net Migragion",value = 12/18)
+}
+```
+## Females
+```{r plotIntplsNetmigrationF, cache=TRUE,fig.cap='Lexis Map of Net Migration',  fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150}
+plotIntplsNetmigration(parms, sex = "f")
+```
+
+## Males
+```{r plotIntplsNetmigrationM, cache=TRUE, fig.cap='Lexis Map of Net Migration',  fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150}
+plotIntplsNetmigration(parms, sex = "m")
+```
+
+<!--chapter:end:12-plotIntplsNetmigration.Rmd-->
+
+# External Plausibility: Implied migration {#impliedmig}
+```{r pb13, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Implied Migration",value = 13/18)
+}
+```
+
+Chart of total net migration by calendar year and sex.
+
+Might be used to check that pattern of implied migration is consistent with any available migration data. Years of a territorial adjustment are identified by orange vertical lines.
+
+```{r plotNetMigration, fig.cap='Chart of total net migration by calendar year and sex', fig.align='center', fig.width=8.25, fig.height=6}
+plotNetMigration(parms)
+```
+
+<!--chapter:end:13-plotNetMigration.Rmd-->
+
+---
+# NB: usingShiny and c2 must be defined in Global Environment
+---
+
+# Life expectancy ($e_x$) over time {#lifeswe}
+External Plausibility: Life expectancy over time, at ages 0, 65, and 80, by sex, compared to an alternative country.
+```{r pb14, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Life Expectancy over time",value = 14/18)
+}
+```
+
+## Females
+ ```{r plotLifeExpectancyF, fig.cap='External Plausibility: Life expectancy over time', fig.align='center', fig.width=4.5,fig.show='hold'}
+plotLifeExpectancy(parms, sex='f', age=0, othercountry = c2)
+plotLifeExpectancy(parms, sex='f', age=65, othercountry = c2)
+plotLifeExpectancy(parms, sex='f', age=80, othercountry = c2)
+```
+
+## Males
+ ```{r plotLifeExpectancyM, fig.cap='External Plausibility: Life expectancy over time', fig.align='center', fig.width=4.5,fig.show='hold'}
+plotLifeExpectancy(parms, sex='m', age=0, othercountry = c2)
+plotLifeExpectancy(parms, sex='m', age=65, othercountry = c2)
+plotLifeExpectancy(parms, sex='m', age=80, othercountry = c2)
+```
+
+<!--chapter:end:14-plotLifeExpectancy.Rmd-->
+
+# Internal consistency: ratio of new to old mortality rates  {#newoldmortrate}
+```{r pb15, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Ratio of new to old mortality rates",value = 15/18)
+}
+```
+Chart of ratio of new vs. old raw and adjusted mortality rates in life table data.
+
+Might be used to locate large discrepancies between old and new data. CS should look at graphs in 16 and 17 to understand whether differences are due to changes in numerators, denominators, or both.
+
+## Females
+### Unadjusted rates
+```{r plotRateRatioNewOldF, cache=TRUE, fig.cap='Internal consistency: ratio of new to old mortality rates -- unadjusted',  fig.align='center', fig.height=10, out.width="95%",fig.asp=1, dpi=150, warning=FALSE, message=FALSE}
+plotRateRatioNewOld(parms,sex='f',plot.adjusted.rates=FALSE)
+```
+### Adjusted rates
+```{r plotRateRatioNewOldFa, cache=TRUE, fig.cap='Internal consistency: ratio of new to old mortality rates -- unadjusted',  fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150, warning=FALSE, message=FALSE}
+plotRateRatioNewOld(parms,sex='f',plot.adjusted.rates=TRUE)
+```
+
+## Males
+### Unadjusted rates
+```{r plotRateRatioNewOldM, cache=TRUE, fig.cap='Internal consistency: ratio of new to old mortality rates -- adjusted',  fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150, warning=FALSE, message=FALSE}
+plotRateRatioNewOld(parms,sex='m',plot.adjusted.rates=FALSE)
+```
+### Adjusted rates
+```{r plotRateRatioNewOldMa, cache=TRUE, fig.cap='Internal consistency: ratio of new to old mortality rates -- adjusted',  fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150, warning=FALSE, message=FALSE}
+plotRateRatioNewOld(parms,sex='m',plot.adjusted.rates=TRUE)
+```
+
+<!--chapter:end:15-plotRateRatioNewOld.Rmd-->
+
+# Internal consistency: ratio of new to old deaths {#newolddeath}
+Chart of ratio of new vs. old death counts in Lexis database.  Might be used to locate large discrepancies between old and new data.
+```{r pb16, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Ratio of new to old Deaths",value = 16/18)
+}
+```
+## Females
+```{r plotNumberRatioFd, cache=TRUE,   fig.cap='Internal consistency: ratio of new to old deaths',  fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150}
+mydata=plotNumberRatio(parms, sex='f', type="deaths")
+if (is.na(mydata[1,1])) {print("No extreme observations for females.")} else {
+  knitr::kable(
+    mydata, booktabs = TRUE,
+    caption = "List of Extreme Observations, Female"
+  )
+}
+```
+
+## Males
+```{r plotNumberRatioMd, cache=TRUE,   fig.cap='Internal consistency: ratio of new to old deaths',  fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150}
+mydata=plotNumberRatio(parms, sex='m', type="deaths")
+if (is.na(mydata[1,1])) {print("No extreme observations for males.")} else {
+  knitr::kable(
+    mydata, booktabs = TRUE,
+    caption = "List of Extreme Observations, Male"
+  )
+}
+```
+
+<!--chapter:end:16-plotNumberRatioDeaths.Rmd-->
+
+# Internal consistency: ratio of new to old population {#newoldpop}
+Chart of ratio of new vs. old population counts in Lexis database.  Might be used to locate large discrepancies between old and new data.
+```{r pb17, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Ratio of new to old Population",value = 17/18)
+}
+```
+
+## Females
+```{r plotNumberRatioFp, cache=TRUE,   fig.cap='Internal consistency: ratio of new to old population',  fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150}
+mydata=plotNumberRatio(parms, sex='f', type="pop")
+if (is.na(mydata[1,1])) {print("No extreme observations for females.")} else {
+  knitr::kable(
+    mydata, booktabs = TRUE,
+    caption = 'List of Extreme Observations, Female'
+    )
+}
+```
+
+## Males
+```{r plotNumberRatioMp, cache=TRUE,   fig.cap='Internal consistency: ratio of new to old population',  fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150}
+mydata=plotNumberRatio(parms, sex='m', type="pop")
+if (is.na(mydata[1,1])) {print("No extreme observations for males.")} else {
+  knitr::kable(
+    mydata, booktabs = TRUE,
+    caption = 'List of Extreme Observations, Male'
+    )
+}
+```
+
+<!--chapter:end:17-plotNumberRatioPop.Rmd-->
+
+# Mortality sex ratios {#mortsexratio}
+```{r pb18, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Mortality Sex Ratios",value = 18/18)
+}
+```
+```{r intplsdeathratesSexRatio, cache=TRUE,   fig.cap='Mortality sex ratio',  fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150}
+intpls_deathratesSexRatio(parms)
+```
+
+<!--chapter:end:18-intpls_deathratesSexRatio.Rmd-->
+
+```{r pbexit, include=FALSE}
+if(usingShiny==1){
+  on.exit(progress$close())
+}
+```
+
+<!--chapter:end:endprogress.Rmd-->
+

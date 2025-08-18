@@ -1,0 +1,5 @@
+```{r pbexit, include=FALSE}
+if(usingShiny==1){
+  on.exit(progress$close())
+}
+```

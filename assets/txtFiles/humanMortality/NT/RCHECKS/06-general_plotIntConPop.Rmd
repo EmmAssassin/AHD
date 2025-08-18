@@ -1,0 +1,15 @@
+# Total population by sex {#totalpop}
+```{r pb06, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Total Population",value = 6/18)
+}
+```
+## Females
+```{r generalplotIntConPopF, cache=TRUE, fig.cap='Internal consistency: total population by sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConPop(parms, sex = "f",total.pop = TRUE)
+```
+
+## Males
+```{r generalplotIntConPopM, cache=TRUE, fig.cap='Internal consistency: total population by sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConPop(parms, sex = "m", total.pop = TRUE)
+```

@@ -1,0 +1,246 @@
+# Death rates over time by sex {#deathratetimesex}
+```{r pb10, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Death Rates over time by sex",value = 10/18)
+}
+```
+Chart of death rates over time by sex for a given age.
+
+<!-- <link rel="stylesheet" href="https://www.mortality.org/Public/sashmd.css" type="text/css"></link> -->
+<!-- <script type="text/javascript" src="https://www.mortality.org/Public/slideshow.js"></script> -->
+<script type="text/javascript" src="slideshow.js"></script>
+<script type="text/javascript">
+<!--
+SLIDES = new slideshow("SLIDES");
+// For a self-running slideshow you can set the delay between slides.
+// 3000 = 3 seconds
+SLIDES.timeout = 500;
+// By default, all of the slideshow images are prefetched.
+// You can set the prefetch variable if you have a large number
+// of slides.
+SLIDES.prefetch = 1;
+// By default the slideshow will repeat when you get to the end.
+// If this is set to false though, the controls do not work!!!
+// SLIDES.repeat = false;
+//-->
+
+```{r generateSlidesAge, cache=TRUE, echo=FALSE,message=FALSE,include=FALSE, eval=TRUE}
+
+# load("parms.RData")
+# library(ggplot2)
+# library(data.table)
+
+#country.code <- parms$COUNTRY
+#country.name <- parms$CountryName
+
+# mltper.path="U:\\dataLab\\UCBshare\\HMDWORKV6\\HUN\\STATS\\mltper_1x1.csv"
+# mltper.path="U:/dataLab/UCBshare/HMDWORKV6/HUN/STATS/mltper_1x1.csv"
+# fltper.path="U:\\dataLab\\UCBshare\\HMDWORKV6\\HUN\\STATS\\fltper_1x1.csv"
+
+# mltper.path="/HUN/STATS/mltper_1x1.csv"
+
+mltper.path <- file.path(parms$STATSPATH, "mltper_1x1.csv")
+fltper.path <- file.path(parms$STATSPATH, "fltper_1x1.csv")
+
+#mltper.path <- file.path("../STATS/mltper_1x1.csv")
+#fltper.path <- file.path("../STATS/fltper_1x1.csv")
+
+
+# read.csv(mltper.path, stringsAsFactors=FALSE, colClasses="numeric")
+
+.line1 <- readLines(mltper.path, n=1)
+if( grepl("Year", .line1)) {
+      mltper <- read.csv(mltper.path, stringsAsFactors=FALSE, colClasses="numeric")
+} else {
+      mltper <- read.table(mltper.path, sep = ",", head=FALSE, stringsAsFactors=FALSE, colClasses="numeric")
+      colnames(mltper) <- c("YearFirst", "YearLast", "Agei","Exposures", "Deaths", "mx", "ax", "qx", "px",
+                               "lx", "dx", "Lx", "Tx", "ex" )
+}
+
+.line1 <- readLines(fltper.path, n=1)
+if( grepl("Year", .line1)){ # file has header
+    fltper <- read.csv(fltper.path, stringsAsFactors=FALSE, colClasses="numeric")
+} else {
+  fltper <- read.table(fltper.path, sep = ",", head=FALSE, stringsAsFactors=FALSE, colClasses="numeric")
+  colnames(fltper) <- c("YearFirst", "YearLast", "Agei","Exposures", "Deaths", "mx", "ax", "qx", "px",  "lx", "dx", "Lx",
+                           "Tx", "ex" )
+}
+
+mltper$Sex<- "Male"
+
+fltper$Sex<- "Female"
+
+ltper=rbind(fltper, mltper)
+# ltper=rbindlist(list(fltper,mltper))
+
+for (i in 0:110){
+
+  this.age <- ltper[ltper$Agei == i, ]
+
+  png(paste("_book/intpls_deathratesA",i,".png",sep=""), width = 8.09, height = 5, units = 'in', res = 300)
+
+  print(
+    ggplot()+
+          geom_point(data=this.age, aes(x=YearFirst,y=Deaths/Exposures,col=Sex))+
+          geom_line(data=this.age, aes(x=YearFirst,y=mx,col=Sex))+
+          labs(title=paste("Death rates over time, ",parms$CountryName,", Age ",i,sep=""), x="Age",y="log mortality")+
+          # ylim(c(-10,1))+
+          scale_y_log10(limits = c(min(ltper$mx[ltper$mx > 0],na.rm=T),max(ltper$mx,na.rm=T)),labels = function(x) format(x, scientific = FALSE))+
+          theme(legend.position="bottom")
+        )
+
+  dev.off()
+}
+```
+
+```{r addSlidesJsAge, echo=FALSE, results="asis"}
+template=
+"s = new slide();
+s.src  = \"intpls_deathratesA%1$d.png\";
+s.link = \"intpls_deathratesA%1$d.png\";
+s.text = \"Open link in same window\";
+SLIDES.add_slide(s);"
+
+for (i in 0:110) {
+  cat(sprintf(template, i))
+}
+
+```
+
+</script>
+
+<!-- <style type="text/css">  -->
+
+<!-- TD.nav { -->
+<!-- text-color: #000000; -->
+<!-- text-align : center; -->
+<!-- font-size : 1.8em; -->
+<!-- background-color : #FFFFFF; -->
+<!-- color : #000000; -->
+<!-- padding:0.5em; -->
+<!-- } -->
+<!-- TD.nav2 { -->
+<!-- text-align : center; -->
+<!-- font-size : 1.8em; -->
+<!-- background-color : #FFFFFF; -->
+<!-- border : solid; -->
+<!-- border-color: #FFFFFF; -->
+<!-- border-width: .1; -->
+<!-- padding:0.5em; -->
+<!-- } -->
+
+<!-- </style> -->
+
+<!-- <script> -->
+<!-- ```{r print1, echo=F, results="asis"} -->
+<!-- cat("function myFunction() {\ndocument.getElementById(\"demo\").innerHTML = \"Paragraph changed.\";\n}") -->
+<!-- ``` -->
+<!-- </script> -->
+
+<!-- <p id="demo">A Paragraph.</p> -->
+
+<!-- <button type="button" onclick="myFunction()">Try it</button> -->
+
+<!-- <img src="intpls_deathratesY2017.png"> -->
+
+
+
+<body class="center" onLoad="SLIDES.update()">
+
+```{r projecth1envAge, echo=FALSE, results="asis"}
+cat(sprintf("<h3>Diagnostic Charts for HMD Project - Country: %1$s (%2$s)</h3>",parms$CountryName,parms$COUNTRY))
+```
+<!-- <h1>Diagnostic Charts for HMD Project - Country: SVK (SVK)</h1> -->
+
+<h3>Internal plausibility - Death rates by age for each year</h3>
+<hr />
+
+<table>
+<tr><td colspan="2">
+<img name="SLIDESIMG" src="intpls_deathratesA0.png" alt="Slideshow image" />
+</td></tr>
+<tr><td class="nav">
+Slide Controls:<br />
+<table>
+<tr>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.next();SLIDES.play();return false;">START</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.pause();return false;">STOP</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.hotlink();return false;">VIEW</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.previous();return false;">PREVIOUS</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.next();return false;">NEXT</A>
+</td>
+</tr>
+</table></td>
+
+<td class="nav">Delay (Seconds): <br /><table>
+<tr>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.timeout=500;">0.25</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.timeout=500;">0.5</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.timeout=1000;">1</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.timeout=1500;">1.5</A>
+</td>
+<td class="nav2">
+<a href="javascript:void(0)"
+onClick="SLIDES.timeout=2000;">2</A>
+</td>
+</tr>
+</table></td></tr>
+<tr><td colspan="2" class="nav">
+Go to age:
+```{r goto_slidejsAge, echo=FALSE, results="asis"}
+buttonYear=seq(from=0,to=110,by=5)
+template=
+"<a href=\"javascript:void(0)\"
+onClick=\"SLIDES.goto_slide(%1$d);return false;\">%1$d </A>"
+
+for (i in buttonYear) {
+  cat(sprintf(template, i))
+}
+
+```
+</td></tr>
+</table>
+<script type="text/javascript">
+<!--
+if (document.images) {
+  SLIDES.image = document.images.SLIDESIMG;
+  SLIDES.update();
+  SLIDES.play();
+}
+//-->
+</script>
+<hr />
+<!-- <table> -->
+<!--   <tr> -->
+<!--     <td class="footerl" valign="top" width="360"><address><a href="mailto:hmd@demog.berkeley.edu">Beate Danielsen: hmd@demog.berkeley.edu</a> </address></td> -->
+<!--     <td class="footerr" valign="top" width="360"><em>Last Updated:<br />October 15, 2018 -->
+<!--         </em><br /><a href="http://validator.w3.org/check/referer"> -->
+<!--         <img height="31" alt=" [Valid XHTML 1.0!] " src="https://www.mortality.org/Public/valid-xhtml10.png"  width="88" /></a> </td> -->
+<!--   </tr> -->
+<!-- </table> -->
+</body>

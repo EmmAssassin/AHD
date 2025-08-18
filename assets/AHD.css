@@ -1,0 +1,434 @@
+/*Links*/
+
+/*Mobile sizing*/
+@media screen and (max-width: 768px) {
+
+  /*Navigation*/
+
+  .nav-toggle {
+    display: block;
+    padding: 12px 20px;
+  }
+
+  .nav-links {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      position: absolute;
+  }
+
+  .nav-links li {
+      display: block;
+  }
+
+  .collapsable {
+      display: none;
+  }
+
+  .open {
+      display: block !important;
+      position: relative;
+      margin-top: 90px;
+      background-color: #f5f5f5;
+      color: #ac142b;
+      box-shadow: 0px 16px 14px 1px #4e4e4ea8;
+      width: 100%;
+      overflow: scroll;
+      height: 100%;
+  }
+
+  .open li {
+      float: none;
+      color: #252525;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+  }
+
+  .open li a {
+      display: block;
+      padding: 12px 16px;
+      width: inherit;
+      height: inherit;
+  }
+}
+
+/*Tablet sizing*/
+@media screen and (min-width: 768px) and (max-width: 1025px) {
+
+  .nav-toggle {
+      display: block;
+      padding: 12px 20px;
+  }
+
+  .nav-links {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      position: absolute;
+  }
+
+  .nav-links li {
+      display: block;
+  }
+
+  .collapsable {
+      display: none;
+  }
+
+  .open {
+      display: block !important;
+      position: absolute;
+      margin-top: 90px;
+      background-color: #f5f5f5;
+      box-shadow: 0px 16px 14px 1px #4e4e4ea8;
+      width: 100%;
+  }
+
+  .open li {
+      float: none;
+      color: #252525;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+  }
+
+  .open li a {
+      display: block;
+      padding: 12px 16px;
+      width: inherit;
+      height: inherit;
+  }
+
+}
+
+/*Laptop sizing*/
+@media screen and (min-width: 1025px) and (max-width: 1401px) {
+
+  .nav-toggle {
+      display: none;
+  }
+
+  .nav-links {
+      margin: 10px 50px 10px 0;
+      position: relative;
+  }
+
+  .nav-links li {
+      padding: 20px;
+      display: inline-block;
+  }
+
+  .collapsable {
+      display: inline;
+      width: 100%;
+  }
+  
+  .collapsableStates{
+    padding: 0;
+    margin-left: -2vw;
+    width: 100%;
+    position: absolute;
+    min-width: 160px;
+    z-index: 1;
+    margin-top: 18px;
+    background-color: #f5f5f5;
+    box-shadow: 0px 10px 10px 5px #4e4e4ead;
+  }
+  
+  .collapsableStates li {
+    width: 100%;
+    padding: 0 !important;
+    z-index: 1;
+  }
+  
+  .collapsableStates a {
+    float: none;
+    color: #252525;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    z-index: 1;
+  }
+
+}
+
+/*Desktop sizing*/
+@media screen and (min-width: 1401px) {
+
+  .nav-toggle {
+      display: none;
+  }
+
+  .nav-links li {
+      padding: 20px;
+      display: inline-block;
+  }
+
+  .nav-links {
+      margin: 10px 50px 10px 0;
+      position: relative;
+  }
+
+  .collapsable {
+      display: inline;
+  }
+  
+  .collapsableStates{
+    padding: 0;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    position: absolute;
+    min-width: 160px;
+    margin-top: 18px;
+    box-shadow: 0px 10px 10px 5px #4e4e4ead;
+    z-index: 1;
+  }
+  
+  .collapsableStates li {
+    width: 100%;
+    padding: 0 !important;
+    z-index: 1;
+    background-color: #f5f5f5;
+  }
+  
+  .collapsableStates a {
+    float: none;
+    color: #252525;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    z-index: 1;
+  }
+
+}
+
+/*All sizes*/
+
+/*Whole*/
+
+body {
+  margin: 0;
+  width: 100%;
+  background-color: #f5f5f5;
+  height: 100vh;
+}
+
+/*Navigation*/
+
+.navigation {
+  background-color: #ecdfb4;
+  min-width: 100%;
+  margin-top: 0;
+  position: fixed;
+  z-index: 1;
+  height: 90px;
+  box-shadow: 0 0 20px 10px #4e4e4ead;
+}
+
+#navigationLogo {
+  height: 50px;
+  padding: 20px 0 20px 5%;
+  position: absolute;
+  z-index: 1;
+}
+
+.collapsable {
+  width: 100%;
+  position: relative;
+  float: right;
+  z-index: 1;
+}
+
+.nav-links {
+  float: right;
+  font-size: 20px;
+}
+
+.nav-links li {
+  list-style: none;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #252525;
+  cursor: pointer;
+  padding: 20px;
+}
+
+.nav-links li a:hover {
+  color: #BE830E;
+}
+
+.bookingButton {
+  padding: 0px !important;
+}
+
+.bookingButton button:hover {
+  color: #BE830E;
+  cursor: pointer;
+}
+
+.nav-toggle {
+  background-color: #ecdfb4;
+  float: right;
+  z-index: 1;
+  position: relative;
+  border: none;
+  height: 90px;
+  margin: 0px;
+  cursor: pointer;
+  transition: all 1s;
+  padding: 12px 16px;
+}
+
+.topLine,
+.midLine,
+.bottomLine {
+  width: 35px;
+  height: 5px;
+  background-color: #252525;
+  margin: 6px 0;
+  transition: 0.4s;
+  z-index: 0;
+  position: relative;
+  border-radius: 30px;
+}
+
+.rightCross {
+  transform: translate(0, 11px) rotate(-45deg) !important;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.leftCross {
+  transform: translate(0, -11px) rotate(45deg);
+}
+
+main {
+  padding: 90px 5% 0 5%;
+  min-height: 70vh;
+  z-index: 0;
+}
+
+.no-move {
+  overflow: hidden;
+}
+
+main h1 {
+  text-align: center;
+  font-size: 40px;
+}
+
+main p {
+  font-size: 26px;
+}
+
+#mobileLine {
+  width: 100%;
+}
+
+.hide {
+  display: none !important;
+}
+
+/*Footer*/
+
+footer {
+  background-color: #ecdfb4;
+  bottom: 0;
+  padding: 30px 5% 30px 5%;
+}
+
+.footer-links {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-links li {
+  list-style: none;
+  display: inline-block;
+  padding: 16px;
+  font-size: 20px;
+}
+
+.footer-links li a {
+  color: #252525;
+  text-decoration: none;
+}
+
+footer hr {
+  color: #252525;
+  height: 0.5px;
+  background: #BE830E;
+  color: #BE830E;
+  width: 85%;
+}
+
+footer p{
+  text-align: center;
+  color: #252525;
+  font-size: 16px;
+}
+
+#footerLogo {
+  height: 50px;
+}
+
+.bookingButton button {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  padding: 20px;
+}
+
+#hideMe {
+  visibility: none;
+  background-color: #DBAB7F !important;
+  border-top: none !important;
+}
+
+td, th{
+  border:1px solid #252525;
+  padding: 5px 10px;
+}
+
+.dataTable{
+  border: 5px solid #252525;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+}
+
+table, th, td {
+  margin: 20px;
+  border-collapse: collapse;
+}
+
+#bold {
+  background-color:#DBAB7F;
+  font-size: large;
+}
+
+#boldTwo {
+  background-color:  #ECDFB4;
+  font-size: large;
+}
+
+#clickables:hover {
+  background-color: #e9a112;
+  cursor:pointer;
+}
+
+#inputData {
+  text-align: center;
+}

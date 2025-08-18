@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--Title - You will see this in the browser tab-->
+        <title>
+            Australian Human Database
+        </title>
+        <!--Favicon - Little img that you see in the browser tab-->
+        <link rel="icon" type="image/x-icon" href="../img/logo.png">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!--Style Sheets (CSS) and other external file links-->
+        <link rel="stylesheet" href="../AHD.css">
+        <!--JQuery Reference - JQuery is just a JavaScript Library-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="../scripts/navigationScript.js"></script>
+    </head>
+
+    <!--Body - Contains our content-->
+    <body>
+      <!--Top navigation - add hover effects later-->
+      <div class="navigation">
+          <!--Logo-->
+          <a href="../../index.html"><img src="../img/logo.png" alt="logo" id="navigationLogo"></a>
+          <!--Hamburger Menu-->
+          <button class="nav-toggle" aria-hidden="true" aria-label="menu" onclick="navFunction(); return false">
+              <!--Hamburger menu lines-->
+              <div class="topLine"></div><div class="midLine"></div><div class="bottomLine"></div>
+          </button>
+          <nav class="nav" aria-hidden="true" style="transition: max-height 284ms ease 0s;">
+              <!--Navigational Links-->
+              <ul class="nav-links">
+                  <!--Collaspable links when mobile sized-->
+                  <div class="collapsable">
+                    <li class="bookingButton">
+                        <button value="2" onclick="openStates(this.value)">States</button>
+                    </li>
+                    <div class="collapsableStates hide">          
+                      
+                    </div> 
+                    <li>
+                        <a class="hideNavButtons" href="dataExplaination.html">Data Explanation</a>
+                    </li>
+                    <li>
+                        <a class="hideNavButtons" href="bgDocumentation.html">Background Documentation</a>
+                    </li>
+                    <li>
+                        <a class="hideNavButtons" href="team.html">Team</a>
+                    </li>
+              <!--Optional Book now button - Outside of collapsable menu-->
+                     
+                </div>      
+              </ul>
+          </nav>
+      </div>
+
+      <!--Page content - needs to be under the sticky nav-->
+      <main>
+        <h1 id="pageHeading">Citing AHD</h1>
+
+          <section>
+            <h2>Citation Guidelines</h2>
+            <p>The following comments are intended to assist users by providing information about AHD data sources and by offering suggestions for appropriate citation procedures. </p>
+          </section>
+          
+          <section>
+            <h3>Complete Data Series</h3>
+            <p>
+                All the input data comes from an external source, namely the Australian Bureau of Statistics (ABS). The Human Mortality Database (HMD) methods protocol are then applied to the input data to obtain the Life Tables presented here. The user should identify and cite the original specific ABS data source, by consulting the complete list of sources given population by means of the link to "Data sources". 
+            </p>
+            <p>
+                <b>Births:</b> All birth counts come from the ABS. The user should identify and cite the original source, merely acknowledging the AHMD as the intermediary.
+            </p>
+            <p>
+                <b>Deaths:</b> The death counts presented in the "Complete Data Series" section of each state page may or may not have been manipulated in various ways.  The death counts presented in the "Complete Data Series" section of each state page may or may not have been manipulated in various ways. 
+            </p>
+            <p>
+                Most death counts undergo various alterations, which may be slight or substantial in nature. Briefly, there are two kinds of manipulations applied to raw death counts in the AHMD: i) assigning deaths of unknown age to specific ages, and ii) splitting aggregate death counts (in various formats) into data organized by Lexis triangle. In these situations, the numbers are original creations of the AHMD, which should thus be acknowledged as the source of the data.
+            </p>
+            <p>
+                <b>Population size: </b> For ages 80 and above, most of the population estimates reported in the "Complete Data Series" section are original creations of the AHMD and should be cited accordingly. One exception pertains to cohorts who would be aged 80-89 at the end of observation (see Figure 6 of the AHMD Methods Protocol, available here: <a href="https://www.mortality.org/File/GetDocument/Public/Docs/MethodsProtocolV6.pdf">link</a>).
+            </p>
+            <p>
+                <b>Exposure-to-risk</b>, <b>death rates</b>, <b>life tables</b>, or <b>life expectancy at birth:</b> All such data are original creations of the AHMD, which should thus be cited as the unique source of the information.
+            </p>
+          </section>
+
+          <section>
+            <h2>Choosing a Bibliographic Citation</h2>
+            <h3>AHD Estimates</h3>
+            <p>
+                If the user concludes that the data in question should be attributed to the AHMD itself, we suggest the following format for a bibliographic citation:
+                <br>
+                AHMD. Australian Human Mortality Database. School of Demography, Australian National University. Available at www.aushd.org (data downloaded on [date]).
+            </p>
+          </section>
+      </main>
+
+      <footer>
+          <!--Logo-->
+          <img src="../img/logo.png" alt="Logo" id="footerLogo">
+          <!--Footer Links-->
+          <ul class="footer-links">
+              <!---->
+              <li>
+                  <a href="dataExplaination.html">Data Explanation</a>
+              </li>
+              <li>
+                  <a href="privacyPolicy.html">Privacy Policy</a>
+              </li>
+              <li>
+                  <a href="citingAHD.html">Citing AHD</a>
+              </li>
+              <li>
+                <a href="legalNotice.html">Legal Notice</a>
+              </li>
+          </ul>
+          <!--line--><hr>
+          <!--Copyright and Facebook link and Icon-->
+          <p>2022 &#169; <a href="./copyRight.html">Australian Human Mortality Database CopyRight</a></p>
+      </footer>
+      <script src="../scripts/navigationScript.js"></script>
+  </body>
+</html>

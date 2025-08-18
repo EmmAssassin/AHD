@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--Title - You will see this in the browser tab-->
+        <title>
+            Australian Human Database
+        </title>
+        <!--Favicon - Little img that you see in the browser tab-->
+        <link rel="icon" type="image/x-icon" href="../img/logo.png">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!--Style Sheets (CSS) and other external file links-->
+        <link rel="stylesheet" href="../AHD.css">
+        <!--JQuery Reference - JQuery is just a JavaScript Library-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="../scripts/navigationScript.js"></script>
+        <script src="../scripts/tableScript.js"></script>
+    </head>
+
+    <!--Body - Contains our content-->
+    <body>
+      <!--Top navigation - add hover effects later-->
+      <div class="navigation">
+        <!--Logo-->
+        <a href="../../index.html"><img src="../img/logo.png" alt="logo" id="navigationLogo"></a>
+        <!--Hamburger Menu-->
+        <button class="nav-toggle" aria-hidden="true" aria-label="menu" onclick="navFunction(); return false">
+            <!--Hamburger menu lines-->
+            <div class="topLine"></div><div class="midLine"></div><div class="bottomLine"></div>
+        </button>
+        <nav class="nav" aria-hidden="true" style="transition: max-height 284ms ease 0s;">
+            <!--Navigational Links-->
+            <ul class="nav-links">
+                <!--Collaspable links when mobile sized-->
+                <div class="collapsable">
+                    <li class="bookingButton">
+                        <button value="2" onclick="openStates(this.value)">States</button>
+                    </li>
+                    <div class="collapsableStates hide">          
+                      
+                    </div> 
+                  <li>
+                      <a class="hideNavButtons" href="dataExplaination.html">Data Explanation</a>
+                  </li>
+                  <li>
+                      <a class="hideNavButtons" href="bgDocumentation.html">Background Documentation</a>
+                  </li>
+                  <li>
+                      <a class="hideNavButtons" href="team.html">Team</a>
+                  </li>
+            <!--Optional Book now button - Outside of collapsable menu-->
+                   
+              </div>      
+            </ul>
+        </nav>
+    </div>
+
+      <!--Page content - needs to be under the sticky nav-->
+      <main>
+        <h1 id="pageHeading">Australian Capital Territory</h1>          
+      </main>
+
+      <footer>
+          <!--Logo-->
+          <img src="../img/logo.png" alt="Logo" id="footerLogo">
+          <!--Footer Links-->
+          <ul class="footer-links">
+              <!---->
+              <li>
+                  <a href="./dataExplaination.html">Data Explanation</a>
+              </li>
+              <li>
+                  <a href="./privacyPolicy.html">Privacy Policy</a>
+              </li>
+              <li>
+                  <a href="./citingAHD.html">Citing AHD</a>
+              </li>
+              <li>
+                <a href="./legalNotice.html">Legal Notice</a>
+              </li>
+          </ul>
+          <!--line--><hr>
+          <!--Copyright and Facebook link and Icon-->
+          <p>2022 &#169; <a href="./copyRight.html">Australian Human Mortality Database CopyRight</a></p>
+      </footer>
+      <script src="../scripts/navigationScript.js"></script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+#  Raw Deaths Lexis Diagram {#rawdeath}
+The background color of the lexis element reflects the nature of the age interval: A dark gray background indicates a closed, a light gray background indicates an open-ended age interval. The outline color of the lexis element is blue for ages of 130 or less, red otherwise.
+```{r pb02, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Raw Deaths",value = 2/18)
+}
+```
+## Females
+```{r generalrawdeathsF, cache=TRUE,   fig.cap='Raw Deaths Lexis Map', fig.align='center', fig.height=10, out.width="95%",fig.asp=1, dpi=150}
+general_rawdeaths(parms, sex = "f")
+```
+
+## Males
+```{r generalrawdeathsM,  cache=TRUE, fig.cap='Raw Deaths Lexis Map', fig.align='center', fig.height=10, out.width="95%",fig.asp=1, dpi=150}
+general_rawdeaths(parms, sex = "m")
+```

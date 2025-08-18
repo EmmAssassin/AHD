@@ -1,0 +1,14 @@
+# External Plausibility: Implied migration {#impliedmig}
+```{r pb13, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Implied Migration",value = 13/18)
+}
+```
+
+Chart of total net migration by calendar year and sex.
+
+Might be used to check that pattern of implied migration is consistent with any available migration data. Years of a territorial adjustment are identified by orange vertical lines.
+
+```{r plotNetMigration, fig.cap='Chart of total net migration by calendar year and sex', fig.align='center', fig.width=8.25, fig.height=6}
+plotNetMigration(parms)
+```

@@ -1,0 +1,25 @@
+---
+# NB: usingShiny and c2 must be defined in Global Environment
+---
+
+# Life expectancy ($e_x$) over time {#lifeswe}
+External Plausibility: Life expectancy over time, at ages 0, 65, and 80, by sex, compared to an alternative country.
+```{r pb14, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Life Expectancy over time",value = 14/18)
+}
+```
+
+## Females
+ ```{r plotLifeExpectancyF, fig.cap='External Plausibility: Life expectancy over time', fig.align='center', fig.width=4.5,fig.show='hold'}
+plotLifeExpectancy(parms, sex='f', age=0, othercountry = c2)
+plotLifeExpectancy(parms, sex='f', age=65, othercountry = c2)
+plotLifeExpectancy(parms, sex='f', age=80, othercountry = c2)
+```
+
+## Males
+ ```{r plotLifeExpectancyM, fig.cap='External Plausibility: Life expectancy over time', fig.align='center', fig.width=4.5,fig.show='hold'}
+plotLifeExpectancy(parms, sex='m', age=0, othercountry = c2)
+plotLifeExpectancy(parms, sex='m', age=65, othercountry = c2)
+plotLifeExpectancy(parms, sex='m', age=80, othercountry = c2)
+```

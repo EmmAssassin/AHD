@@ -1,0 +1,45 @@
+# Internal Consistency: deaths by age and sex {#intcondeathagesex}
+```{r pb07, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Deaths by age and sex",value = 7/18)
+}
+```
+## Females
+
+### Age 0-4
+```{r plotIntConDeathsF04, cache=TRUE, fig.cap='Internal consistency: deaths by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConDeaths(parms, sex = "f",age.min = 0, age.max = 4)
+
+```
+### Age 5-64
+```{r plotIntConDeathsF564, cache=TRUE, fig.cap='Internal consistency: deaths by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConDeaths(parms, sex = "f",age.min = 5, age.max = 64)
+```
+### Age 65+
+```{r plotIntConDeathsF65, cache=TRUE, fig.cap='Internal consistency: deaths by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConDeaths(parms, sex = "f", age.min = 65)
+```
+### Age 85+
+```{r plotIntConDeathsF85, cache=TRUE, fig.cap='Internal consistency: deaths by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConDeaths(parms, sex = "f", age.min = 85)
+```
+
+## Males
+
+### Age 0-4
+```{r plotIntConDeathsM04, cache=TRUE, fig.cap='Internal consistency: deaths by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConDeaths(parms, sex = "m",age.min = 0, age.max = 4)
+
+```
+### Age 5-64
+```{r plotIntConDeathsM564, cache=TRUE, fig.cap='Internal consistency: deaths by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConDeaths(parms, sex = "m",age.min = 5, age.max = 64)
+```
+### Age 65+
+```{r plotIntConDeathsM65, cache=TRUE, fig.cap='Internal consistency: deaths by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConDeaths(parms, sex = "m", age.min = 65)
+```
+### Age 85+
+```{r plotIntConDeathsM85, cache=TRUE, fig.cap='Internal consistency: deaths by age and sex', fig.align='center', fig.height=8.25, fig.width=6}
+plotIntConDeaths(parms, sex = "m", age.min = 85)
+```

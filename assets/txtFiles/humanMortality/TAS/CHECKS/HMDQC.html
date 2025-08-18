@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Diagnostic Charts for HMD Project - TAS</title>
+<meta name="Author" content="Beate Danielsen, Health Information Solutions"></meta>
+<meta name="keywords" lang="en-us" content="Human mortality, lifetable, international"></meta>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-5"></meta>
+<meta name="date" content="2000-04-05T10:52:00+00:00"></meta>
+<link rel="stylesheet"         href="https://www.mortality.org/Public/sashmd.css"          type="text/css"></link>
+</head>
+<body class="center">
+<h1>Diagnostic Charts for HMD Project</h1>
+<h1>Country: TAS (TAS)</h1>
+<hr />
+Note: All charts are stored in /90days/hmd/RunResultsTMP/TAS/CHECKS.
+<hr />
+<table>
+<tr>
+<td colspan="4"><b>General data quality checks</b></td>
+</tr>
+<tr>
+<td width=" 20">1.</td>
+<td width="400">Chart of raw population data from input database (IDB) by calendar year, age, and sex</td>
+<td width="300">Confirm range of age intervals across time is correct.</td>
+<td width="300">All charts in one location: <a href="general_rawpop.html">  general_rawpop.html</a><br />
+                Females: <a href="general_rawpopF.png">general_rawpopF.png</a><br />
+                Males:   <a href="general_rawpopM.png">general_rawpopM.png</a></td>
+</tr>
+<tr>
+<td width=" 20">2.</td>
+<td width="400">Chart of raw deaths counts from input database (IDB) by calendar year, age-interval, and sex</td>
+<td width="300">Confirm range of age intervals across time is correct.</td>
+<td width="300">All charts in one location: <a href="general_rawdeaths.html">  general_rawdeaths.html</a><br />
+                Females: <a href="general_rawdeathsF.png">general_rawdeathsF.png</a><br />
+                Males:   <a href="general_rawdeathsM.png">general_rawdeathsM.png</a><br /></td>
+</tr>
+<tr>
+<td width=" 20">3.</td>
+<td width="400">Lexis map of Lexis database (LDB) by calendar year, age, and sex.</td>
+<td width="300">Confirm that data in LDB make sense.</td>
+<td width="300">All charts in one location: <a href="general_lexisDB.html">  general_lexisDB.html</a><br />
+                Females: <a href="general_lexisDBF.png">general_lexisDBF.png</a><br />
+                Males:   <a href="general_lexisDBM.png">general_lexisDBM.png</a><br /></td>
+</tr>
+<tr>
+<td width=" 20">4.</td>
+<td width="400">Chart of outliers in distribution of deaths                          in age range prior to open age interval (OAI)</td>
+<td width="300">Check that procedure for smoothing deaths                          before fitting model to split OAI is reasonable.</td>
+<td width="300">No Outliers were detected.</td>
+</tr>
+<tr>
+<td colspan="4"><b>Internal consistency checks</b></td>
+</tr>
+<tr>
+<td width=" 20">5.</td>
+<td width="400">Chart of total number of deaths by year for IDB versus LDB by sex</td>
+<td width="300">Total from IDB should match exactly to total in LDB.</td>
+<td width="300">All charts in one location: <a href="intcon_totaldeaths.html">intcon_totaldeaths.html</a><br />
+                Females: <a href="intcon_totaldeathsF.html">intcon_totaldeathsF.html</a><br />
+                Males:   <a href="intcon_totaldeathsM.html">intcon_totaldeathsM.html</a><br /></td>
+</tr>
+<tr>
+<td width=" 20">6.</td>
+<td width="400">Chart of total January 1st population by year for IDB versus LDB by sex</td>
+<td width="300">Total from IDB should track close to total in LDB.</td>
+<td width="300">All charts in one location: <a href="intcon_totalpop.html">intcon_totalpop.html</a><br />
+                Females: <a href="intcon_totalpopF.html">intcon_totalpopF.html </a><br />
+                Males:   <a href="intcon_totalpopM.html">intcon_totalpopM.html </a><br /></td>
+</tr>
+<tr>
+<td width=" 20">7.</td>
+<td width="400">Chart of deaths within age groups (under 5, 5 to 64, 65 or higher, 85 or higher) by year for IDB versus LDB</td>
+<td width="300">For each age group specific chart, IDB should track close to LDB.</td>
+<td width="300">All charts in one location: <a href="intcon_deathsbyage.html">intcon_deathsbyage.html</a><br />
+                Females aged 0 to 4:      <a href="intcon_deathsbyageAG0_4F.html">intcon_deathsbyageAG0_4F.html</a><br />
+                Females aged 5 to 64:     <a href="intcon_deathsbyageAG5_64F.html">intcon_deathsbyageAG5_64F.html</a><br />
+                Females aged 65 or older: <a href="intcon_deathsbyageAG65_200F.html">intcon_deathsbyageAG65_200F.html</a><br />
+                Females aged 85 or older: <a href="intcon_deathsbyageAG85_200F.html">intcon_deathsbyageAG85_200F.html</a><br />
+                Males aged 0 to 4:        <a href="intcon_deathsbyageAG0_4M.html">intcon_deathsbyageAG0_4M.html</a><br />
+                Males aged 5 to 64:       <a href="intcon_deathsbyageAG5_64M.html">intcon_deathsbyageAG5_64M.html</a><br />
+                Males aged 65 or older:   <a href="intcon_deathsbyageAG65_200M.html">intcon_deathsbyageAG65_200M.html</a><br />
+                Males aged 85 or older:   <a href="intcon_deathsbyageAG85_200M.html">intcon_deathsbyageAG85_200M.html</a></td>
+</tr>
+<tr>
+<td width=" 20">8.</td>
+<td width="400">Chart of population size within age groups (under 5, 5 to 64, 65 or higher, 85 or higher) by year for IDB versus LDB</td>
+<td width="300">For each age group specific chart, IDB should track close to LDB.</td>
+<td width="300">All charts in one location: <a href="intcon_popbyage.html">intcon_popbyage.html</a><br />
+                Females aged 0 to 4:      <a href="intcon_popbyageAG0_4F.html">intcon_popbyageAG0_4F.html</a><br />
+                Females aged 5 to 64:     <a href="intcon_popbyageAG5_64F.html">intcon_popbyageAG5_64F.html</a><br />
+                Females aged 65 or older: <a href="intcon_popbyageAG65_200F.html">intcon_popbyageAG65_200F.html</a><br />
+                Females aged 85 or older: <a href="intcon_popbyageAG85_200F.html">intcon_popbyageAG85_200F.html</a><br />
+                Males aged 0 to 4:        <a href="intcon_popbyageAG0_4M.html">intcon_popbyageAG0_4M.html</a><br />
+                Males aged 5 to 64:       <a href="intcon_popbyageAG5_64M.html">intcon_popbyageAG5_64M.html</a><br />
+                Males aged 65 or older:   <a href="intcon_popbyageAG65_200M.html">intcon_popbyageAG65_200M.html</a><br />
+                Males aged 85 or older:   <a href="intcon_popbyageAG85_200M.html">intcon_popbyageAG85_200M.html</a></td>
+</tr>
+<tr>
+<td colspan="4"><b>Internal plausibility checks</b></td>
+</tr>
+<tr>
+<td width=" 20">9.</td>
+<td width="400">Chart of death rates by age and sex for each year (based on mltper_1x1.csv/fltper_1x1.csv located in output directory for country!!!)</td>
+<td width="300">Identify strange patterns in death rates for males versus females.</td>
+<td width="300">JavaScript Slideshow (PNG images): <a href="intpls_deathratesY.html">intpls_deathratesY.html</a><br />
+</td>
+</tr>
+<tr>
+<td width=" 20">10.</td>
+<td width="400">Chart of death rates by year and sex for each age (based on mltper_1x1.csv/fltper_1x1.csv located in output directory for country!!!)</td>
+<td width="300">Identify strange patterns in death rates for males versus females.</td>
+<td width="300">JavaScript Slideshow (PNG images): <a href="intpls_deathratesA.html">intpls_deathratesA.html</a><br />
+</td>
+</tr>
+<tr>
+<td width=" 20">11.</td>
+<td width="400">Chart of mortality deviations compared with adiacent ages. Note that the number of neighboring ages and/or years as well as
+                the p-values for X and the size of R can be modified prior to running the batch program.</td>
+<td width="300">Expect to see large negative deviations at age 1 versus age 0. Patterns of large deviations, e.g., at ages ending in "0" or "5",
+                may indicate problematic places in the mortality surface.</td>
+<td width="300">All charts in one location: <a href="intpls_mortalitydeviations.html">intpls_mortalitydeviations.html</a><br />
+                Females     <a href="intpls_mortalitydeviationsF.html">intpls_mortalitydeviationsF.html</a><br />
+                Males       <a href="intpls_mortalitydeviationsM.html">intpls_mortalitydeviationsM.html</a></td> 
+</tr>
+<tr>
+<td width=" 20">12.</td>
+<td width="400">Lexis map of total net migration.</td>
+<td width="300">Migration patterns should make sense. Should not show net migration above age 80 (unless there are territorial changes).</td>
+<td width="300">All charts in one location: <a href="intpls_totalnetmigration.html">intpls_totalnetmigration.html</a><br />
+                Females     <a href="intpls_totalnetmigrationF.html">intpls_totalnetmigrationF.html</a><br />
+                Males       <a href="intpls_totalnetmigrationM.html">intpls_totalnetmigrationM.html</a></td> 
+</tr>
+<tr>
+<td colspan="4"><b>External plausibility checks</b></td>
+</tr>
+<tr>
+<td width=" 20">13.</td>
+<td width="400">Chart of total net migration by calendar year and sex</td>
+<td width="300">Might be used to check that pattern of implied migration is consistent with any available migration data.</td>
+<td width="300"><a href="extpls_totalnetmigration.png">extpls_totalnetmigration.png</a></td>
+</tr>
+<tr>
+<td width=" 20">14.</td>
+<td width="400">Chart of life expectancy at ages 0, 65, and 80 by sex compared to Sweden</td>
+<td width="300">Might be used to check pattern of life expectancy with Sweden as the benchmark.</td>
+<td width="300">All charts in one location: <a href="extpls_lifeexpectancy.html">extpls_lifeexpectancy.html</a><br />
+                Females:    <a href="extpls_lifeexpectancyF.html">extpls_lifeexpectancyF.html</a><br />
+                Males:      <a href="extpls_lifeexpectancyM.html">extpls_lifeexpectancyM.html</a><br /> 
+                Females Age 0:    <a href="extpls_lifeexpectancyF0.png">extpls_lifeexpectancyF0.png<br /></a>
+                Females Age 65:   <a href="extpls_lifeexpectancyF65.png">extpls_lifeexpectancyF65.png<br /></a>
+                Females Age 80:   <a href="extpls_lifeexpectancyF80.png">extpls_lifeexpectancyF80.png<br /></a>
+                Males Age 0:      <a href="extpls_lifeexpectancyM0.png">extpls_lifeexpectancyM0.png<br /></a>
+                Males Age 65:     <a href="extpls_lifeexpectancyM65.png">extpls_lifeexpectancyM65.png<br /></a>
+                Males Age 80:    <a href="extpls_lifeexpectancyM80.png">extpls_lifeexpectancyM80.png</a></td>
+</tr>
+<tr>
+<td colspan="4"><b>Internal consistency of old vs. new data</b></td>
+</tr>
+<tr>
+<td width=" 20">15.</td>
+<td width="400">Chart of ratio of new vs. old raw and              adjusted mortality rates in life table data</td>
+<td width="300">Might be used to locate large discrepancies between old and new data. CS should look at graphs in 16 and 17 to understand whether differences are due to changes in numerators, denominators, or both.</td>
+<td width="300">Not available!</td>
+</tr>
+<tr>
+<td width=" 20">16.</td>
+<td width="400">Chart of ratio of new vs. old death counts in Lexis databse</td>
+<td width="300">Might be used to locate large discrepancies between old and new data.</td>
+<td width="300">Not available!</td>
+</tr>
+<tr>
+<td width=" 20">17.</td>
+<td width="400">Chart of ratio of new vs. old population counts in Lexis database</td>
+<td width="300">Might be used to locate large discrepancies between old and new data.</td>
+<td width="300">Not available!</td>
+</tr>
+</table>
+<hr />
+To access documentation and source code for the programs used by this interface,
+<a href="http://www.demog.berkeley.edu/~hmd/beate/documentation of diagnostics for HMD project.html">click here</a>.
+<hr />
+<table>
+  <tr>
+    <td class="footerl" valign="top" width="360"><address><a href="mailto:hmd@demog.berkeley.edu">HMD/Beate Danielsen: bhmd@demog.berkeley.edu</a> </address></td>
+    <td class="footerr" valign="top" width="360"><em>Last Updated:<br />May 23, 2023
+        </em><br /><a href="http://validator.w3.org/check/referer">
+        <img height="31" alt=" [Valid XHTML 1.0!] " src="https://www.mortality.org/Public/valid-xhtml10.png"  width="88" /></a> </td>
+  </tr>
+</table>
+</body>
+</html>

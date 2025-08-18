@@ -1,0 +1,9 @@
+# Mortality sex ratios {#mortsexratio}
+```{r pb18, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Mortality Sex Ratios",value = 18/18)
+}
+```
+```{r intplsdeathratesSexRatio, cache=TRUE,   fig.cap='Mortality sex ratio',  fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150}
+intpls_deathratesSexRatio(parms)
+```

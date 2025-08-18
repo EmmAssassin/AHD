@@ -1,0 +1,16 @@
+# Internal Plausibility: Lexis Map of Net Migration {#netmig}
+Migration patterns should make sense. Should not show net migration above age 80 (unless there are territorial changes).
+```{r pb12, include=FALSE}
+if(usingShiny==1){
+  progress$set(detail="Net Migragion",value = 12/18)
+}
+```
+## Females
+```{r plotIntplsNetmigrationF, cache=TRUE,fig.cap='Lexis Map of Net Migration',  fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150}
+plotIntplsNetmigration(parms, sex = "f")
+```
+
+## Males
+```{r plotIntplsNetmigrationM, cache=TRUE, fig.cap='Lexis Map of Net Migration',  fig.align='center',  fig.height=10, out.width="95%",fig.asp=1, dpi=150}
+plotIntplsNetmigration(parms, sex = "m")
+```

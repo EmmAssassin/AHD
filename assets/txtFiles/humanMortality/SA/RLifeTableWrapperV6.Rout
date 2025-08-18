@@ -1,0 +1,681 @@
+
+R version 4.2.3 (2023-03-15) -- "Shortstop Beagle"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+
+
+ Heads up : experience has shown that saving your workspace on quitting R 
+is a bad idea when your environment holds many GB of stuff. Consequently
+this R is configured to NOT save your workspace on quitting.
+
+Rstudio, however does not understand this -- to save headaches YOU MUST configure
+Rstudio to never save .RData and to not read existing .RData files
+ Tools -> Global Options
+
+> ## R Start file
+> #sessionInfo()
+> #.libPaths()
+> 
+> options(showErrorCalls=TRUE)
+> options(showWarnCalls=TRUE)
+> options(show.error.locations="top")
+> options(warn=1)  # immediately print warnings
+> 
+> 
+> 
+> cat("HMD R Lifetable Processing....\n")
+HMD R Lifetable Processing....
+> 
+> 
+> cat("Loading devtools and RLifeTables package \n")
+Loading devtools and RLifeTables package 
+> 
+> library(roxygen2)
+> library(devtools)
+Loading required package: usethis
+> 
+> 
+> load_all(path='../HMDLifeTables/HMDLifeTables/HMDLifeTables')
+ℹ Loading HMDLifeTables
+> 
+> #cat(paste("Loading...",file.path(Sys.getenv("PROJ"),"RunHMDCountry.R"),"\n"))
+> 
+> #source(file.path(Sys.getenv("PROJ"),"RunHMDCountry.R"), echo=FALSE)
+>        
+> cat("Pulling environment variables that may override defaults...\n")
+Pulling environment variables that may override defaults...
+> 
+> ## construct parameter list.  NB  parms$field = NULL will not stick, while list(field=NULL) will
+> ## so use list()
+> parms <- list(
++     WORKING = getwd(),
++     OPENAGE = ifelse( nzchar(Sys.getenv("OPENAGE")), as.integer(Sys.getenv("OPENAGE")), 110),
++     RADIX =  ifelse( nzchar(Sys.getenv("RADIX")), as.integer(Sys.getenv("RADIX")), 100000),
++     CAGEEXTRP = ifelse( nzchar(Sys.getenv("CAGEEXTRP")), as.integer(Sys.getenv("CAGEEXTRP")), 90),
++     MPVERSION =  ifelse( nzchar(Sys.getenv("MPVER")), as.integer(Sys.getenv("MPVER")), 6),
++     STATSFOLDER = "STATS",
++     XXX = ifelse( nzchar(Sys.getenv("XXX")), Sys.getenv("XXX"), 
++                   ifelse(exists("XXX"), XXX, NULL) ),
++     CountryName = ifelse( nzchar(Sys.getenv("CountryName")), Sys.getenv("CountryName"),
++                   ifelse(exists("CountryName"), CountryName, NULL) ),
++     IDBPATH = NULL,
++     LDBPATH = NULL,
++     SAVEBIN = TRUE
++     );
+>     
+> if(  nzchar(Sys.getenv("LDBPATH")) )
++     parms["LDBPATH"] <- Sys.getenv("LDBPATH")
+> ##
+> 
+> if(  nzchar(Sys.getenv("INDBPATH")) )
++     parms["IDBPATH"] <- Sys.getenv("INDBPATH")
+> ##
+> ## check inputs for obvious errors, using R LexisDB code
+> 
+> load_all(path='/data/commons/boe/HMDLexis.git/HMDLexis/HMDLexis')
+ℹ Loading HMDLexis
+! Adding files missing in collate:
+  '/data/commons/boe/HMDLexis.git/HMDLexis/HMDLexis/R/computeLDB.R',
+  '/data/commons/boe/HMDLexis.git/HMDLexis/HMDLexis/R/d_rr2tltu.R',
+  '/data/commons/boe/HMDLexis.git/HMDLexis/HMDLexis/R/d_s1x1_CDW.R',
+  '/data/commons/boe/HMDLexis.git/HMDLexis/HMDLexis/R/d_sNx1vv.R',
+  '/data/commons/boe/HMDLexis.git/HMDLexis/HMDLexis/R/d_unk5.R', and
+  '/data/commons/boe/HMDLexis.git/HMDLexis/HMDLexis/R/writeLDB.R'
+> 
+> res<- try(
++   testidb <- HMDLexis::readInputDB(WORKING=getwd(), XXX=parms$XXX)
++ )
+
+Reading in InputDB items for SA ...
+ run at:  2023-05-23 09:16:31 
+
+Error in HMDLexis::readInputDB(WORKING = getwd(), XXX = parms$XXX) : 
+Either the spelling or the order of the column names is off in SAdeath.txt
+Correct this before continuing. The correct columns should be:
+
+PopName, Area, Year, YearReg, YearInterval, Sex, Age, AgeInterval, Lexis, RefCode, Access, Deaths, NoteCode1, NoteCode2, NoteCode3, LDB
+
+> 
+> if( class(res) == "try-error" ){
++    warning("FAST FAIL: there appear to be problems in the InputDB files")
++ }
+Warning: FAST FAIL: there appear to be problems in the InputDB files
+> 
+> 
+> cat("Running the lifetables...\n")
+Running the lifetables...
+> 
+> print(parms)
+$WORKING
+[1] "/nobackup/90days/hmd/RunResultsTMP/SA"
+
+$OPENAGE
+[1] 110
+
+$RADIX
+[1] 1e+05
+
+$CAGEEXTRP
+[1] 90
+
+$MPVERSION
+[1] 6
+
+$STATSFOLDER
+[1] "STATS"
+
+$XXX
+[1] "SA"
+
+$CountryName
+[1] "SA"
+
+$IDBPATH
+NULL
+
+$LDBPATH
+NULL
+
+$SAVEBIN
+[1] TRUE
+
+> ## run the top-level script from the RLifeTables package, which suitable parameter settings
+> RunHMDCountry(WORKING=parms$WORKING, OPENAGE=parms$OPENAGE, RADIX=parms$RADIX, CAGEEXTRP=parms$CAGEEXTRP,
++               MPVERSION=parms$MPVERSION, STATSFOLDER=parms$STATSFOLDER, XXX=parms$XXX, CountryName=parms$CountryName,
++               LDBPATH=parms$LDBPATH,
++               IDBPATH=parms$IDBPATH, SAVEBIN=parms$SAVEBIN)
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+1 0.12517070909463 0.109734522729193 
+2 0.12087770750169 0.109109880360278 
+3 0.128532877190893 0.0982166157683785 
+4 0.130128122714473 0.101789066852052 
+5 0.118206695677282 0.101781974715321 
+6 0.127941988704424 0.098661115490561 
+7 0.115369663112164 0.0944587273845044 
+8 0.116364837509759 0.0996862912697574 
+9 0.0962065879429657 0.109028460997139 
+10 0.101020694579863 0.101036355546725 
+11 0.108784011187244 0.0945489396438718 
+12 0.103006918295588 0.112739588860031 
+13 0.110873399443714 0.08057378963325 
+14 0.106278357999106 0.0928066375582677 
+15 0.0994534963331559 0.10435996621436 
+16 0.109611451214858 0.0884523319592109 
+17 0.0996706841912173 0.109886257423159 
+18 0.092642860823299 0.105545928400988 
+19 0.105885122321369 0.108585586782792 
+20 0.0892396363286574 0.109451035647185 
+21 0.10430365965124 0.0981716239640731 
+22 0.0921240068625661 0.0987014192724521 
+23 0.088497846556504 0.114094285705964 
+24 0.0864524955523398 0.12824910421387 
+25 0.0864587164940762 0.110205236789896 
+26 0.0830171895524241 0.115702149931623 
+27 0.0844039167452801 0.111957399142048 
+28 0.080084668648445 0.117016999152174 
+29 0.0677257137963145 0.12911665677709 
+30 0.0711632841921733 0.124345107101266 
+31 0.0708594986971981 0.126812016518937 
+32 0.0687922459999198 0.13292385007145 
+33 0.0701283021058984 0.128716384808515 
+34 0.0601277649621562 0.131487944005521 
+35 0.0657633673371937 0.121445349678607 
+36 0.0511338021139887 0.148940885897189 
+37 0.0596132386215297 0.134888196061767 
+38 0.0568264208681934 0.137426615097635 
+39 0.0544924348949091 0.134990179622499 
+40 0.054410864509196 0.137057309449551 
+41 0.0489149739743591 0.142981001017501 
+42 0.0488820087186347 0.148493114216811 
+43 0.0460002047158721 0.145218080842424 
+44 0.0454265217551403 0.147221202104884 
+45 0.0446694561374597 0.147280618524451 
+46 0.0457059776830109 0.141895923109243 
+47 0.0442498831731302 0.142171522512121 
+48 0.0447012518194135 0.13783115478593 
+49 0.0412076858647235 0.142835475674429 
+50 0.0409181448108308 0.138268325605575 
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+1 0.0726792500616826 0.129318915012799 
+2 0.0742580691172977 0.117638336973793 
+3 0.0758006420714719 0.11501800892758 
+4 0.0696156829989216 0.133526048785271 
+5 0.0734687810801872 0.117111936267868 
+6 0.0715495662819051 0.121065369517037 
+7 0.0688399007847654 0.117558802921461 
+8 0.0648039381148191 0.124404956839764 
+9 0.0626974910212886 0.115373007490166 
+10 0.0589621790655532 0.125986169427527 
+11 0.0602538138193286 0.119198139456267 
+12 0.0635092023606711 0.127928714090158 
+13 0.0577199287549989 0.115199263355722 
+14 0.0565899134864066 0.124198011947492 
+15 0.0617600253711553 0.11898548980094 
+16 0.0526155146060789 0.125669781610525 
+17 0.0530986388325451 0.122562387694019 
+18 0.0563935524120509 0.118882997464856 
+19 0.0523114430960962 0.132111291302109 
+20 0.0534556645810424 0.119199973358458 
+21 0.0552070132155491 0.119190979664875 
+22 0.050440504239026 0.123162092229453 
+23 0.052802912276485 0.121627514561963 
+24 0.0495905867374738 0.133781143209319 
+25 0.0461076506218709 0.131908909055457 
+26 0.0448218944592461 0.137879320074162 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+
+iterations 8
+function evaluations 14
+segments explored during Cauchy searches 9
+BFGS updates skipped 0
+active bounds at final generalized Cauchy point 0
+norm of the final projected gradient 0.000133882
+final function value 98.8886
+
+final  value 98.888581 
+converged
+27 0.0504780644702935 0.123462087775896 
+28 0.0465977447329482 0.131562022084366 
+29 0.0423975307652658 0.135064625434034 
+30 0.0417498922782451 0.139610705701581 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+
+iterations 8
+function evaluations 15
+segments explored during Cauchy searches 9
+BFGS updates skipped 0
+active bounds at final generalized Cauchy point 0
+norm of the final projected gradient 4.47209e-06
+final function value 111.017
+
+final  value 111.017373 
+converged
+31 0.0481495580589092 0.123712678912715 
+32 0.0432661861487213 0.134460164697395 
+33 0.0396861500701014 0.143100409972179 
+34 0.0375199740285876 0.139576952171897 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+35 0.0375153378342238 0.139498583714986 
+36 0.0381577047357706 0.140772037588672 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+37 0.0342453545986299 0.148520164989963 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+
+iterations 8
+function evaluations 14
+segments explored during Cauchy searches 9
+BFGS updates skipped 0
+active bounds at final generalized Cauchy point 0
+norm of the final projected gradient 2.02375e-06
+final function value 132.565
+
+final  value 132.564506 
+converged
+38 0.0358939658181607 0.14927732964861 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+39 0.0345326348709986 0.145890338971223 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+
+iterations 8
+function evaluations 14
+segments explored during Cauchy searches 9
+BFGS updates skipped 0
+active bounds at final generalized Cauchy point 0
+norm of the final projected gradient 6.25816e-05
+final function value 137.404
+
+final  value 137.403948 
+converged
+40 0.0339124544833794 0.153405482728563 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+41 0.0320617817169269 0.154838570644763 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+
+iterations 8
+function evaluations 14
+segments explored during Cauchy searches 9
+BFGS updates skipped 0
+active bounds at final generalized Cauchy point 0
+norm of the final projected gradient 0.000192236
+final function value 140
+
+final  value 139.999708 
+converged
+42 0.0307624389532283 0.162746768973353 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+43 0.0304516410432102 0.152754107091029 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+44 0.0296280342308122 0.16005490981504 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+
+iterations 8
+function evaluations 15
+segments explored during Cauchy searches 9
+BFGS updates skipped 0
+active bounds at final generalized Cauchy point 0
+norm of the final projected gradient 0.000932923
+final function value 142.458
+
+final  value 142.457916 
+converged
+45 0.0295933484518338 0.160667132893865 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+46 0.0279495532249079 0.16018238621893 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+47 0.0284871296034605 0.161227579061833 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+48 0.0280400206638078 0.150896166229479 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+49 0.0271051583282782 0.158257745447787 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+50 0.0253490573701468 0.155912548788337 
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+1 0.126117617607771 0.104696813631471 
+2 0.11462872203306 0.100434327094081 
+3 0.105913929855488 0.0965545966762198 
+4 0.101406538538841 0.103459566583394 
+5 0.0918254135416635 0.110232974270633 
+6 0.0800917406773401 0.116554775358116 
+7 0.0679609857251672 0.128943476185685 
+8 0.0573436853460801 0.135474774816575 
+9 0.0486974312265658 0.14389529796244 
+10 0.0441264788984026 0.142053964171424 
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+1 0.0729965541606254 0.12404275852895 
+2 0.068274152320086 0.11864225492921 
+3 0.0593968378776362 0.122433158928625 
+4 0.055078907850456 0.123758155986587 
+5 0.0521864201014669 0.123672822061224 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+
+iterations 8
+function evaluations 15
+segments explored during Cauchy searches 9
+BFGS updates skipped 0
+active bounds at final generalized Cauchy point 0
+norm of the final projected gradient 0.00226998
+final function value 482.158
+
+final  value 482.157529 
+converged
+6 0.0460448497172968 0.131815449903908 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+
+iterations 8
+function evaluations 14
+segments explored during Cauchy searches 9
+BFGS updates skipped 0
+active bounds at final generalized Cauchy point 0
+norm of the final projected gradient 0.000286769
+final function value 556.719
+
+final  value 556.718656 
+converged
+7 0.0419004055845914 0.136073426384339 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+8 0.0360173559361276 0.144878721042915 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+9 0.0313756821017818 0.15657813861008 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+10 0.0282624731403363 0.158053056684613 
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+1 0.120101788544251 0.101456565666478 
+2 0.103389052695788 0.100354791260265 
+3 0.0853557940358102 0.113347332142105 
+4 0.0620363391413733 0.132179094107835 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+5 0.0464807727841917 0.142065661632532 
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+1 0.0703880350556686 0.120389915831862 
+2 0.0570813317913976 0.123035699685711 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+3 0.0488430379947717 0.127885729685426 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+4 0.0387093711556838 0.140619957546762 
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+N = 2, M = 20 machine precision = 2.22045e-16
+Error in stats::optim(starts.j, fn = function(...) KannistoLik(...), gr = function(...) KannistoGr(...),  : 
+  L-BFGS-B needs finite values of 'fn'
+5 0.029861106122614 0.156866389542317 
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+
+MPVERSION was given as 6 but monthly births file was missing:
+ /nobackup/90days/hmd/RunResultsTMP/SA/InputDB/SAbirthbymonth.txt 
+reverted to MPVERSION 5 exposures
+Warning in Write_Births(WORKING = WORKING, STATSFOLDER = STATSFOLDER, LDBPATH = LDBPATH,  :
+  ***  SA : Different Birth Years between IDB, LDB: 1911  1912  1913  1914  1915  1916  1917  1918  1919  1920  1921  1922  1923  1924  1925  1926  1927  1928  1929  1930  1931  1932  1933  1934  1935  1936  1937  1938  1939  1940  1941  1942  1943  1944  1945  1946  1947  1948  1949  1950  1951  1952  1953  1954  1955  1956  1957  1958  1959  1960  1961  1962  1963  1964  1965  1966  1967  1968  1969  1970 
+Calls: RunHMDCountry -> Write_Births
+> 
+> 
+> cat("HMD R Lifetable ... finished")
+HMD R Lifetable ... finished> 
+> proc.time()
+   user  system elapsed 
+ 97.359 107.844  24.330 
